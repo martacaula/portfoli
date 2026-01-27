@@ -74,6 +74,8 @@ const TRANSLATIONS = {
     solutionTitle: "The Solution",
     personaTitle: "User Persona",
     metricsTitle: "Success Metrics",
+    nextStepsTitle: "Next Steps",
+    nextStepsMetricsTitle: "Next Steps + Success Metrics",
     taskTitle: "Your Task",
     takeOnTitle: "Give us your take on",
     note: "Note"
@@ -132,6 +134,8 @@ const TRANSLATIONS = {
     solutionTitle: "La Solución",
     personaTitle: "User Persona",
     metricsTitle: "Métricas de Éxito",
+    nextStepsTitle: "Siguientes Pasos",
+    nextStepsMetricsTitle: "Siguientes Pasos + Métricas de Éxito",
     taskTitle: "Tu Tarea",
     takeOnTitle: "Danos tu opinión sobre",
     note: "Note"
@@ -190,17 +194,46 @@ const TRANSLATIONS = {
     solutionTitle: "La Solució",
     personaTitle: "User Persona",
     metricsTitle: "Mètriques d'Èxit",
+    nextStepsTitle: "Propers Passos",
+    nextStepsMetricsTitle: "Propers Passos + Mètriques d'Èxit",
     taskTitle: "La teva tasca",
     takeOnTitle: "Dona'ns la teva visió sobre",
     note: "Nota"
   }
 };
 
+type MultilangText = { en: string; es: string; ca: string };
+type MultilangList = { en: string[]; es: string[]; ca: string[] };
+
 interface MultilangWork extends Work {
-  longDescription: { en: string; es: string; ca: string };
-  subtitle?: { en: string; es: string; ca: string };
-  challenge: { en: string; es: string; ca: string };
-  outcome: { en: string; es: string; ca: string };
+  longDescription: MultilangText;
+  subtitle?: MultilangText;
+  challenge: MultilangText;
+  outcome: MultilangText;
+  ctaLabel?: MultilangText;
+  brief?: {
+    preline: MultilangText;
+    mainQuestion: MultilangText;
+    clarification?: MultilangText;
+  };
+  takeOn?: {
+    questions: MultilangList;
+    notes?: MultilangList;
+  };
+  insight?: MultilangText;
+  tensions?: MultilangList;
+  persona?: {
+    title: MultilangText;
+    oneLiner: MultilangText;
+    needs: MultilangList;
+  };
+  solution?: {
+    title: MultilangText;
+    description: MultilangText;
+    phrases: MultilangList;
+  };
+  nextSteps?: MultilangList;
+  successMetrics?: MultilangList;
 }
 
 const WORKS: MultilangWork[] = [
@@ -235,26 +268,206 @@ const WORKS: MultilangWork[] = [
   },
   { 
     id: '2', 
-    name: 'DitMadKompass', 
+    name: 'DitMadkompas', 
     genre: 'UX Design & Strategy', 
     day: 'DitMad', 
     year: '2023',
     image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop',
-    description: 'UX for a specialized nutrition start-up.',
+    description: 'Fast food scanning concept for clearer processing insights.',
+    subtitle: {
+      en: 'A fast food scanning concept that explains processing levels and suggests healthier alternatives.',
+      es: 'A fast food scanning concept that explains processing levels and suggests healthier alternatives.',
+      ca: 'A fast food scanning concept that explains processing levels and suggests healthier alternatives.'
+    },
     challenge: {
-      en: 'Translating complex nutritional data into a seamless, intuitive user experience.',
-      es: 'Traducir datos nutricionales complejos en una experiencia de usuario fluida e intuitiva.',
-      ca: 'Traduir dades nutricionals complexes en una experiència d\'usuari fluida i intuïtiva.'
+      en: 'Food information feels confusing and time-consuming, especially at the shelf. There is also no reliable, ready-made database to power instant scanning, so the concept must prove trust and usefulness before heavy tech.',
+      es: 'Food information feels confusing and time-consuming, especially at the shelf. There is also no reliable, ready-made database to power instant scanning, so the concept must prove trust and usefulness before heavy tech.',
+      ca: 'Food information feels confusing and time-consuming, especially at the shelf. There is also no reliable, ready-made database to power instant scanning, so the concept must prove trust and usefulness before heavy tech.'
     },
     outcome: {
-      en: 'The MVP reached its acquisition target in under 3 months, securing seed funding.',
-      es: 'El MVP alcanzó su objetivo de adquisición en menos de 3 meses, asegurando financiación inicial.',
-      ca: 'L\'MVP va assolir el seu objectiu d\'adquisició en menys de 3 mesos, assegurant el finançament inicial.'
+      en: 'A validation-first plan that pairs a simple scoring experience with a content strategy to earn attention, trust, and repeat use.',
+      es: 'A validation-first plan that pairs a simple scoring experience with a content strategy to earn attention, trust, and repeat use.',
+      ca: 'A validation-first plan that pairs a simple scoring experience with a content strategy to earn attention, trust, and repeat use.'
     },
     longDescription: {
-      en: 'Working with the DitMad start-up, we developed a UX framework that empowers users to navigate their nutritional journey with precision.',
-      es: 'Trabajando con la start-up DitMad, desarrollamos un marco de UX.',
-      ca: 'Treballant amb la start-up DitMad, vam desenvolupar un marc d\'UX.'
+      en: 'DitMadkompas is designed to help people make smarter grocery choices without needing nutrition expertise. Scan a product to get a clear processing indicator, a simple ingredient explanation, and better options to compare.',
+      es: 'DitMadkompas is designed to help people make smarter grocery choices without needing nutrition expertise. Scan a product to get a clear processing indicator, a simple ingredient explanation, and better options to compare.',
+      ca: 'DitMadkompas is designed to help people make smarter grocery choices without needing nutrition expertise. Scan a product to get a clear processing indicator, a simple ingredient explanation, and better options to compare.'
+    },
+    ctaLabel: {
+      en: 'Try the scanner',
+      es: 'Try the scanner',
+      ca: 'Try the scanner'
+    },
+    brief: {
+      preline: {
+        en: 'Your brief',
+        es: 'Your brief',
+        ca: 'Your brief'
+      },
+      mainQuestion: {
+        en: 'How might we make food processing easy to understand in seconds, in a way people trust and actually use while shopping?',
+        es: 'How might we make food processing easy to understand in seconds, in a way people trust and actually use while shopping?',
+        ca: 'How might we make food processing easy to understand in seconds, in a way people trust and actually use while shopping?'
+      },
+      clarification: {
+        en: 'Reduce the cognitive load at the shelf, keep the signal clear, and validate real behavior before building complex scanning.',
+        es: 'Reduce the cognitive load at the shelf, keep the signal clear, and validate real behavior before building complex scanning.',
+        ca: 'Reduce the cognitive load at the shelf, keep the signal clear, and validate real behavior before building complex scanning.'
+      }
+    },
+    takeOn: {
+      questions: {
+        en: [
+          'What would make you trust a simple Green, Yellow, Red processing score?',
+          'When you scan a product, what is the one thing you want explained first: processing, sugar, additives, or ingredients in plain language?',
+          'Would you prefer "healthier alternatives" or "closest swap" suggestions, and why?',
+          'What would convince you to scan weekly: speed, accuracy, personalization, or saving favorites and history?',
+          'What would you pay for: deep ingredient insights, ranked alternatives, smart shopping lists, or personalized dietary modes?'
+        ],
+        es: [
+          'What would make you trust a simple Green, Yellow, Red processing score?',
+          'When you scan a product, what is the one thing you want explained first: processing, sugar, additives, or ingredients in plain language?',
+          'Would you prefer "healthier alternatives" or "closest swap" suggestions, and why?',
+          'What would convince you to scan weekly: speed, accuracy, personalization, or saving favorites and history?',
+          'What would you pay for: deep ingredient insights, ranked alternatives, smart shopping lists, or personalized dietary modes?'
+        ],
+        ca: [
+          'What would make you trust a simple Green, Yellow, Red processing score?',
+          'When you scan a product, what is the one thing you want explained first: processing, sugar, additives, or ingredients in plain language?',
+          'Would you prefer "healthier alternatives" or "closest swap" suggestions, and why?',
+          'What would convince you to scan weekly: speed, accuracy, personalization, or saving favorites and history?',
+          'What would you pay for: deep ingredient insights, ranked alternatives, smart shopping lists, or personalized dietary modes?'
+        ]
+      },
+      notes: {
+        en: [
+          'These prompts are designed for quick user interviews and onboarding surveys.',
+          'The goal is to validate trust and completion, not collect opinions without action.'
+        ],
+        es: [
+          'These prompts are designed for quick user interviews and onboarding surveys.',
+          'The goal is to validate trust and completion, not collect opinions without action.'
+        ],
+        ca: [
+          'These prompts are designed for quick user interviews and onboarding surveys.',
+          'The goal is to validate trust and completion, not collect opinions without action.'
+        ]
+      }
+    },
+    insight: {
+      en: 'People want to eat better, but the information at purchase time is too complex to process quickly.',
+      es: 'People want to eat better, but the information at purchase time is too complex to process quickly.',
+      ca: 'People want to eat better, but the information at purchase time is too complex to process quickly.'
+    },
+    tensions: {
+      en: [
+        'Shelf speed vs nutritional nuance',
+        'Simple scoring vs perceived credibility',
+        'Useful scanning experience vs missing product database constraints'
+      ],
+      es: [
+        'Shelf speed vs nutritional nuance',
+        'Simple scoring vs perceived credibility',
+        'Useful scanning experience vs missing product database constraints'
+      ],
+      ca: [
+        'Shelf speed vs nutritional nuance',
+        'Simple scoring vs perceived credibility',
+        'Useful scanning experience vs missing product database constraints'
+      ]
+    },
+    persona: {
+      title: {
+        en: 'The time-poor, health-curious shopper',
+        es: 'The time-poor, health-curious shopper',
+        ca: 'The time-poor, health-curious shopper'
+      },
+      oneLiner: {
+        en: 'Wants a clear signal in seconds, without reading labels or decoding food science.',
+        es: 'Wants a clear signal in seconds, without reading labels or decoding food science.',
+        ca: 'Wants a clear signal in seconds, without reading labels or decoding food science.'
+      },
+      needs: {
+        en: [
+          'A trusted, intuitive indicator that reduces decision fatigue',
+          'Plain-language ingredient explanations that feel practical',
+          'Better alternatives that fit their preferences and context'
+        ],
+        es: [
+          'A trusted, intuitive indicator that reduces decision fatigue',
+          'Plain-language ingredient explanations that feel practical',
+          'Better alternatives that fit their preferences and context'
+        ],
+        ca: [
+          'A trusted, intuitive indicator that reduces decision fatigue',
+          'Plain-language ingredient explanations that feel practical',
+          'Better alternatives that fit their preferences and context'
+        ]
+      }
+    },
+    solution: {
+      title: {
+        en: 'Scan, understand, compare',
+        es: 'Scan, understand, compare',
+        ca: 'Scan, understand, compare'
+      },
+      description: {
+        en: 'DitMadkompas combines a simple processing-level indicator with ingredient explanations and alternatives, supported by a content strategy that educates without overwhelming. The product is structured as freemium, with advanced comparisons, deeper insights, and personalization reserved for paid tiers.',
+        es: 'DitMadkompas combines a simple processing-level indicator with ingredient explanations and alternatives, supported by a content strategy that educates without overwhelming. The product is structured as freemium, with advanced comparisons, deeper insights, and personalization reserved for paid tiers.',
+        ca: 'DitMadkompas combines a simple processing-level indicator with ingredient explanations and alternatives, supported by a content strategy that educates without overwhelming. The product is structured as freemium, with advanced comparisons, deeper insights, and personalization reserved for paid tiers.'
+      },
+      phrases: {
+        en: [
+          'Traffic-light processing indicator',
+          'Plain-language ingredient breakdown',
+          'Alternatives and comparisons by default'
+        ],
+        es: [
+          'Traffic-light processing indicator',
+          'Plain-language ingredient breakdown',
+          'Alternatives and comparisons by default'
+        ],
+        ca: [
+          'Traffic-light processing indicator',
+          'Plain-language ingredient breakdown',
+          'Alternatives and comparisons by default'
+        ]
+      }
+    },
+    nextSteps: {
+      en: [
+        'Launch a "Fake Door" landing page to test demand for scanning.',
+        'Run a "Pinocchio" simulated scan flow where results are returned manually to test trust and completion.',
+        'Iterate messaging and acquisition content (short explainers, comparisons, demos) to support conversion into active scanners.'
+      ],
+      es: [
+        'Launch a "Fake Door" landing page to test demand for scanning.',
+        'Run a "Pinocchio" simulated scan flow where results are returned manually to test trust and completion.',
+        'Iterate messaging and acquisition content (short explainers, comparisons, demos) to support conversion into active scanners.'
+      ],
+      ca: [
+        'Launch a "Fake Door" landing page to test demand for scanning.',
+        'Run a "Pinocchio" simulated scan flow where results are returned manually to test trust and completion.',
+        'Iterate messaging and acquisition content (short explainers, comparisons, demos) to support conversion into active scanners.'
+      ]
+    },
+    successMetrics: {
+      en: [
+        'Landing page CTA click rate above 20%.',
+        'Full scan flow completion above 25%.',
+        'Weekly-use intent above 15%.'
+      ],
+      es: [
+        'Landing page CTA click rate above 20%.',
+        'Full scan flow completion above 25%.',
+        'Weekly-use intent above 15%.'
+      ],
+      ca: [
+        'Landing page CTA click rate above 20%.',
+        'Full scan flow completion above 25%.',
+        'Weekly-use intent above 15%.'
+      ]
     }
   },
   { 
@@ -606,6 +819,13 @@ const App: React.FC = () => {
                     <button onClick={() => navigateTo('lineup')} className="mb-8 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}</button>
                     <h1 className="text-5xl md:text-[9rem] font-heading font-bold text-white leading-[0.8] mb-6 tracking-tighter uppercase">{selectedWork.name}</h1>
                     <p className="text-lg md:text-2xl text-[#ff6700] font-mono tracking-widest max-w-3xl mx-auto uppercase">{selectedWork.subtitle?.[lang] || selectedWork.description}</p>
+                    {selectedWork.ctaLabel && (
+                      <div className="mt-10 flex justify-center">
+                        <button type="button" className="px-8 py-3 border border-[#ff6700] text-[#ff6700] font-mono uppercase tracking-widest text-xs hover:bg-[#ff6700] hover:text-black transition-colors">
+                          {selectedWork.ctaLabel[lang]}
+                        </button>
+                      </div>
+                    )}
                  </div>
               </section>
               <section className="py-24 md:py-48 px-6 max-w-7xl mx-auto">
@@ -617,6 +837,105 @@ const App: React.FC = () => {
                           <div className="h-px bg-white/10" />
                           <div><h5 className="text-[#3a6ea5] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('outcome')}</h5><p className="text-white/70 text-sm leading-relaxed">{selectedWork.outcome[lang]}</p></div>
                        </div>
+                       {selectedWork.brief && (
+                         <div className="space-y-10">
+                           <h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('taskTitle')}</h2>
+                           <div className="space-y-6">
+                             <p className="text-[10px] font-mono uppercase tracking-[0.5em] text-[#ff6700]">{selectedWork.brief.preline[lang]}</p>
+                             <p className="text-2xl md:text-3xl text-white font-heading font-bold leading-tight tracking-tight">{selectedWork.brief.mainQuestion[lang]}</p>
+                             {selectedWork.brief.clarification && (
+                               <p className="text-white/70 text-base md:text-lg leading-relaxed">{selectedWork.brief.clarification[lang]}</p>
+                             )}
+                           </div>
+                         </div>
+                       )}
+                       {selectedWork.takeOn && (
+                         <div className="space-y-10">
+                           <h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('takeOnTitle')}</h2>
+                           <ul className="space-y-4 text-white/70 text-base md:text-lg leading-relaxed list-disc list-inside">
+                             {selectedWork.takeOn.questions[lang].map((question, index) => (
+                               <li key={`takeon-${index}`}>{question}</li>
+                             ))}
+                           </ul>
+                           {selectedWork.takeOn.notes && (
+                             <div className="space-y-2">
+                               {selectedWork.takeOn.notes[lang].map((note, index) => (
+                                 <p key={`note-${index}`} className="text-xs md:text-sm text-white/50 font-mono tracking-widest">
+                                   {t('note')}: {note}
+                                 </p>
+                               ))}
+                             </div>
+                           )}
+                         </div>
+                       )}
+                       {selectedWork.insight && (
+                         <div className="space-y-8">
+                           <h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('problemAnalysis')}</h2>
+                           <p className="text-white/70 text-base md:text-lg leading-relaxed">{selectedWork.insight[lang]}</p>
+                           {selectedWork.tensions && (
+                             <ul className="space-y-3 text-white/70 text-base md:text-lg leading-relaxed list-disc list-inside">
+                               {selectedWork.tensions[lang].map((tension, index) => (
+                                 <li key={`tension-${index}`}>{tension}</li>
+                               ))}
+                             </ul>
+                           )}
+                         </div>
+                       )}
+                       {selectedWork.persona && (
+                         <div className="space-y-8">
+                           <h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('personaTitle')}</h2>
+                           <div className="space-y-4">
+                             <p className="text-2xl md:text-3xl text-white font-heading font-bold leading-tight tracking-tight">{selectedWork.persona.title[lang]}</p>
+                             <p className="text-white/70 text-base md:text-lg leading-relaxed">{selectedWork.persona.oneLiner[lang]}</p>
+                             <ul className="space-y-3 text-white/70 text-base md:text-lg leading-relaxed list-disc list-inside">
+                               {selectedWork.persona.needs[lang].map((need, index) => (
+                                 <li key={`need-${index}`}>{need}</li>
+                               ))}
+                             </ul>
+                           </div>
+                         </div>
+                       )}
+                       {selectedWork.solution && (
+                         <div className="space-y-8">
+                           <h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('solutionTitle')}</h2>
+                           <div className="space-y-4">
+                             <p className="text-2xl md:text-3xl text-white font-heading font-bold leading-tight tracking-tight">{selectedWork.solution.title[lang]}</p>
+                             <p className="text-white/70 text-base md:text-lg leading-relaxed">{selectedWork.solution.description[lang]}</p>
+                             <ul className="space-y-3 text-white/70 text-base md:text-lg leading-relaxed list-disc list-inside">
+                               {selectedWork.solution.phrases[lang].map((phrase, index) => (
+                                 <li key={`phrase-${index}`}>{phrase}</li>
+                               ))}
+                             </ul>
+                           </div>
+                         </div>
+                       )}
+                       {(selectedWork.nextSteps || selectedWork.successMetrics) && (
+                         <div className="space-y-10">
+                           <h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('nextStepsMetricsTitle')}</h2>
+                           <div className="space-y-8">
+                             {selectedWork.nextSteps && (
+                               <div>
+                                 <h5 className="text-[#ff6700] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('nextStepsTitle')}</h5>
+                                 <ol className="space-y-3 text-white/70 text-base md:text-lg leading-relaxed list-decimal list-inside">
+                                   {selectedWork.nextSteps[lang].map((step, index) => (
+                                     <li key={`step-${index}`}>{step}</li>
+                                   ))}
+                                 </ol>
+                               </div>
+                             )}
+                             {selectedWork.successMetrics && (
+                               <div>
+                                 <h5 className="text-[#3a6ea5] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('metricsTitle')}</h5>
+                                 <ol className="space-y-3 text-white/70 text-base md:text-lg leading-relaxed list-decimal list-inside">
+                                   {selectedWork.successMetrics[lang].map((metric, index) => (
+                                     <li key={`metric-${index}`}>{metric}</li>
+                                   ))}
+                                 </ol>
+                               </div>
+                             )}
+                           </div>
+                         </div>
+                       )}
                     </div>
                     <aside className="lg:col-span-4 lg:sticky lg:top-40 self-start"><div className="p-10 border border-white/5 rounded-[2.5rem]"><h5 className="text-white/20 mb-6 text-[10px] font-mono uppercase tracking-widest">{t('nextWork')}</h5><button onClick={() => { const idx = WORKS.findIndex(w => w.id === selectedWork?.id); const next = WORKS[(idx + 1) % WORKS.length]; navigateTo('work-detail', undefined, next); }} className="group flex items-center justify-between w-full text-left"><span className="text-3xl font-black uppercase group-hover:text-[#ff6700] transition-colors leading-none tracking-tighter">{WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}</span><ArrowRight className="w-8 h-8 text-[#ff6700] group-hover:translate-x-3 transition-transform" /></button></div></aside>
                  </div>
