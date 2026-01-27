@@ -381,6 +381,35 @@ const WORKS: MultilangWork[] = [
       es: 'Quant x Mossfera se centró en la creación de GPTs personalizados.',
       ca: 'Quant x Mossfera es va centrar en la creació de GPTs personalitzats.'
     }
+  },
+  { 
+    id: '8', 
+    name: 'TORRENT', 
+    genre: 'Design Sprint & AI Strategy', 
+    day: 'TFG_Fase1_Marta_Caula_Riera', 
+    year: '2025',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop',
+    description: 'An AI-augmented Design Sprint that protects human judgment while reducing cycle time.',
+    subtitle: {
+      en: 'An AI-augmented Design Sprint that protects human judgment while reducing cycle time.',
+      es: 'Un Design Sprint aumentado por IA que protege el juicio humano mientras reduce el tiempo de ciclo.',
+      ca: 'Un Design Sprint augmentat per IA que protegeix el judici humà mentre redueix el temps de cicle.'
+    },
+    challenge: {
+      en: 'BALANCING AI SPEED WITH HUMAN CREATIVITY IN DESIGN SPRINTS.',
+      es: 'EQUILIBRAR LA VELOCIDAD DE LA IA CON LA CREATIVIDAD HUMANA EN DESIGN SPRINTS.',
+      ca: 'EQUILIBRAR LA VELOCITAT DE LA IA AMB LA CREATIVITAT HUMANA EN DESIGN SPRINTS.'
+    },
+    outcome: {
+      en: 'A robust methodology with "no-AI" windows for ideation and mandatory traceability.',
+      es: 'Una metodología robusta con ventanas "sin IA" para ideación y trazabilidad obligatoria.',
+      ca: 'Una metodologia robusta amb finestres "sense IA" per a ideació i traçabilitat obligatòria.'
+    },
+    longDescription: {
+      en: 'TORRENT is a Design Sprint enriched with AI for small creative teams. AI is used as a collaborative cognitive tool embedded in the workflow, focused on instrumental tasks like transcription, synthesis, formatting, and rapid prototyping, while decisions remain fully human (human-in-the-loop). The method introduces explicit “no-AI” windows for ideation and incubation, plus mandatory traceability through a Decision Log and an Insight Repo, and Green AI limits to keep usage intentional and sustainable.',
+      es: 'TORRENT es un Design Sprint enriquecido con IA para pequeños equipos creativos. La IA actúa como herramienta cognitiva colaborativa en tareas instrumentales, mientras las decisiones siguen siendo plenamente dirigida por humanos. El método incluye ventanas "sin IA" para ideación pura, asegura trazabilidad mediante registros de decisión y promueve un uso sostenible de la IA.',
+      ca: 'TORRENT és un Design Sprint enriquit amb IA per a petits equips creatius. La IA actua com a eina cognitiva col·laborativa per a tasques instrumentals, mentre les decisions segueixen sent plenament dirigida per humans. El mètode inclou finestres "sense IA" per a ideació pura, assegura traçabilitat mitjançant registres de decisió i promou un ús sostenible de la IA.'
+    }
   }
 ];
 
