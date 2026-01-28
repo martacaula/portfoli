@@ -6,7 +6,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Ticket, Globe, Zap, Music, MapPin, Menu, X, Calendar, Play, ChevronLeft, ChevronRight, ArrowLeft, Camera, Layers, Cpu, Volume2, VolumeX, ArrowRight, Activity, Terminal, Briefcase, Workflow, Maximize2, ExternalLink, Eye, Image as ImageIcon, Languages, ShieldCheck, ShieldAlert, UserCheck, Timer, Target, Users, Lightbulb, TrendingUp, HelpCircle, GraduationCap, Waves, Coffee, Camera as CameraIcon, CheckCircle2, FileText, Instagram, Linkedin, Github } from 'lucide-react';
+import { Ticket, Globe, Zap, Music, MapPin, Menu, X, Calendar, Play, ChevronLeft, ChevronRight, ArrowLeft, Camera, Layers, Cpu, ArrowRight, Activity, Terminal, Briefcase, Workflow, Maximize2, ExternalLink, Eye, Image as ImageIcon, Languages, ShieldCheck, ShieldAlert, UserCheck, Timer, Target, Users, Lightbulb, TrendingUp, HelpCircle, GraduationCap, Waves, Coffee, Camera as CameraIcon, CheckCircle2, FileText, Instagram, Linkedin, Github } from 'lucide-react';
 import FluidBackground from './components/FluidBackground';
 import GradientText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
@@ -1983,7 +1983,6 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'lineup' | 'gallery' | 'torrent' | 'work-detail'>('home');
   const [selectedWork, setSelectedWork] = useState<MultilangWork | null>(null);
   const [galleryFocus, setGalleryFocus] = useState<FolderName | null>(null);
-  const [isMuted, setIsMuted] = useState(true);
   const [lang, setLang] = useState<Language>('en');
   const torrentAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -2112,23 +2111,94 @@ const App: React.FC = () => {
 
               <section id="about" className="relative z-10 py-24 md:py-40 bg-black/40 border-y border-white/5 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 text-center">
-                  <div className="flex flex-col items-center gap-16">
-                    <div className="relative z-10 space-y-6 max-w-3xl">
-                      <h2 className="text-5xl md:text-8xl font-heading font-bold leading-[0.9]">
-                        {lang === 'en' ? 'Who' : lang === 'es' ? 'Quién' : 'Qui'} <br /> <GradientText text={lang === 'en' ? 'AM I' : lang === 'es' ? 'SOY' : 'SÓC'} className="text-6xl md:text-9xl" />
-                      </h2>
-                      <p className="text-2xl font-bold text-white leading-tight uppercase tracking-tight mx-auto">{t('aboutIntro')}</p>
-                    </div>
-                    <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative w-full max-w-5xl aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(255,103,0,0.15)] bg-black group">
-                      <video autoPlay loop muted={isMuted} playsInline className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-1000">
-                        <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-technology-background-loop-3129-large.mp4" type="video/mp4" />
-                      </video>
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40">
-                        <button onClick={() => setIsMuted(!isMuted)} className="p-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-[#ff6700] transition-colors">
-                          {isMuted ? <VolumeX className="w-10 h-10 text-white" /> : <Volume2 className="w-10 h-10 text-white" />}
-                        </button>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                    <div className="text-left space-y-10 order-2 lg:order-1">
+                      <div className="space-y-6">
+                        <h2 className="text-5xl md:text-8xl font-heading font-bold leading-[0.9]">
+                          {lang === 'en' ? 'Who' : lang === 'es' ? 'Quién' : 'Qui'} <br />
+                          <GradientText text={lang === 'en' ? 'AM I' : lang === 'es' ? 'SOY' : 'SÓC'} className="text-6xl md:text-9xl" />
+                        </h2>
+                        <p className="text-2xl font-bold text-[#ff6700] leading-tight uppercase tracking-tight">{t('aboutIntro')}</p>
                       </div>
-                    </motion.div>
+
+                      <div className="space-y-8 text-lg md:text-xl text-white/70 leading-relaxed font-light">
+                        <motion.p
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                          className="border-l-2 border-[#ff6700] pl-6"
+                        >
+                          {t('aboutBio')}
+                        </motion.p>
+
+                        <motion.p
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 }}
+                          className="pl-6"
+                        >
+                          {t('workExp')}
+                        </motion.p>
+
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.4 }}
+                          className="flex items-center gap-4 text-[#ff6700] font-bold uppercase tracking-widest text-sm pt-4"
+                        >
+                          <Waves className="w-6 h-6" />
+                          <span>{t('surferText')}</span>
+                        </motion.div>
+                      </div>
+                    </div>
+
+                    <div className="relative order-1 lg:order-2 flex flex-col items-center">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="relative w-full max-w-md group"
+                      >
+                        <img
+                          src="./Assets/marta_caula.jpeg"
+                          alt="Marta Caula"
+                          className="w-full h-full object-contain opacity-95 group-hover:opacity-100 transition-all duration-1000"
+                        />
+
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <div className="backdrop-blur-xl bg-black/40 p-4 rounded-2xl border border-white/10 flex items-center gap-4">
+                            <button
+                              onClick={() => {
+                                const audio = document.getElementById('about-audio') as HTMLAudioElement;
+                                if (audio.paused) audio.play();
+                                else audio.pause();
+                              }}
+                              className="w-12 h-12 flex-shrink-0 rounded-full bg-[#ff6700] hover:bg-[#ff8533] transition-all flex items-center justify-center shadow-lg"
+                            >
+                              <Play className="w-5 h-5 text-white fill-current" />
+                            </button>
+
+                            <div className="flex-1 space-y-2">
+                              <div className="flex justify-between items-center text-[10px] uppercase tracking-widest text-white/60">
+                                <span>About Me</span>
+                                <Music className="w-3 h-3 text-[#ff6700]" />
+                              </div>
+                              <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                <motion.div
+                                  initial={{ width: "0%" }}
+                                  whileInView={{ width: "100%" }}
+                                  transition={{ duration: 45, ease: "linear" }}
+                                  className="h-full bg-[#ff6700]"
+                                />
+                              </div>
+                            </div>
+                            <audio id="about-audio" loop>
+                              <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+                            </audio>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
                   </div>
                 </div>
               </section>
