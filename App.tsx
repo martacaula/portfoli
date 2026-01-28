@@ -76,7 +76,24 @@ const TRANSLATIONS = {
     metricsTitle: "Success Metrics",
     taskTitle: "Your Task",
     takeOnTitle: "Give us your take on",
-    note: "Note"
+    note: "Note",
+    sideCardButton: "View Case Study",
+    yourTaskPreLine: "Strategic Exploration",
+    yourTaskQuestion: "What would make this experience effortless for people?",
+    yourTaskReframe: "Turn complexity into a guided, human pace.",
+    takeOnQuestions: ["Is the value obvious in 10 seconds?", "What creates daily habit?", "Where does trust fail first?"],
+    takeOnNote: "Decisions prioritize clarity over noise.",
+    problemTensions: ["Depth vs Speed", "Signal vs Noise", "Craft vs Scale"],
+    personaName: "The Explorer",
+    personaOneLiner: "Curious, fast-moving, and allergic to friction.",
+    personaNeeds: ["Clear entry point", "Fast feedback loops", "Trustable outcomes"],
+    solutionName: "Focused Experience Loop",
+    solutionParagraph: "A concise narrative arc that moves users from curiosity to confident action with minimal steps.",
+    solutionPhrases: ["Frictionless start", "Human verified AI", "Contextual delivery"],
+    nextStepsLabel: "Next Steps",
+    successMetricsLabel: "Success Metrics",
+    nextSteps: ["Beta testing", "Tone fine-tuning", "Accessibility audit"],
+    successMetrics: ["Daily active users", "Completion rate", "Conversion to premium"]
   },
   es: {
     lineupNav: "Line Up",
@@ -134,7 +151,24 @@ const TRANSLATIONS = {
     metricsTitle: "Métricas de Éxito",
     taskTitle: "Tu Tarea",
     takeOnTitle: "Danos tu opinión sobre",
-    note: "Note"
+    note: "Nota",
+    sideCardButton: "Ver Caso",
+    yourTaskPreLine: "Exploración estratégica",
+    yourTaskQuestion: "¿Qué haría que esta experiencia fuese effortless para las personas?",
+    yourTaskReframe: "Convertir la complejidad en un ritmo guiado y humano.",
+    takeOnQuestions: ["¿El valor es obvio en 10 segundos?", "¿Qué genera hábito diario?", "¿Dónde falla primero la confianza?"],
+    takeOnNote: "Las decisiones priorizan la claridad sobre el ruido.",
+    problemTensions: ["Profundidad vs Velocidad", "Señal vs Ruido", "Artesanía vs Escala"],
+    personaName: "La Exploradora",
+    personaOneLiner: "Curiosa, rápida y alérgica a la fricción.",
+    personaNeeds: ["Punto de entrada claro", "Feedback rápido", "Resultados confiables"],
+    solutionName: "Bucle de experiencia enfocado",
+    solutionParagraph: "Un arco narrativo conciso que mueve a las personas de la curiosidad a la acción con pasos mínimos.",
+    solutionPhrases: ["Inicio sin fricción", "IA verificada por humanos", "Entrega contextual"],
+    nextStepsLabel: "Próximos pasos",
+    successMetricsLabel: "Métricas de éxito",
+    nextSteps: ["Beta testing", "Ajuste de tono", "Auditoría de accesibilidad"],
+    successMetrics: ["Usuarios activos diarios", "Tasa de finalización", "Conversión a premium"]
   },
   ca: {
     lineupNav: "Line Up",
@@ -192,7 +226,24 @@ const TRANSLATIONS = {
     metricsTitle: "Mètriques d'Èxit",
     taskTitle: "La teva tasca",
     takeOnTitle: "Dona'ns la teva visió sobre",
-    note: "Nota"
+    note: "Nota",
+    sideCardButton: "Veure Cas",
+    yourTaskPreLine: "Exploració estratègica",
+    yourTaskQuestion: "Què faria que aquesta experiència fos effortless per a les persones?",
+    yourTaskReframe: "Convertir la complexitat en un ritme guiat i humà.",
+    takeOnQuestions: ["El valor és obvi en 10 segons?", "Què genera hàbit diari?", "On falla primer la confiança?"],
+    takeOnNote: "Les decisions prioritzen la claredat per sobre del soroll.",
+    problemTensions: ["Profunditat vs Velocitat", "Senyal vs Soroll", "Artesania vs Escala"],
+    personaName: "L'Exploradora",
+    personaOneLiner: "Curiosa, ràpida i al·lèrgica a la fricció.",
+    personaNeeds: ["Punt d'entrada clar", "Feedback ràpid", "Resultats fiables"],
+    solutionName: "Bucle d'experiència enfocat",
+    solutionParagraph: "Un arc narratiu concís que mou les persones de la curiositat a l'acció amb passos mínims.",
+    solutionPhrases: ["Inici sense fricció", "IA verificada per humans", "Entrega contextual"],
+    nextStepsLabel: "Següents passos",
+    successMetricsLabel: "Mètriques d'èxit",
+    nextSteps: ["Beta testing", "Ajust de to", "Auditoria d'accessibilitat"],
+    successMetrics: ["Usuaris actius diaris", "Taxa de finalització", "Conversió a premium"]
   }
 };
 
@@ -201,6 +252,7 @@ interface MultilangWork extends Work {
   subtitle?: { en: string; es: string; ca: string };
   challenge: { en: string; es: string; ca: string };
   outcome: { en: string; es: string; ca: string };
+  mediaType?: 'image' | 'video';
 }
 
 const WORKS: MultilangWork[] = [
@@ -383,6 +435,61 @@ const WORKS: MultilangWork[] = [
     }
   }
 ];
+
+type WorkContent = {
+  hero: { title: string; subtitle: string; narrative: string };
+  sideCard: { challenge: string; outcome: string; buttonLabel: string };
+  yourTask: { preLine: string; question: string; reframe: string };
+  takeOn: { questions: string[]; note: string };
+  problem: { insight: string; tensions: string[] };
+  persona: { title: string; oneLiner: string; needs: string[] };
+  solution: { title: string; paragraph: string; definingPhrases: string[] };
+  metrics: { nextSteps: string[]; successMetrics: string[] };
+};
+
+const buildWorkContent = (work: MultilangWork, lang: Language): WorkContent => {
+  const copy = TRANSLATIONS[lang];
+
+  return {
+    hero: {
+      title: work.name,
+      subtitle: work.subtitle?.[lang] || work.description,
+      narrative: work.longDescription[lang]
+    },
+    sideCard: {
+      challenge: work.challenge[lang],
+      outcome: work.outcome[lang],
+      buttonLabel: copy.sideCardButton
+    },
+    yourTask: {
+      preLine: copy.yourTaskPreLine,
+      question: copy.yourTaskQuestion,
+      reframe: copy.yourTaskReframe
+    },
+    takeOn: {
+      questions: copy.takeOnQuestions,
+      note: copy.takeOnNote
+    },
+    problem: {
+      insight: work.subtitle?.[lang] || work.description,
+      tensions: copy.problemTensions
+    },
+    persona: {
+      title: copy.personaName,
+      oneLiner: copy.personaOneLiner,
+      needs: copy.personaNeeds
+    },
+    solution: {
+      title: copy.solutionName,
+      paragraph: copy.solutionParagraph,
+      definingPhrases: copy.solutionPhrases
+    },
+    metrics: {
+      nextSteps: copy.nextSteps,
+      successMetrics: copy.successMetrics
+    }
+  };
+};
 
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -599,28 +706,161 @@ const App: React.FC = () => {
               <TorrentGallery />
             </motion.div>
           ) : currentPage === 'work-detail' && selectedWork ? (
-            <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a]">
-              <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0"><div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10" /><img src={selectedWork.image} className="w-full h-full object-cover grayscale opacity-30" /></div>
-                <div className="relative z-20 text-center max-w-6xl px-6">
-                  <button onClick={() => navigateTo('lineup')} className="mb-8 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}</button>
-                  <h1 className="text-5xl md:text-[9rem] font-heading font-bold text-white leading-[0.8] mb-6 tracking-tighter uppercase">{selectedWork.name}</h1>
-                  <p className="text-lg md:text-2xl text-[#ff6700] font-mono tracking-widest max-w-3xl mx-auto uppercase">{selectedWork.subtitle?.[lang] || selectedWork.description}</p>
-                </div>
-              </section>
-              <section className="py-24 md:py-48 px-6 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-                  <div className="lg:col-span-8 space-y-32">
-                    <div className="space-y-12"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('narrative')}</h2><p className="text-xl md:text-3xl text-white/70 leading-relaxed font-light">{selectedWork.longDescription[lang]}</p></div>
-                    <div className="p-10 border border-white/10 bg-black/60 backdrop-blur-3xl rounded-[3rem] space-y-10">
-                      <div><h5 className="text-[#ff6700] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('challenge')}</h5><p className="text-white text-xl font-heading font-bold leading-tight tracking-tight uppercase">{selectedWork.challenge[lang]}</p></div>
-                      <div className="h-px bg-white/10" />
-                      <div><h5 className="text-[#3a6ea5] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('outcome')}</h5><p className="text-white/70 text-sm leading-relaxed">{selectedWork.outcome[lang]}</p></div>
-                    </div>
-                  </div>
-                  <aside className="lg:col-span-4 lg:sticky lg:top-40 self-start"><div className="p-10 border border-white/5 rounded-[2.5rem]"><h5 className="text-white/20 mb-6 text-[10px] font-mono uppercase tracking-widest">{t('nextWork')}</h5><button onClick={() => { const idx = WORKS.findIndex(w => w.id === selectedWork?.id); const next = WORKS[(idx + 1) % WORKS.length]; navigateTo('work-detail', undefined, next); }} className="group flex items-center justify-between w-full text-left"><span className="text-3xl font-black uppercase group-hover:text-[#ff6700] transition-colors leading-none tracking-tighter">{WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}</span><ArrowRight className="w-8 h-8 text-[#ff6700] group-hover:translate-x-3 transition-transform" /></button></div></aside>
-                </div>
-              </section>
+            <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#f8f8f8] text-black pb-40">
+              {(() => {
+                const content = buildWorkContent(selectedWork, lang);
+                return (
+                  <>
+                    <section className="min-h-[70vh] flex flex-col justify-end px-6 md:px-24 pb-20 border-b border-black/5">
+                      <button onClick={() => navigateTo('lineup')} className="mb-20 inline-flex items-center gap-3 text-black/30 font-mono text-[10px] uppercase tracking-widest hover:text-[#ff6700] transition-colors">
+                        <ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}
+                      </button>
+                      <div className="max-w-6xl">
+                        <h1 className="text-5xl md:text-[8vw] font-heading font-bold uppercase leading-[0.9] tracking-tighter mb-8">{content.hero.title}</h1>
+                        <p className="text-xl md:text-2xl text-black/40 font-light mb-12 max-w-2xl">{content.hero.subtitle}</p>
+                        <p className="text-lg md:text-xl text-black/70 leading-relaxed max-w-3xl">{content.hero.narrative}</p>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-24 max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+                      <div className="lg:col-span-8 space-y-32">
+                        <div>
+                          <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/30 mb-8">{t('problemAnalysis')}</h3>
+                          <p className="text-2xl md:text-4xl font-bold leading-tight mb-10">{content.problem.insight}</p>
+                          <div className="space-y-4">
+                            {content.problem.tensions.map((tension, i) => (
+                              <div key={i} className="flex items-center gap-4 text-black/40">
+                                <div className="w-1.5 h-1.5 rounded-full bg-black/10" />
+                                <p className="text-sm font-medium uppercase tracking-widest">{tension}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="relative aspect-video bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/5">
+                          <MediaRenderer url={selectedWork.image} type={selectedWork.mediaType} />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+                          <div>
+                            <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/30 mb-8">{t('personaTitle')}</h3>
+                            <p className="text-xl font-bold uppercase mb-4">{content.persona.title}</p>
+                            <p className="text-black/50 leading-relaxed mb-8">{content.persona.oneLiner}</p>
+                          </div>
+                          <div className="space-y-6">
+                            {content.persona.needs.map((need, i) => (
+                              <div key={i} className="flex gap-4 p-4 border border-black/5 rounded-xl bg-white">
+                                <CheckCircle2 className="w-5 h-5 text-[#ff6700] shrink-0" />
+                                <p className="text-xs uppercase font-bold tracking-tight">{need}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="p-12 md:p-20 bg-black text-white rounded-[3rem] relative overflow-hidden">
+                          <span className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/30 block mb-6">{content.yourTask.preLine}</span>
+                          <h2 className="text-3xl md:text-5xl font-heading font-bold uppercase mb-12 leading-[1.1]">{content.yourTask.question}</h2>
+                          <div className="flex gap-4 items-center text-white/40">
+                            <span className="w-8 h-px bg-white/20" />
+                            <p className="italic font-light text-xl">{content.yourTask.reframe}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="lg:col-span-4 space-y-12">
+                        <div className="p-10 bg-white border border-black/5 rounded-[2.5rem] sticky top-32 shadow-sm">
+                          <div className="space-y-12">
+                            <div>
+                              <h5 className="text-[10px] font-mono uppercase tracking-widest text-black/20 mb-4">{t('challenge')}</h5>
+                              <p className="text-sm leading-relaxed text-black/80">{content.sideCard.challenge}</p>
+                            </div>
+                            <div className="h-px bg-black/5" />
+                            <div>
+                              <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#ff6700] mb-4">{t('outcome')}</h5>
+                              <p className="text-sm leading-relaxed text-black/80">{content.sideCard.outcome}</p>
+                            </div>
+                            <button className="w-full py-5 bg-black text-white text-[10px] font-bold uppercase tracking-[0.3em] rounded-xl hover:bg-[#ff6700] transition-colors">
+                              {content.sideCard.buttonLabel}
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="p-10 space-y-8">
+                          <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('takeOnTitle')}</h3>
+                          <div className="space-y-6">
+                            {content.takeOn.questions.map((question, i) => (
+                              <div key={i} className="flex gap-4 group cursor-help">
+                                <span className="text-[#ff6700] font-mono text-xs">0{i + 1}</span>
+                                <p className="text-xs font-bold uppercase tracking-tight text-black/60 group-hover:text-black transition-colors">{question}</p>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="pt-8 border-t border-black/5">
+                            <p className="text-[10px] font-mono text-black/20 uppercase italic">{t('note')}: {content.takeOn.note}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-32 bg-white border-y border-black/5">
+                      <div className="max-w-5xl mx-auto text-center space-y-12">
+                        <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-[#ff6700]">{t('solutionTitle')}</h3>
+                        <h2 className="text-4xl md:text-7xl font-heading font-bold uppercase tracking-tighter leading-none">{content.solution.title}</h2>
+                        <p className="text-xl md:text-2xl text-black/60 leading-relaxed max-w-3xl mx-auto">{content.solution.paragraph}</p>
+                        <div className="flex flex-wrap justify-center gap-4 pt-10">
+                          {content.solution.definingPhrases.map((phrase, i) => (
+                            <span key={i} className="px-6 py-3 rounded-full border border-black/5 text-xs font-bold uppercase tracking-widest text-black/40">
+                              {phrase}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-32 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+                      <div className="space-y-12">
+                        <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('nextStepsLabel')}</h3>
+                        <div className="space-y-4">
+                          {content.metrics.nextSteps.map((step, i) => (
+                            <div key={i} className="flex items-center gap-6 p-6 bg-white border border-black/5 rounded-2xl">
+                              <ChevronRight className="w-4 h-4 text-[#ff6700]" />
+                              <p className="text-sm font-bold uppercase tracking-tight">{step}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="space-y-12">
+                        <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('successMetricsLabel')}</h3>
+                        <div className="space-y-4">
+                          {content.metrics.successMetrics.map((metric, i) => (
+                            <div key={i} className="flex items-center justify-between p-6 bg-black/5 rounded-2xl">
+                              <p className="text-sm font-bold uppercase tracking-tight text-black/60">{metric}</p>
+                              <TrendingUp className="w-4 h-4 text-black/20" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-40 border-t border-black/5 text-center">
+                      <h5 className="text-[10px] font-mono uppercase tracking-widest text-black/20 mb-8">{t('nextWork')}</h5>
+                      <button
+                        onClick={() => {
+                          const idx = WORKS.findIndex((w) => w.id === selectedWork?.id);
+                          const next = WORKS[(idx + 1) % WORKS.length];
+                          navigateTo('work-detail', undefined, next);
+                        }}
+                        className="group flex flex-col items-center"
+                      >
+                        <span className="text-5xl md:text-[10vw] font-heading font-bold uppercase tracking-tighter group-hover:text-[#ff6700] transition-colors">
+                          {WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}
+                        </span>
+                        <ArrowRight className="w-20 h-20 text-[#ff6700] group-hover:translate-x-10 transition-transform duration-500" />
+                      </button>
+                    </section>
+                  </>
+                );
+              })()}
             </motion.div>
           ) : (
             <motion.div key="torrent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a] overflow-x-hidden pb-40">
@@ -672,6 +912,17 @@ const App: React.FC = () => {
       </footer>
     </div>
   );
+};
+
+const MediaRenderer: React.FC<{ url: string; type?: 'image' | 'video' }> = ({ url, type = 'image' }) => {
+  if (type === 'video' || url.endsWith('.mp4')) {
+    return (
+      <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+        <source src={url} type="video/mp4" />
+      </video>
+    );
+  }
+  return <img src={url} className="w-full h-full object-cover" />;
 };
 
 export default App;
