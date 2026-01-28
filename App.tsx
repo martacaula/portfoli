@@ -15,8 +15,7 @@ import AIChat from './components/AIChat';
 import TorrentAnimation from './components/TorrentAnimation';
 import ToolAquarium from './components/ToolAquarium';
 import TorrentGallery from './components/TorrentGallery';
-import ProjectDetailView from './components/ProjectDetailView';
-import { Artist as Work, MultilangWork } from './types';
+import { Artist as Work } from './types';
 
 type Language = 'en' | 'es' | 'ca';
 
@@ -197,66 +196,18 @@ const TRANSLATIONS = {
   }
 };
 
-
-const TORRENT_WORK: MultilangWork = {
-  id: 'torrent',
-  name: 'TORRENT',
-  genre: 'Design Sprint & AI Strategy',
-  day: 'TFG_Fase1_Marta_Caula_Riera',
-  year: '2025',
-  image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop',
-  description: 'An AI-augmented Design Sprint that protects human judgment while reducing cycle time.',
-  subtitle: {
-    en: 'An AI-augmented Design Sprint that protects human judgment while reducing cycle time.',
-    es: 'Un Design Sprint aumentado por IA que protege el juicio humano mientras reduce el tiempo de ciclo.',
-    ca: 'Un Design Sprint augmentat per IA que protegeix el judici humà mentre redueix el temps de cicle.'
-  },
-  challenge: {
-    en: 'BALANCING AI SPEED WITH HUMAN CREATIVITY IN DESIGN SPRINTS.',
-    es: 'EQUILIBRAR LA VELOCIDAD DE LA IA CON LA CREATIVIDAD HUMANA EN DESIGN SPRINTS.',
-    ca: 'EQUILIBRAR LA VELOCITAT DE LA IA AMB LA CREATIVITAT HUMANA EN DESIGN SPRINTS.'
-  },
-  outcome: {
-    en: 'A robust methodology with "no-AI" windows for ideation and mandatory traceability.',
-    es: 'Una metodología robusta con ventanas "sin IA" para ideación y trazabilidad obligatoria.',
-    ca: 'Una metodologia robusta amb finestres "sense IA" per a ideació i traçabilitat obligatòria.'
-  },
-  longDescription: {
-    en: 'TORRENT is a Design Sprint enriched with AI for small creative teams. AI is used as a collaborative cognitive tool embedded in the workflow, focused on instrumental tasks like transcription, synthesis, formatting, and rapid prototyping, while decisions remain fully human (human-in-the-loop). The method introduces explicit “no-AI” windows for ideation and incubation, plus mandatory traceability through a Decision Log and an Insight Repo, and Green AI limits to keep usage intentional and sustainable.',
-    es: 'TORRENT es un Design Sprint enriquecido con IA para pequeños equipos creativos. La IA actúa como herramienta cognitiva colaborativa en tareas instrumentales, mientras las decisiones siguen siendo plenamente dirigida por humanos. El método incluye ventanas "sin IA" para ideación pura, asegura trazabilidad mediante registros de decisión y promueve un uso sostenible de la IA.',
-    ca: 'TORRENT és un Design Sprint enriquit amb IA per a petits equips creatius. La IA actua com a eina cognitiva col·laborativa per a tasques instrumentals, mentre les decisions segueixen sent plenament dirigida per humans. El mètode inclou finestres "sense IA" per a ideació pura, assegura traçabilitat mitjançant registres de decisió i promou un ús sostenible de la IA.'
-  },
-  problem: {
-    en: 'Traditional Design Sprints are too slow for today\'s velocity, but unconstrained AI risks generic results and loss of human agency.',
-    es: 'Los Design Sprints tradicionales son demasiado lentos, pero la IA sin restricciones arriesga resultados genéricos y pérdida de agencia humana.',
-    ca: 'Els Design Sprints tradicionals són massa lents, però la IA sense restriccions arrisca resultats genèrics i pèrdua d\'agència humana.'
-  },
-  persona: {
-    en: 'Small Creative Teams. 3-5 people. Hybrid roles. Need to scale output without scaling headcount.',
-    es: 'Pequeños Equipos Creativos. 3-5 personas. Roles híbridos. Necesitan escalar la producción sin escalar el personal.',
-    ca: 'Petits Equips Creatius. 3-5 persones. Rols híbrids. Necessiten escalar la producció sense escalar el personal.'
-  },
-  solution: {
-    en: 'A modified sprint structure with "Cognitive Offloading" to AI for low-level tasks and "Protected Windows" for high-level human ideation.',
-    es: 'Una estructura de sprint modificada con "Descarga Cognitiva" a la IA y "Ventanas Protegidas" para la ideación humana.',
-    ca: 'Una estructura de sprint modificada amb "Descàrrega Cognitiva" a la IA i "Finestres Protegides" per a la ideació humana.'
-  },
-  task: {
-    en: 'Identify one bottleneck in your current workflow where AI could take over execution but not decision.',
-    es: 'Identifica un cuello de botella en tu flujo actual donde la IA podría ejecutar pero no decidir.',
-    ca: 'Identifica un coll de botella en el teu flux actual on la IA podria executar però no decidir.'
-  },
-  takeOn: {
-    en: 'Can we trust AI to facilitate a design sprint without steering the creative outcome?',
-    es: '¿Podemos confiar en que la IA facilite un sprint sin dirigir el resultado creativo?',
-    ca: 'Podem confiar en que la IA faciliti un sprint sense dirigir el resultat creatiu?'
-  },
-  metrics: {
-    en: '40% Cycle Time Reduction. 100% Decision Traceability. Zero "Hallucinated" Ideas.',
-    es: 'Reducción del 40% en el tiempo de ciclo. 100% Trazabilidad de decisiones.',
-    ca: 'Reducció del 40% en el temps de cicle. 100% Traçabilitat de decisions.'
-  }
-};
+interface MultilangWork extends Work {
+  longDescription: { en: string; es: string; ca: string };
+  subtitle?: { en: string; es: string; ca: string };
+  challenge: { en: string; es: string; ca: string };
+  outcome: { en: string; es: string; ca: string };
+  problem?: { en: string; es: string; ca: string };
+  persona?: { en: string; es: string; ca: string };
+  solution?: { en: string; es: string; ca: string };
+  task?: { en: string; es: string; ca: string };
+  takeOn?: { en: string; es: string; ca: string };
+  metrics?: { en: string; es: string; ca: string };
+}
 
 const WORKS: MultilangWork[] = [
   {
@@ -726,27 +677,41 @@ const App: React.FC = () => {
               <TorrentGallery />
             </motion.div>
           ) : currentPage === 'work-detail' && selectedWork ? (
-            <ProjectDetailView
-              work={selectedWork}
-              lang={lang}
-              t={t}
-              onBack={() => navigateTo('lineup')}
-              onNext={() => {
-                const idx = WORKS.findIndex(w => w.id === selectedWork?.id);
-                const next = WORKS[(idx + 1) % WORKS.length];
-                navigateTo('work-detail', undefined, next);
-              }}
-              nextWorkName={WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}
-            />
+            <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a]">
+              <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0"><div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10" /><img src={selectedWork.image} className="w-full h-full object-cover grayscale opacity-30" /></div>
+                <div className="relative z-20 text-center max-w-6xl px-6">
+                  <button onClick={() => navigateTo('lineup')} className="mb-8 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}</button>
+                  <h1 className="text-5xl md:text-[9rem] font-heading font-bold text-white leading-[0.8] mb-6 tracking-tighter uppercase">{selectedWork.name}</h1>
+                  <p className="text-lg md:text-2xl text-[#ff6700] font-mono tracking-widest max-w-3xl mx-auto uppercase">{selectedWork.subtitle?.[lang] || selectedWork.description}</p>
+                </div>
+              </section>
+              <section className="py-24 md:py-48 px-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+                  <div className="lg:col-span-8 space-y-32">
+                    <div className="space-y-12"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('narrative')}</h2><p className="text-xl md:text-3xl text-white/70 leading-relaxed font-light">{selectedWork.longDescription[lang]}</p></div>
+                    <div className="p-10 border border-white/10 bg-black/60 backdrop-blur-3xl rounded-[3rem] space-y-10">
+                      <div><h5 className="text-[#ff6700] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('challenge')}</h5><p className="text-white text-xl font-heading font-bold leading-tight tracking-tight uppercase">{selectedWork.challenge[lang]}</p></div>
+                      <div className="h-px bg-white/10" />
+                      <div><h5 className="text-[#3a6ea5] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('outcome')}</h5><p className="text-white/70 text-sm leading-relaxed">{selectedWork.outcome[lang]}</p></div>
+                    </div>
+                  </div>
+                  <aside className="lg:col-span-4 lg:sticky lg:top-40 self-start"><div className="p-10 border border-white/5 rounded-[2.5rem]"><h5 className="text-white/20 mb-6 text-[10px] font-mono uppercase tracking-widest">{t('nextWork')}</h5><button onClick={() => { const idx = WORKS.findIndex(w => w.id === selectedWork?.id); const next = WORKS[(idx + 1) % WORKS.length]; navigateTo('work-detail', undefined, next); }} className="group flex items-center justify-between w-full text-left"><span className="text-3xl font-black uppercase group-hover:text-[#ff6700] transition-colors leading-none tracking-tighter">{WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}</span><ArrowRight className="w-8 h-8 text-[#ff6700] group-hover:translate-x-3 transition-transform" /></button></div></aside>
+                </div>
+              </section>
+            </motion.div>
           ) : (
-            <ProjectDetailView
-              work={TORRENT_WORK}
-              lang={lang}
-              t={t}
-              onBack={() => navigateTo('home')}
-              onNext={() => navigateTo('lineup')}
-              nextWorkName="The Waves Feed"
-            />
+            <motion.div key="torrent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a] overflow-x-hidden pb-40">
+              <section className="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/10">
+                <div className="absolute inset-0 opacity-40"><div className="absolute inset-0 bg-gradient-to-b from-[#ff6700]/20 to-[#0a0a0a] z-10" /><img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover grayscale" /></div>
+                <div className="relative z-20 text-center max-w-7xl px-6 w-full">
+                  <button onClick={() => navigateTo('home')} className="mb-12 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('exitEnvironment')}</button>
+                  <h1 className="text-4xl md:text-[6rem] font-heading font-bold text-white leading-none mb-4 tracking-tighter uppercase">{t('project')}</h1>
+                  <div className="w-full flex justify-center"><GradientText text="TORRENT" as="h2" className="bitcount-single-hero text-[15vw] md:text-[10vw] leading-[0.6] text-center mb-12" /></div>
+                </div>
+              </section>
+              <section className="py-24 px-6 max-w-7xl mx-auto space-y-12"><TorrentAnimation /></section>
+            </motion.div>
           )}
         </AnimatePresence>
       </main>
