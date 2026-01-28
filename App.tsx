@@ -823,7 +823,14 @@ const WORKS: MultilangWork[] = [
       en: 'Mossfera x Quant represents the convergence of biological inspiration and algorithmic precision.',
       es: 'Mossfera x Quant representa la convergencia de la inspiración biológica y la precisión algorítmica.',
       ca: 'Mossfera x Quant representa la convergència de la inspiració biològica i la precisió algorítmica.'
-    }
+    },
+    // Placeholders for structure
+    problem: { en: 'Placeholder Problem', es: 'Problema Placeholder', ca: 'Problema Placeholder' },
+    persona: { en: 'Placeholder Persona', es: 'Persona Placeholder', ca: 'Persona Placeholder' },
+    solution: { en: 'Placeholder Solution', es: 'Solución Placeholder', ca: 'Solució Placeholder' },
+    task: { en: 'Placeholder Task', es: 'Tarea Placeholder', ca: 'Tasca Placeholder' },
+    takeOn: { en: 'Placeholder Take', es: 'Opinión Placeholder', ca: 'Opinió Placeholder' },
+    metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
   },
   {
     id: '6',
