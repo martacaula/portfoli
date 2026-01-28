@@ -2329,7 +2329,7 @@ const App: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [currentPage]);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'auto' }); }, [currentPage]);
 
   const navigateTo = (page: typeof currentPage, sectionId?: string, workData?: MultilangWork) => {
     setMobileMenuOpen(false);
