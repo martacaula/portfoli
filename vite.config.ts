@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
         : '/';
     return {
       base,
+      assetsInclude: ['**/*.pdf', '**/*.PDF'],
       server: {
         port: 3000,
         host: '0.0.0.0',
