@@ -253,6 +253,7 @@ interface MultilangWork extends Work {
   challenge: { en: string; es: string; ca: string };
   outcome: { en: string; es: string; ca: string };
   mediaType?: 'image' | 'video';
+  content?: Partial<Record<Language, Partial<WorkContent>>>;
 }
 
 const WORKS: MultilangWork[] = [
@@ -283,6 +284,203 @@ const WORKS: MultilangWork[] = [
       en: 'Re:Connect rethinks how Politiken is consumed across devices by turning long-form, premium journalism into short, curated audio briefings. Personalized by interests and age, it builds a daily habit for students.',
       es: 'Re:Connect replantea cómo se consume Politiken al convertir el periodismo premium en resúmenes de audio breves.',
       ca: 'Re:Connect replanteja com es consumeix Politiken en convertir el periodisme premium en resums d\'àudio breus.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'Politiken Re:Connect | Voice-First Morning Brief',
+          subtitle: 'A flagship habit that proves premium value before payment.',
+          narrative: 'In a 2-day sprint, we reframed Politiken\'s youth challenge around attention, trust, and daily rhythm. The concept is a 5 to 10 minute audio brief built for wake-up and commute, with a student on-ramp to reduce friction early.'
+        },
+        sideCard: {
+          challenge: 'Print loss was not converting to digital, youth appeal felt limited, and app usage was estimated around 15 to 20% with discovery gated by subscription. Competitors won mornings with faster daily summaries, while product sprawl risked dilution.',
+          outcome: 'A converged flagship concept with a clear scope boundary, plus an intended prototype and test plan to validate habit and trust.',
+          buttonLabel: 'View Concept One-Pager'
+        },
+        yourTask: {
+          preLine: 'Design for a real morning moment.',
+          question: 'What is the smallest daily experience that makes Politiken feel worth coming back to?',
+          reframe: 'If we can win 10 minutes a day, what should the brief include and exclude? How do we prove quality before we ask for payment?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you opt in to a daily audio brief tomorrow morning?',
+            'Which topics belong in the default brief, and which should be optional?',
+            'What trust signals matter most for AI-supported summaries and voice Q&A?',
+            'Where should the student on-ramp live: app, campus partnerships, or both?',
+            'What is the one thing that would make this feel premium, not just convenient?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Younger readers commit to premium when it fits their routine and proves value with minimal friction.',
+          tensions: [
+            'Depth of journalism vs 5 to 10 minute consumption',
+            'Paywall protection vs discovery and habit formation',
+            'One flagship experience vs pressure to ship many features'
+          ]
+        },
+        persona: {
+          title: 'Time-Pressed Student Reader',
+          oneLiner: 'Mobile-first, price-sensitive, and high trust expectations, with a preference for short audio and offline access.',
+          needs: [
+            'A brief that respects limited time',
+            'Clear quality and credibility cues',
+            'A low-friction student pathway (trial, partners)'
+          ]
+        },
+        solution: {
+          title: 'AI Morning News Brief',
+          paragraph: 'A voice-first daily brief that opens from a timed notification, delivers curated summaries, and supports follow-up questions grounded in Politiken journalism. The experience stays intentionally narrow to protect quality and repeat use.',
+          definingPhrases: [
+            'Voice-first 5 to 10 minute brief',
+            'Proof of value before payment',
+            'Student on-ramp for later conversion'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Wireframe the first 30 seconds and the core player flow.',
+            'Build a clickable prototype and run short student interviews focused on timing, clarity, trust.',
+            'Define a protected scope boundary and a lightweight content ops plan for daily briefs.'
+          ],
+          successMetrics: [
+            'Listening frequency of at least 3 times per week per user (target).',
+            '30+ day retention of the brief experience (target).',
+            'Conversion pathway from student access to paid after graduation (target).'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'Politiken Re:Connect | Voice-First Morning Brief',
+          subtitle: 'A flagship habit that proves premium value before payment.',
+          narrative: 'In a 2-day sprint, we reframed Politiken\'s youth challenge around attention, trust, and daily rhythm. The concept is a 5 to 10 minute audio brief built for wake-up and commute, with a student on-ramp to reduce friction early.'
+        },
+        sideCard: {
+          challenge: 'Print loss was not converting to digital, youth appeal felt limited, and app usage was estimated around 15 to 20% with discovery gated by subscription. Competitors won mornings with faster daily summaries, while product sprawl risked dilution.',
+          outcome: 'A converged flagship concept with a clear scope boundary, plus an intended prototype and test plan to validate habit and trust.',
+          buttonLabel: 'View Concept One-Pager'
+        },
+        yourTask: {
+          preLine: 'Design for a real morning moment.',
+          question: 'What is the smallest daily experience that makes Politiken feel worth coming back to?',
+          reframe: 'If we can win 10 minutes a day, what should the brief include and exclude? How do we prove quality before we ask for payment?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you opt in to a daily audio brief tomorrow morning?',
+            'Which topics belong in the default brief, and which should be optional?',
+            'What trust signals matter most for AI-supported summaries and voice Q&A?',
+            'Where should the student on-ramp live: app, campus partnerships, or both?',
+            'What is the one thing that would make this feel premium, not just convenient?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Younger readers commit to premium when it fits their routine and proves value with minimal friction.',
+          tensions: [
+            'Depth of journalism vs 5 to 10 minute consumption',
+            'Paywall protection vs discovery and habit formation',
+            'One flagship experience vs pressure to ship many features'
+          ]
+        },
+        persona: {
+          title: 'Time-Pressed Student Reader',
+          oneLiner: 'Mobile-first, price-sensitive, and high trust expectations, with a preference for short audio and offline access.',
+          needs: [
+            'A brief that respects limited time',
+            'Clear quality and credibility cues',
+            'A low-friction student pathway (trial, partners)'
+          ]
+        },
+        solution: {
+          title: 'AI Morning News Brief',
+          paragraph: 'A voice-first daily brief that opens from a timed notification, delivers curated summaries, and supports follow-up questions grounded in Politiken journalism. The experience stays intentionally narrow to protect quality and repeat use.',
+          definingPhrases: [
+            'Voice-first 5 to 10 minute brief',
+            'Proof of value before payment',
+            'Student on-ramp for later conversion'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Wireframe the first 30 seconds and the core player flow.',
+            'Build a clickable prototype and run short student interviews focused on timing, clarity, trust.',
+            'Define a protected scope boundary and a lightweight content ops plan for daily briefs.'
+          ],
+          successMetrics: [
+            'Listening frequency of at least 3 times per week per user (target).',
+            '30+ day retention of the brief experience (target).',
+            'Conversion pathway from student access to paid after graduation (target).'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'Politiken Re:Connect | Voice-First Morning Brief',
+          subtitle: 'A flagship habit that proves premium value before payment.',
+          narrative: 'In a 2-day sprint, we reframed Politiken\'s youth challenge around attention, trust, and daily rhythm. The concept is a 5 to 10 minute audio brief built for wake-up and commute, with a student on-ramp to reduce friction early.'
+        },
+        sideCard: {
+          challenge: 'Print loss was not converting to digital, youth appeal felt limited, and app usage was estimated around 15 to 20% with discovery gated by subscription. Competitors won mornings with faster daily summaries, while product sprawl risked dilution.',
+          outcome: 'A converged flagship concept with a clear scope boundary, plus an intended prototype and test plan to validate habit and trust.',
+          buttonLabel: 'View Concept One-Pager'
+        },
+        yourTask: {
+          preLine: 'Design for a real morning moment.',
+          question: 'What is the smallest daily experience that makes Politiken feel worth coming back to?',
+          reframe: 'If we can win 10 minutes a day, what should the brief include and exclude? How do we prove quality before we ask for payment?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you opt in to a daily audio brief tomorrow morning?',
+            'Which topics belong in the default brief, and which should be optional?',
+            'What trust signals matter most for AI-supported summaries and voice Q&A?',
+            'Where should the student on-ramp live: app, campus partnerships, or both?',
+            'What is the one thing that would make this feel premium, not just convenient?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Younger readers commit to premium when it fits their routine and proves value with minimal friction.',
+          tensions: [
+            'Depth of journalism vs 5 to 10 minute consumption',
+            'Paywall protection vs discovery and habit formation',
+            'One flagship experience vs pressure to ship many features'
+          ]
+        },
+        persona: {
+          title: 'Time-Pressed Student Reader',
+          oneLiner: 'Mobile-first, price-sensitive, and high trust expectations, with a preference for short audio and offline access.',
+          needs: [
+            'A brief that respects limited time',
+            'Clear quality and credibility cues',
+            'A low-friction student pathway (trial, partners)'
+          ]
+        },
+        solution: {
+          title: 'AI Morning News Brief',
+          paragraph: 'A voice-first daily brief that opens from a timed notification, delivers curated summaries, and supports follow-up questions grounded in Politiken journalism. The experience stays intentionally narrow to protect quality and repeat use.',
+          definingPhrases: [
+            'Voice-first 5 to 10 minute brief',
+            'Proof of value before payment',
+            'Student on-ramp for later conversion'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Wireframe the first 30 seconds and the core player flow.',
+            'Build a clickable prototype and run short student interviews focused on timing, clarity, trust.',
+            'Define a protected scope boundary and a lightweight content ops plan for daily briefs.'
+          ],
+          successMetrics: [
+            'Listening frequency of at least 3 times per week per user (target).',
+            '30+ day retention of the brief experience (target).',
+            'Conversion pathway from student access to paid after graduation (target).'
+          ]
+        }
+      }
     }
   },
   {
@@ -384,6 +582,73 @@ const WORKS: MultilangWork[] = [
       en: 'Sirene is a specialized UX project for OOONOS, focusing on the intuitive visualization of acoustic data.',
       es: 'Sirene es un proyecto de UX especializado para OOONOS.',
       ca: 'Sirene és un projecte d\'UX especialitzat per a OOONOS.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'Sirène | Empowerment-Led Marketing Campaign',
+          subtitle: 'A safety brand framework built on trust, tone, and simple action.',
+          narrative: 'Sirène is a pocket-sized safety device where one press connects you to loved ones. This work defines the campaign foundation across website and social, shifting from fear storytelling to an empowerment tone.'
+        },
+        sideCard: {
+          challenge: 'Safety marketing sits in a sensitive space where messaging can either empower or reinforce fear. The plan had to support near-term reach for vulnerable users while building a longer-term brand for confident, everyday customers.',
+          outcome: 'A campaign framework with tone principles, channel priorities (Instagram first, website for depth), and insight-led feature messaging.',
+          buttonLabel: 'View Campaign Framework'
+        },
+        yourTask: {
+          preLine: 'Trust first, urgency second.',
+          question: 'How should Sirène communicate safety without triggering fear or victim framing?',
+          reframe: 'In other words: What do we say in the first 5 seconds that feels respectful and real? What do we show to prove reliability, not just intention?'
+        },
+        takeOn: {
+          questions: [
+            'Which moment should the campaign anchor on: commuting, travel, or being alone at night?',
+            'What is the right balance between product demo and human story?',
+            'Which feature should lead: loud alarm, live location, or direct emergency call?',
+            'What partnerships would add credibility without feeling performative?',
+            'What content formats should dominate: short video, highlights, Q&A, or photography?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'People adopt safety tools when the message is calm, empowering, and specific about how help is activated.',
+          tensions: [
+            'Urgency vs calm, confidence-building communication',
+            'Privacy vs connectivity (location, community, alerts)',
+            'Awareness storytelling vs proof through demos and clear information'
+          ]
+        },
+        persona: {
+          title: 'Solo Commuter',
+          oneLiner: 'Often moves alone and wants a discreet backup that reduces anxiety without changing their life.',
+          needs: [
+            'One-step activation that is easy under stress',
+            'Clear reassurance about reliability (battery, offline, connection)',
+            'A support loop that involves loved ones, not just the device'
+          ]
+        },
+        solution: {
+          title: 'Tone, Content, and Channel System',
+          paragraph: 'A marketing framework that prioritizes Instagram as the daily touchpoint (highlights, relevant posts, photography) and the website as the trust layer (clear info for the target audience, data-backed claims). Messaging centers empowerment and practical demos, shaped by user triggers and requested features.',
+          definingPhrases: [
+            'Empowerment-led tone',
+            'Demo-first clarity',
+            'Channel roles with purpose'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Produce a core set of representative videos and photo assets for social and landing pages.',
+            'Build the website information architecture around "How it works", "Family", "Community", and "Q&A".',
+            'Pilot partner-led distribution and community touchpoints to validate reach and trust.'
+          ],
+          successMetrics: [
+            'Website intent signals (waitlist, contact, "How it works" completion rate) (target).',
+            'Social trust signals (saves, shares, highlight taps, Q&A engagement) (target).',
+            'Qualified partnership conversations initiated (target).'
+          ]
+        }
+      }
     }
   },
   {
@@ -393,7 +658,7 @@ const WORKS: MultilangWork[] = [
     day: 'Kave Home',
     year: '2024',
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop',
-    description: 'Professional studio photography and lighting design for high-end furniture.',
+    description: 'A reshoot brief to modernize a high-visual category.',
     challenge: {
       en: 'Capturing the tactile essence of Mediterranean design in a controlled studio environment.',
       es: 'Capturar la esencia táctil del diseño mediterráneo en un entorno de estudio.',
@@ -408,6 +673,203 @@ const WORKS: MultilangWork[] = [
       en: 'During my internship at Kave Home, I managed studio lighting and high-end digital capture using Capture One.',
       es: 'Durante mis prácticas en Kave Home, gestioné la iluminación de estudio.',
       ca: 'Durant les meves pràctiques a Kave Home, vaig gestionar la il·luminació d\'estudi.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'Kave Home | Mirrors Category Refresh',
+          subtitle: 'A reshoot brief to modernize a high-visual category and restore momentum.',
+          narrative: 'The mirrors category was tracking below plan, while key SKUs carried outdated or missing lifestyle imagery. I defined a focused reshoot scope that upgrades context, scale cues, and cross-room usage without overextending production.'
+        },
+        sideCard: {
+          challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
+          outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
+          buttonLabel: 'View Reshoot Brief'
+        },
+        yourTask: {
+          preLine: 'Make imagery earn its space.',
+          question: 'What should we reshoot first to improve discovery and confidence from listing to PDP?',
+          reframe: 'If we can only refresh a shortlist, which scenes best communicate style and true scale? What would you keep consistent across every mirror for faster comparison?'
+        },
+        takeOn: {
+          questions: [
+            'Which room contexts matter most for mirrors in your market mix?',
+            'How should we balance lifestyle ambients vs clean product-first images?',
+            'What is the one scale cue you want shoppers to feel instantly?',
+            'Should bathroom mirrors be deliberately styled in other rooms to expand intent?',
+            'What consistency rule should never change across the category (crop, angle, lighting, props)?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'The category needed fresher, clearer visual cues to win attention and trust in a fast-scrolling environment.',
+          tensions: [
+            'High-visual category, but stale or missing ambients on key products',
+            'Need to show real scale, while keeping production practical and repeatable',
+            'Bathroom-led assortment, but broader room potential that current imagery does not unlock'
+          ]
+        },
+        persona: {
+          title: 'Mobile Home Shopper',
+          oneLiner: 'Decides visually in seconds and needs scale reassurance before committing.',
+          needs: [
+            'A quick read on size and placement',
+            'Clear differentiation between similar styles and finishes',
+            'Confidence the mirror works beyond a single staged room'
+          ]
+        },
+        solution: {
+          title: 'Reshoot Scope + Category Image System',
+          paragraph: 'A production-ready brief that prioritizes best sellers and content gaps, then applies a consistent image system to improve browsing, comparison, and perceived fit. The approach also opens new room narratives for mirrors that were previously framed too narrowly.',
+          definingPhrases: [
+            'Prioritized, not blanket reshoots',
+            'Context that communicates scale',
+            'Cross-room storytelling built for listings'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Lock the shortlist and shotlist, including required outputs per SKU (listing, PDP, variants).',
+            'Define the image system rules (crop, angle, lighting, prop limits) and apply across the reshoot.',
+            'Roll out refreshed ambients in priority listings and validate learnings before expanding scope.'
+          ],
+          successMetrics: [
+            'Category listing engagement (CTR to PDP, scroll depth, time on listing).',
+            'PDP intent signals (gallery interaction, add-to-cart rate, variant selection rate).',
+            'Commercial impact on the refreshed set (sell-through, stock coverage, returns or complaints tied to "size expectation").'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'Kave Home | Mirrors Category Refresh',
+          subtitle: 'A reshoot brief to modernize a high-visual category and restore momentum.',
+          narrative: 'The mirrors category was tracking below plan, while key SKUs carried outdated or missing lifestyle imagery. I defined a focused reshoot scope that upgrades context, scale cues, and cross-room usage without overextending production.'
+        },
+        sideCard: {
+          challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
+          outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
+          buttonLabel: 'View Reshoot Brief'
+        },
+        yourTask: {
+          preLine: 'Make imagery earn its space.',
+          question: 'What should we reshoot first to improve discovery and confidence from listing to PDP?',
+          reframe: 'If we can only refresh a shortlist, which scenes best communicate style and true scale? What would you keep consistent across every mirror for faster comparison?'
+        },
+        takeOn: {
+          questions: [
+            'Which room contexts matter most for mirrors in your market mix?',
+            'How should we balance lifestyle ambients vs clean product-first images?',
+            'What is the one scale cue you want shoppers to feel instantly?',
+            'Should bathroom mirrors be deliberately styled in other rooms to expand intent?',
+            'What consistency rule should never change across the category (crop, angle, lighting, props)?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'The category needed fresher, clearer visual cues to win attention and trust in a fast-scrolling environment.',
+          tensions: [
+            'High-visual category, but stale or missing ambients on key products',
+            'Need to show real scale, while keeping production practical and repeatable',
+            'Bathroom-led assortment, but broader room potential that current imagery does not unlock'
+          ]
+        },
+        persona: {
+          title: 'Mobile Home Shopper',
+          oneLiner: 'Decides visually in seconds and needs scale reassurance before committing.',
+          needs: [
+            'A quick read on size and placement',
+            'Clear differentiation between similar styles and finishes',
+            'Confidence the mirror works beyond a single staged room'
+          ]
+        },
+        solution: {
+          title: 'Reshoot Scope + Category Image System',
+          paragraph: 'A production-ready brief that prioritizes best sellers and content gaps, then applies a consistent image system to improve browsing, comparison, and perceived fit. The approach also opens new room narratives for mirrors that were previously framed too narrowly.',
+          definingPhrases: [
+            'Prioritized, not blanket reshoots',
+            'Context that communicates scale',
+            'Cross-room storytelling built for listings'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Lock the shortlist and shotlist, including required outputs per SKU (listing, PDP, variants).',
+            'Define the image system rules (crop, angle, lighting, prop limits) and apply across the reshoot.',
+            'Roll out refreshed ambients in priority listings and validate learnings before expanding scope.'
+          ],
+          successMetrics: [
+            'Category listing engagement (CTR to PDP, scroll depth, time on listing).',
+            'PDP intent signals (gallery interaction, add-to-cart rate, variant selection rate).',
+            'Commercial impact on the refreshed set (sell-through, stock coverage, returns or complaints tied to "size expectation").'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'Kave Home | Mirrors Category Refresh',
+          subtitle: 'A reshoot brief to modernize a high-visual category and restore momentum.',
+          narrative: 'The mirrors category was tracking below plan, while key SKUs carried outdated or missing lifestyle imagery. I defined a focused reshoot scope that upgrades context, scale cues, and cross-room usage without overextending production.'
+        },
+        sideCard: {
+          challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
+          outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
+          buttonLabel: 'View Reshoot Brief'
+        },
+        yourTask: {
+          preLine: 'Make imagery earn its space.',
+          question: 'What should we reshoot first to improve discovery and confidence from listing to PDP?',
+          reframe: 'If we can only refresh a shortlist, which scenes best communicate style and true scale? What would you keep consistent across every mirror for faster comparison?'
+        },
+        takeOn: {
+          questions: [
+            'Which room contexts matter most for mirrors in your market mix?',
+            'How should we balance lifestyle ambients vs clean product-first images?',
+            'What is the one scale cue you want shoppers to feel instantly?',
+            'Should bathroom mirrors be deliberately styled in other rooms to expand intent?',
+            'What consistency rule should never change across the category (crop, angle, lighting, props)?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'The category needed fresher, clearer visual cues to win attention and trust in a fast-scrolling environment.',
+          tensions: [
+            'High-visual category, but stale or missing ambients on key products',
+            'Need to show real scale, while keeping production practical and repeatable',
+            'Bathroom-led assortment, but broader room potential that current imagery does not unlock'
+          ]
+        },
+        persona: {
+          title: 'Mobile Home Shopper',
+          oneLiner: 'Decides visually in seconds and needs scale reassurance before committing.',
+          needs: [
+            'A quick read on size and placement',
+            'Clear differentiation between similar styles and finishes',
+            'Confidence the mirror works beyond a single staged room'
+          ]
+        },
+        solution: {
+          title: 'Reshoot Scope + Category Image System',
+          paragraph: 'A production-ready brief that prioritizes best sellers and content gaps, then applies a consistent image system to improve browsing, comparison, and perceived fit. The approach also opens new room narratives for mirrors that were previously framed too narrowly.',
+          definingPhrases: [
+            'Prioritized, not blanket reshoots',
+            'Context that communicates scale',
+            'Cross-room storytelling built for listings'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Lock the shortlist and shotlist, including required outputs per SKU (listing, PDP, variants).',
+            'Define the image system rules (crop, angle, lighting, prop limits) and apply across the reshoot.',
+            'Roll out refreshed ambients in priority listings and validate learnings before expanding scope.'
+          ],
+          successMetrics: [
+            'Category listing engagement (CTR to PDP, scroll depth, time on listing).',
+            'PDP intent signals (gallery interaction, add-to-cart rate, variant selection rate).',
+            'Commercial impact on the refreshed set (sell-through, stock coverage, returns or complaints tied to "size expectation").'
+          ]
+        }
+      }
     }
   },
   {
@@ -433,6 +895,329 @@ const WORKS: MultilangWork[] = [
       es: 'Quant x Mossfera se centró en la creación de GPTs personalizados.',
       ca: 'Quant x Mossfera es va centrar en la creació de GPTs personalitzats.'
     }
+  },
+  {
+    id: '8',
+    name: 'Neety',
+    genre: 'B2B Sales Automation',
+    day: 'Neety',
+    year: '2025',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
+    description: 'Campaign console redesign for faster action.',
+    subtitle: {
+      en: 'A calmer campaign console with clearer hierarchy and action paths.',
+      es: 'A calmer campaign console with clearer hierarchy and action paths.',
+      ca: 'A calmer campaign console with clearer hierarchy and action paths.'
+    },
+    challenge: {
+      en: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+      es: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+      ca: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.'
+    },
+    outcome: {
+      en: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+      es: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+      ca: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.'
+    },
+    longDescription: {
+      en: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.',
+      es: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.',
+      ca: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'Neety | B2B Sales Automation UI Redesign',
+          subtitle: 'A calmer campaign console with clearer hierarchy and action paths.',
+          narrative: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
+        },
+        sideCard: {
+          challenge: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+          outcome: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+          buttonLabel: 'View Before/After'
+        },
+        yourTask: {
+          preLine: 'Make the next action obvious.',
+          question: 'How should a campaign dashboard communicate status and unlock the right action in seconds?',
+          reframe: 'If a new user opens this screen, what do they understand first? What do they do next, without reading everything?'
+        },
+        takeOn: {
+          questions: [
+            'Which three signals must always be visible above the fold?',
+            'What task statuses cause the most confusion today, and why?',
+            'Do bulk actions belong at the top, or closer to selected items?',
+            'What should be expandable vs always-on in each task card?',
+            'Where should lightweight notifications live so they help, not interrupt?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'In automation tooling, ambiguity is the real bottleneck, not feature count.',
+          tensions: [
+            'Dense information vs scanability',
+            'Transparency of execution vs cognitive load',
+            'Brand expression vs utilitarian clarity'
+          ]
+        },
+        persona: {
+          title: 'Sales Ops Operator',
+          oneLiner: 'Runs outbound workflows daily and needs fast, reliable feedback to keep campaigns moving.',
+          needs: [
+            'Progress that is readable at a glance',
+            'Status clarity with minimal interpretation',
+            'Strong primary actions that match the workflow'
+          ]
+        },
+        solution: {
+          title: 'Campaign Console Refresh',
+          paragraph: 'A minimal, modern layout that improves progress visibility (radial progress), elevates primary actions (“Retry Selected”, “Continue Selected”), and strengthens hierarchy through clearer headers and task card structure. A small notification box keeps updates accessible without pulling focus.',
+          definingPhrases: [
+            'Clear hierarchy, less noise',
+            'Primary actions, visually prioritized',
+            'Status clarity inside task cards'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Turn the proposal into a reusable component set (cards, status tags, buttons, progress).',
+            'Validate the new hierarchy with quick usability checks on 3 key tasks (scan, select, act).',
+            'Define analytics events for key actions to monitor workflow health post-implementation.'
+          ],
+          successMetrics: [
+            'Time to identify the next action from page load (target).',
+            'Task completion rate for selected actions (target).',
+            'Reduction in status-related support questions or user confusion signals (target).'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'Neety | B2B Sales Automation UI Redesign',
+          subtitle: 'A calmer campaign console with clearer hierarchy and action paths.',
+          narrative: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
+        },
+        sideCard: {
+          challenge: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+          outcome: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+          buttonLabel: 'View Before/After'
+        },
+        yourTask: {
+          preLine: 'Make the next action obvious.',
+          question: 'How should a campaign dashboard communicate status and unlock the right action in seconds?',
+          reframe: 'If a new user opens this screen, what do they understand first? What do they do next, without reading everything?'
+        },
+        takeOn: {
+          questions: [
+            'Which three signals must always be visible above the fold?',
+            'What task statuses cause the most confusion today, and why?',
+            'Do bulk actions belong at the top, or closer to selected items?',
+            'What should be expandable vs always-on in each task card?',
+            'Where should lightweight notifications live so they help, not interrupt?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'In automation tooling, ambiguity is the real bottleneck, not feature count.',
+          tensions: [
+            'Dense information vs scanability',
+            'Transparency of execution vs cognitive load',
+            'Brand expression vs utilitarian clarity'
+          ]
+        },
+        persona: {
+          title: 'Sales Ops Operator',
+          oneLiner: 'Runs outbound workflows daily and needs fast, reliable feedback to keep campaigns moving.',
+          needs: [
+            'Progress that is readable at a glance',
+            'Status clarity with minimal interpretation',
+            'Strong primary actions that match the workflow'
+          ]
+        },
+        solution: {
+          title: 'Campaign Console Refresh',
+          paragraph: 'A minimal, modern layout that improves progress visibility (radial progress), elevates primary actions (“Retry Selected”, “Continue Selected”), and strengthens hierarchy through clearer headers and task card structure. A small notification box keeps updates accessible without pulling focus.',
+          definingPhrases: [
+            'Clear hierarchy, less noise',
+            'Primary actions, visually prioritized',
+            'Status clarity inside task cards'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Turn the proposal into a reusable component set (cards, status tags, buttons, progress).',
+            'Validate the new hierarchy with quick usability checks on 3 key tasks (scan, select, act).',
+            'Define analytics events for key actions to monitor workflow health post-implementation.'
+          ],
+          successMetrics: [
+            'Time to identify the next action from page load (target).',
+            'Task completion rate for selected actions (target).',
+            'Reduction in status-related support questions or user confusion signals (target).'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'Neety | B2B Sales Automation UI Redesign',
+          subtitle: 'A calmer campaign console with clearer hierarchy and action paths.',
+          narrative: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
+        },
+        sideCard: {
+          challenge: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+          outcome: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+          buttonLabel: 'View Before/After'
+        },
+        yourTask: {
+          preLine: 'Make the next action obvious.',
+          question: 'How should a campaign dashboard communicate status and unlock the right action in seconds?',
+          reframe: 'If a new user opens this screen, what do they understand first? What do they do next, without reading everything?'
+        },
+        takeOn: {
+          questions: [
+            'Which three signals must always be visible above the fold?',
+            'What task statuses cause the most confusion today, and why?',
+            'Do bulk actions belong at the top, or closer to selected items?',
+            'What should be expandable vs always-on in each task card?',
+            'Where should lightweight notifications live so they help, not interrupt?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'In automation tooling, ambiguity is the real bottleneck, not feature count.',
+          tensions: [
+            'Dense information vs scanability',
+            'Transparency of execution vs cognitive load',
+            'Brand expression vs utilitarian clarity'
+          ]
+        },
+        persona: {
+          title: 'Sales Ops Operator',
+          oneLiner: 'Runs outbound workflows daily and needs fast, reliable feedback to keep campaigns moving.',
+          needs: [
+            'Progress that is readable at a glance',
+            'Status clarity with minimal interpretation',
+            'Strong primary actions that match the workflow'
+          ]
+        },
+        solution: {
+          title: 'Campaign Console Refresh',
+          paragraph: 'A minimal, modern layout that improves progress visibility (radial progress), elevates primary actions (“Retry Selected”, “Continue Selected”), and strengthens hierarchy through clearer headers and task card structure. A small notification box keeps updates accessible without pulling focus.',
+          definingPhrases: [
+            'Clear hierarchy, less noise',
+            'Primary actions, visually prioritized',
+            'Status clarity inside task cards'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Turn the proposal into a reusable component set (cards, status tags, buttons, progress).',
+            'Validate the new hierarchy with quick usability checks on 3 key tasks (scan, select, act).',
+            'Define analytics events for key actions to monitor workflow health post-implementation.'
+          ],
+          successMetrics: [
+            'Time to identify the next action from page load (target).',
+            'Task completion rate for selected actions (target).',
+            'Reduction in status-related support questions or user confusion signals (target).'
+          ]
+        }
+      }
+    }
+  }
+  ,
+  {
+    id: '9',
+    name: 'Strenes Concert',
+    genre: 'Visual Identity System',
+    day: 'Strenes',
+    year: '2025',
+    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop',
+    description: 'Visual identity system proposal for a locally rooted festival.',
+    subtitle: {
+      en: 'A modular, locally rooted system designed to scale across touchpoints.',
+      es: 'A modular, locally rooted system designed to scale across touchpoints.',
+      ca: 'A modular, locally rooted system designed to scale across touchpoints.'
+    },
+    challenge: {
+      en: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.',
+      es: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.',
+      ca: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.'
+    },
+    outcome: {
+      en: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.',
+      es: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.',
+      ca: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.'
+    },
+    longDescription: {
+      en: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.',
+      es: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.',
+      ca: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'Strenes Concert | Visual Identity System Proposal',
+          subtitle: 'A modular, locally rooted system designed to scale across touchpoints.',
+          narrative: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.'
+        },
+        sideCard: {
+          challenge: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.',
+          outcome: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.',
+          buttonLabel: 'View Brand System'
+        },
+        yourTask: {
+          preLine: 'Make the system easy to use, not just nice to look at.',
+          question: 'What visual rules keep Strenes consistent across tickets, posters, social, and signage?',
+          reframe: 'In other words: If different teams produce assets, what guardrails prevent drift? Where should the system allow variation, and where should it stay strict?'
+        },
+        takeOn: {
+          questions: [
+            'Which applications matter most for first impression: street posters, social, or venue signage?',
+            'How bold can the pattern be before it hurts legibility of lineup information?',
+            'Does the stained-glass reference read as Girona, even without the Basilica context?',
+            'What typography pairing feels right for a youthful festival while staying functional?',
+            'What accessibility checks should we apply to the palette across day and night contexts?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'A local festival brand wins when it balances cultural specificity with a repeatable system that scales cleanly.',
+          tensions: [
+            'Consistency vs flexibility across many formats',
+            'Heritage cues vs contemporary youth energy',
+            'Bold chroma and pattern vs accessibility and information clarity'
+          ]
+        },
+        persona: {
+          title: 'City-First Festival-Goer',
+          oneLiner: 'Discovers events on the street and on mobile, decides quickly, and wants a cohesive experience.',
+          needs: [
+            'Instant recognition at a distance',
+            'Clear hierarchy for date, venue, and lineup',
+            'A visual system that stays consistent across touchpoints'
+          ]
+        },
+        solution: {
+          title: 'Stained-Glass Modular Identity',
+          paragraph: 'A symbol and pattern language derived from a single core shape, paired with a defined chroma palette and a practical typography system. The toolkit includes proportions, safety zones, positive and negative color use, and mock-ups to guide real-world rollout.',
+          definingPhrases: [
+            'One shape, many applications',
+            'Rules that protect consistency',
+            'Local meaning, modern execution'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Convert the system into ready-to-use templates for social, posters, tickets, and signage.',
+            'Run accessibility and legibility checks on key layouts and color pairings.',
+            'Extend mock-ups into a full event kit with clear production specs and handoff files.'
+          ],
+          successMetrics: [
+            'Template adoption and consistency across teams (audit-based) (target).',
+            'Reduction in production errors (wrong spacing, off-brand color, typography drift) (target).',
+            'Audience recognition in lightweight intercept feedback (street and social) (target).'
+          ]
+        }
+      }
+    }
   }
 ];
 
@@ -447,10 +1232,20 @@ type WorkContent = {
   metrics: { nextSteps: string[]; successMetrics: string[] };
 };
 
+const mergeWorkContent = (base: WorkContent, override?: Partial<WorkContent>): WorkContent => ({
+  hero: { ...base.hero, ...override?.hero },
+  sideCard: { ...base.sideCard, ...override?.sideCard },
+  yourTask: { ...base.yourTask, ...override?.yourTask },
+  takeOn: { ...base.takeOn, ...override?.takeOn },
+  problem: { ...base.problem, ...override?.problem },
+  persona: { ...base.persona, ...override?.persona },
+  solution: { ...base.solution, ...override?.solution },
+  metrics: { ...base.metrics, ...override?.metrics }
+});
+
 const buildWorkContent = (work: MultilangWork, lang: Language): WorkContent => {
   const copy = TRANSLATIONS[lang];
-
-  return {
+  const base: WorkContent = {
     hero: {
       title: work.name,
       subtitle: work.subtitle?.[lang] || work.description,
@@ -489,6 +1284,9 @@ const buildWorkContent = (work: MultilangWork, lang: Language): WorkContent => {
       successMetrics: copy.successMetrics
     }
   };
+
+  const override = work.content?.[lang] || work.content?.en;
+  return mergeWorkContent(base, override);
 };
 
 const App: React.FC = () => {
@@ -795,9 +1593,11 @@ const App: React.FC = () => {
                               </div>
                             ))}
                           </div>
-                          <div className="pt-8 border-t border-black/5">
-                            <p className="text-[10px] font-mono text-black/20 uppercase italic">{t('note')}: {content.takeOn.note}</p>
-                          </div>
+                          {content.takeOn.note.trim() ? (
+                            <div className="pt-8 border-t border-black/5">
+                              <p className="text-[10px] font-mono text-black/20 uppercase italic">{t('note')}: {content.takeOn.note}</p>
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </section>
