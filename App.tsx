@@ -279,7 +279,13 @@ const lineupDocs = (
   import.meta as ImportMeta & {
     glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
   }
-).glob('./Assets/**/*.{pdf,PDF,mov,MOV,mp4,MP4}', { eager: true, import: 'default' });
+).glob('./Assets/**/*.{pdf,PDF}', { eager: true, import: 'default' });
+
+const lineupVideos = (
+  import.meta as ImportMeta & {
+    glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
+  }
+).glob('./Assets/**/*.{mov,MOV,mp4,MP4}', { eager: true, import: 'default' });
 
 const findLineupAsset = (suffix: string) =>
   Object.entries(lineupAssets).find(([path]) => path.endsWith(suffix))?.[1] ?? '';
@@ -293,7 +299,7 @@ const buildFolderAssets = (folderName: string) =>
 type ProjectLink = {
   url: string;
   label: string;
-  kind: 'pdf' | 'video' | 'file';
+  kind: 'pdf';
 };
 
 const buildFolderLinks = (folderName: string): ProjectLink[] =>
@@ -301,11 +307,24 @@ const buildFolderLinks = (folderName: string): ProjectLink[] =>
     .filter(([path]) => path.includes(`/Assets/${folderName}/`))
     .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
     .map(([path, url]) => {
-      const lower = path.toLowerCase();
       const filename = path.split('/').pop() ?? 'Document';
-      const kind = lower.endsWith('.pdf') ? 'pdf' : lower.endsWith('.mp4') || lower.endsWith('.mov') ? 'video' : 'file';
-      return { url, label: filename, kind };
+      return { url, label: filename, kind: 'pdf' };
     });
+
+type ProjectMedia = { url: string; type: 'image' | 'video' };
+
+const buildFolderMedia = (folderName: string): ProjectMedia[] => {
+  const images = Object.entries(lineupAssets)
+    .filter(([path]) => path.includes(`/Assets/${folderName}/`))
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+    .map(([, url]) => ({ url, type: 'image' as const }));
+  const videos = Object.entries(lineupVideos)
+    .filter(([path]) => path.includes(`/Assets/${folderName}/`))
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+    .map(([, url]) => ({ url, type: 'video' as const }));
+
+  return [...images, ...videos];
+};
 
 const LINEUP_IMAGES = {
   reconnect: findLineupAsset('Assets/reconnectmedia/Captura de pantalla 2026-01-28 a las 13.23.06.png'),
@@ -317,14 +336,14 @@ const LINEUP_IMAGES = {
   strenes: findLineupAsset('Assets/strenesmedia/herostrenes.png'),
 };
 
-const LINEUP_LOGS: Record<string, string[]> = {
-  '1': buildFolderAssets('reconnectmedia'),
-  '2': buildFolderAssets('ditmadmedia'),
-  '3': buildFolderAssets('redcrossmedia'),
-  '4': buildFolderAssets('mossmedia'),
-  '6': buildFolderAssets('kavehomeinternship'),
-  '8': buildFolderAssets('neetymedia'),
-  '9': buildFolderAssets('strenesmedia'),
+const LINEUP_LOGS: Record<string, ProjectMedia[]> = {
+  '1': buildFolderMedia('reconnectmedia'),
+  '2': buildFolderMedia('ditmadmedia'),
+  '3': buildFolderMedia('redcrossmedia'),
+  '4': buildFolderMedia('mossmedia'),
+  '6': buildFolderMedia('kavehomeinternship'),
+  '8': buildFolderMedia('neetymedia'),
+  '9': buildFolderMedia('strenesmedia'),
 };
 
 const LINEUP_LINKS: Record<string, ProjectLink[]> = {
@@ -1747,7 +1766,6 @@ const App: React.FC = () => {
                 const workLog = LINEUP_LOGS[selectedWork.id] ?? [];
                 const workLinks = LINEUP_LINKS[selectedWork.id] ?? [];
                 const pdfLinks = workLinks.filter((link) => link.kind === 'pdf');
-                const otherLinks = workLinks.filter((link) => link.kind !== 'pdf');
                 return (
                   <>
                     <section className="min-h-[70vh] flex flex-col justify-end px-6 md:px-24 pb-20 border-b border-black/5">
@@ -1786,7 +1804,7 @@ const App: React.FC = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 items-start auto-rows-min">
                               {workLog.map((asset, index) => (
                                 <div key={`${selectedWork.id}-log-${index}`} className="relative overflow-hidden bg-white/5 shadow-lg">
-                                  <MediaRenderer url={asset} className="w-full h-auto object-contain" />
+                                  <MediaRenderer url={asset.url} type={asset.type} className="w-full h-auto object-contain" />
                                 </div>
                               ))}
                             </div>
@@ -1900,9 +1918,9 @@ const App: React.FC = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         <div className="space-y-6">
                           <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('interestingLinks')}</h3>
-                          {otherLinks.length ? (
+                          {workLinks.length ? (
                             <div className="space-y-4">
-                              {otherLinks.map((link) => (
+                              {workLinks.map((link) => (
                                 <a
                                   key={link.url}
                                   href={link.url}
@@ -1914,7 +1932,7 @@ const App: React.FC = () => {
                                     <ExternalLink className="w-4 h-4 text-[#ff6700]" />
                                     <span className="text-xs font-bold uppercase tracking-tight text-black/70">{link.label}</span>
                                   </div>
-                                  <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">{link.kind}</span>
+                                  <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">PDF</span>
                                 </a>
                               ))}
                             </div>
