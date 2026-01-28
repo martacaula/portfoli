@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Figma, Github, Layers, Scissors, PenTool, Video, Aperture, Cpu, Share2, Zap, Command, Palette, Camera, Code, Sun, Film, Wind, CheckCircle } from 'lucide-react';
+import { type Language } from '../types';
 
 interface Tool {
   name: string;
@@ -10,17 +11,38 @@ interface Tool {
   color: string;
 }
 
+type BranchId = 'design' | 'visual' | 'digital';
+
 interface Branch {
-  id: string;
-  title: string;
+  id: BranchId;
+  title: Record<Language, string>;
   tools: Tool[];
   accent: string;
 }
 
+const COPY: Record<Language, { fromLabel: string; footer: [string, string, string] }> = {
+  en: {
+    fromLabel: 'from',
+    footer: ['Enterprise Ready', 'Creative Suite v2.5', 'Optimized Workflow']
+  },
+  es: {
+    fromLabel: 'de',
+    footer: ['Listo para empresa', 'Suite creativa v2.5', 'Flujo optimizado']
+  },
+  ca: {
+    fromLabel: 'de',
+    footer: ['Preparat per a empresa', 'Suite creativa v2.5', 'Flux optimitzat']
+  }
+};
+
 const BRANCHES: Branch[] = [
   {
     id: 'design',
-    title: 'Design & Identity',
+    title: {
+      en: 'Design & Identity',
+      es: 'Diseño e Identidad',
+      ca: 'Disseny i Identitat'
+    },
     accent: '#3a6ea5',
     tools: [
       { name: 'Figma', brand: 'Figma Inc.', icon: <Layers className="w-4 h-4" />, color: '#F24E1E' },
@@ -30,7 +52,11 @@ const BRANCHES: Branch[] = [
   },
   {
     id: 'visual',
-    title: 'Visual Arts',
+    title: {
+      en: 'Visual Arts',
+      es: 'Artes Visuales',
+      ca: 'Arts Visuals'
+    },
     accent: '#ff6700',
     tools: [
       { name: 'Final Cut Pro', brand: 'Apple Inc.', icon: <Scissors className="w-4 h-4" />, color: '#EA77FF' },
@@ -41,7 +67,11 @@ const BRANCHES: Branch[] = [
   },
   {
     id: 'digital',
-    title: 'Digital Transformation',
+    title: {
+      en: 'Digital Transformation',
+      es: 'Transformación Digital',
+      ca: 'Transformació Digital'
+    },
     accent: '#ebebeb',
     tools: [
       { name: 'AI Studio', brand: 'Google Cloud', icon: <Cpu className="w-4 h-4" />, color: '#4285F4' },
@@ -51,7 +81,7 @@ const BRANCHES: Branch[] = [
   }
 ];
 
-const ToolModule: React.FC<{ tool: Tool }> = ({ tool }) => (
+const ToolModule: React.FC<{ tool: Tool; fromLabel: string }> = ({ tool, fromLabel }) => (
   <motion.div
     whileHover={{ x: 3 }}
     className="group flex items-center gap-3 p-3 bg-white/[0.02] border border-white/5 rounded-lg hover:border-white/10 transition-all"
@@ -64,12 +94,13 @@ const ToolModule: React.FC<{ tool: Tool }> = ({ tool }) => (
     </div>
     <div className="flex flex-col">
       <span className="text-[11px] font-bold text-white uppercase tracking-wider">{tool.name}</span>
-      <span className="text-[9px] font-medium text-white/30 lowercase italic tracking-tight">from {tool.brand}</span>
+      <span className="text-[9px] font-medium text-white/30 lowercase italic tracking-tight">{fromLabel} {tool.brand}</span>
     </div>
   </motion.div>
 );
 
-const ToolAquarium: React.FC = () => {
+const ToolAquarium: React.FC<{ lang: Language }> = ({ lang }) => {
+  const copy = COPY[lang];
   return (
     <div className="relative w-full py-8 px-6 bg-transparent border-y border-white/5">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -85,12 +116,12 @@ const ToolAquarium: React.FC = () => {
             >
               <div className="flex items-center gap-3 pb-3 border-b border-white/5">
                  <div className="w-1 h-3 rounded-full" style={{ backgroundColor: branch.accent }} />
-                 <h4 className="text-xs font-bold uppercase tracking-widest text-white/60">{branch.title}</h4>
+                 <h4 className="text-xs font-bold uppercase tracking-widest text-white/60">{branch.title[lang]}</h4>
               </div>
 
               <div className="space-y-2">
                 {branch.tools.map((tool, i) => (
-                  <ToolModule key={i} tool={tool} />
+                  <ToolModule key={i} tool={tool} fromLabel={copy.fromLabel} />
                 ))}
               </div>
             </motion.div>
@@ -98,9 +129,9 @@ const ToolAquarium: React.FC = () => {
         </div>
 
         <div className="flex justify-center gap-8 pt-8 opacity-20 border-t border-white/5">
-           <span className="text-[8px] font-mono uppercase tracking-widest">Enterprise Ready</span>
-           <span className="text-[8px] font-mono uppercase tracking-widest">Creative Suite v2.5</span>
-           <span className="text-[8px] font-mono uppercase tracking-widest">Optimized Workflow</span>
+           <span className="text-[8px] font-mono uppercase tracking-widest">{copy.footer[0]}</span>
+           <span className="text-[8px] font-mono uppercase tracking-widest">{copy.footer[1]}</span>
+           <span className="text-[8px] font-mono uppercase tracking-widest">{copy.footer[2]}</span>
         </div>
       </div>
     </div>

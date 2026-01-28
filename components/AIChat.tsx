@@ -2,8 +2,41 @@
 import React, { useState } from 'react';
 import { MessageCircle, X, Instagram, Linkedin, Github, Send, Mail, Briefcase } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { type Language } from '../types';
 
-const AIChat: React.FC = () => {
+interface AIChatProps {
+  lang: Language;
+}
+
+const COPY: Record<Language, { header: string; greetingPrefix: string; greetingSuffix: string; email: string; projects: string; footer: string }> = {
+  en: {
+    header: 'Contact Hub',
+    greetingPrefix: "Hi! I'm",
+    greetingSuffix: 'What would you like to do?',
+    email: 'Contact via Email',
+    projects: 'View Projects',
+    footer: 'Ready for iteration v2.5'
+  },
+  es: {
+    header: 'Centro de Contacto',
+    greetingPrefix: '¡Hola! Soy',
+    greetingSuffix: '¿Qué te gustaría hacer?',
+    email: 'Contactar por Email',
+    projects: 'Ver Proyectos',
+    footer: 'Lista para la iteración v2.5'
+  },
+  ca: {
+    header: 'Hub de Contacte',
+    greetingPrefix: 'Hola! Sóc la',
+    greetingSuffix: "Què t'agradaria fer?",
+    email: 'Contactar per Email',
+    projects: 'Veure Projectes',
+    footer: 'Llesta per a la iteració v2.5'
+  }
+};
+
+const AIChat: React.FC<AIChatProps> = ({ lang }) => {
+  const copy = COPY[lang];
   const [isOpen, setIsOpen] = useState(false);
   
   const socialLinks = [
@@ -13,8 +46,8 @@ const AIChat: React.FC = () => {
   ];
 
   const contactOptions = [
-    { label: 'Contactar via Email', icon: <Mail className="w-4 h-4" />, action: () => window.location.href = 'mailto:caulamarta2@gmail.com' },
-    { label: 'Veure Projectes', icon: <Briefcase className="w-4 h-4" />, action: () => { setIsOpen(false); window.dispatchEvent(new CustomEvent('navigate-lineup')); } },
+    { label: copy.email, icon: <Mail className="w-4 h-4" />, action: () => window.location.href = 'mailto:caulamarta2@gmail.com' },
+    { label: copy.projects, icon: <Briefcase className="w-4 h-4" />, action: () => { setIsOpen(false); window.dispatchEvent(new CustomEvent('navigate-lineup')); } },
   ];
 
   return (
@@ -30,7 +63,7 @@ const AIChat: React.FC = () => {
             {/* Header with Social Links */}
             <div className="bg-gradient-to-r from-[#ff6700]/20 to-[#3a6ea5]/20 p-6 border-b border-white/5">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="bebas-neue-regular text-2xl tracking-widest text-white uppercase">Contact Hub</h3>
+                <h3 className="bebas-neue-regular text-2xl tracking-widest text-white uppercase">{copy.header}</h3>
                 <button onClick={() => setIsOpen(false)} className="text-white/40 hover:text-white transition-colors">
                   <X className="w-5 h-5" />
                 </button>
@@ -57,7 +90,7 @@ const AIChat: React.FC = () => {
               <div className="space-y-4">
                 <div className="bg-white/5 border border-white/5 p-4 rounded-2xl">
                   <p className="text-sm text-[#ebebeb] leading-relaxed">
-                    Hola! Sóc la <span className="text-[#ff6700] font-bold">Marta</span>. Què t'agradaria fer?
+                    {copy.greetingPrefix} <span className="text-[#ff6700] font-bold">Marta</span>. {copy.greetingSuffix}
                   </p>
                 </div>
               </div>
@@ -82,7 +115,7 @@ const AIChat: React.FC = () => {
 
             {/* Footer Tag */}
             <div className="p-4 bg-black/40 border-t border-white/5 text-center">
-               <span className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em]">Ready for iteration v2.5</span>
+               <span className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em]">{copy.footer}</span>
             </div>
           </motion.div>
         )}

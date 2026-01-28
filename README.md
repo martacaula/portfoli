@@ -1,20 +1,44 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <img src="./Assets/marta_caula.jpeg" alt="Marta Caula" width="320" />
 </div>
 
-# Run and deploy your AI Studio app
+# Portfolio — Marta Caula
 
-This contains everything you need to run your app locally.
+Portfolio web interactivo para presentar proyectos, fotografía y piezas visuales.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1aw1XUqXSXYQOL79wW_Z9ZpPLFIKbBeFx
+## Stack
 
-## Run Locally
+- React + TypeScript + Vite
+- Animaciones: Framer Motion
+- Iconos: Lucide
 
-**Prerequisites:**  Node.js
+## Ejecutar en local
 
+**Requisitos:** Node.js (recomendado 18+)
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Instalar dependencias:
+
+```bash
+pnpm install
+```
+
+2. Arrancar en desarrollo:
+
+```bash
+pnpm dev
+```
+
+La app se sirve por defecto en `http://localhost:3000`.
+
+## Build y preview
+
+```bash
+pnpm build
+pnpm preview
+```
+
+## Variables de entorno (opcional)
+
+Si activas funcionalidades que consumen APIs externas, puedes definir variables en `.env.local`.
+
+- `GEMINI_API_KEY`: clave para funciones basadas en Gemini (si se usan en la app).
