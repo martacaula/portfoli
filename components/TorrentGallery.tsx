@@ -79,6 +79,9 @@ const galleryAssets = (
   import: 'default',
 });
 
+const findGalleryAsset = (suffix: string) =>
+  Object.entries(galleryAssets).find(([path]) => path.endsWith(suffix))?.[1] ?? '';
+
 const buildGalleryImages = () => {
   const imagesByFolder: Record<FolderName, GalleryItem[]> = {
     'Free Surf Photography': [],
@@ -129,7 +132,10 @@ const FOLDERS: {
   longDescription: string;
 }[] = FOLDER_CONFIGS.map((folder) => ({
   name: folder.name,
-  cover: imagesByFolder[folder.name]?.[0]?.url ?? '',
+  cover:
+    folder.name === 'Sessions for X'
+      ? findGalleryAsset('/sessionsforx/Freelance_Services13.JPG')
+      : imagesByFolder[folder.name]?.[0]?.url ?? '',
   description: folder.description,
   longDescription: folder.longDescription,
 }));
@@ -227,7 +233,7 @@ const TorrentGallery: React.FC = () => {
               </div>
 
               {/* Images Grid - Simplified, no text labels */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-12 items-start auto-rows-min">
                 {folderImages.map((img, i) => (
                   <motion.div
                     key={img.id}
