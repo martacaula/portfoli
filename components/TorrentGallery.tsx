@@ -18,114 +18,123 @@ interface GalleryItem {
   title: string;
 }
 
-const FOLDERS: {
+type FolderConfig = {
   name: FolderName;
-  cover: string;
+  directory: string;
   description: string;
   longDescription: string;
-}[] = [
+};
+
+const FOLDER_CONFIGS: FolderConfig[] = [
   {
     name: 'Free Surf Photography',
-    cover: 'https://images.unsplash.com/photo-1502680399488-646b5a3167a5?q=80&w=1200&auto=format&fit=crop',
+    directory: 'freesurfphotography',
     description: 'Raw energy and wave dynamics.',
     longDescription:
       'A technical exploration of fluid dynamics and human interaction with unpredictable water surfaces. Captured during high-velocity sessions across Atlantic swells.',
   },
   {
     name: 'Water Study',
-    cover: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200&auto=format&fit=crop',
+    directory: 'waterstudy',
     description: 'Abstract textures and light refraction.',
     longDescription:
       'Focusing on the micro-textures of liquid surfaces. This series analyzes how light refracts through different densities and movements of water.',
   },
   {
     name: 'Cofanetti',
-    cover: 'https://images.unsplash.com/photo-1512418431372-71059bc16995?q=80&w=1200&auto=format&fit=crop',
+    directory: 'cofaneti',
     description: 'Product architecture and tactile luxury.',
     longDescription:
       'A study on material perception and structural design in premium packaging. Investigating how shadows define luxury volumes.',
   },
   {
     name: 'Kave Home Series',
-    cover: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?q=80&w=1200&auto=format&fit=crop',
+    directory: 'kavehomeseries',
     description: 'Interior materiality and space.',
     longDescription:
       'Documentation of interior environments where furniture becomes a sculptural element. Focus on the relationship between product and architectural void.',
   },
   {
     name: 'Windsurf',
-    cover: 'https://images.unsplash.com/photo-1521336575822-6da63fb45455?q=80&w=1200&auto=format&fit=crop',
+    directory: 'windsurf',
     description: 'Intersection of air and water.',
     longDescription:
       'Capturing the tension between wind and sail. This series documents the mechanical precision required to harness natural elements at high speeds.',
   },
   {
     name: 'Sessions for X',
-    cover: 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1200&auto=format&fit=crop',
+    directory: 'sessionsforx',
     description: 'Artistic portraits and brand sessions.',
     longDescription:
       'A curated collection of human-centric sessions. These frames prioritize emotion and environmental context over traditional commercial aesthetics.',
   },
 ];
 
-const unsplashSeeds: Record<FolderName, string[]> = {
-  'Free Surf Photography': [
-    'photo-1502680399488-646b5a3167a5',
-    'photo-1439405326854-01523417459d',
-    'photo-1519046904884-53103b34b206',
-    'photo-1507525428034-b723cf961d3e',
-  ],
-  'Water Study': [
-    'photo-1518837695005-2083093ee35b',
-    'photo-1505118380757-91f5f45d8de4',
-    'photo-1507525428034-b723cf961d3e',
-    'photo-1512236393941-3d6da97e00ba',
-  ],
-  'Cofanetti': [
-    'photo-1512418431372-71059bc16995',
-    'photo-1523275335684-37898b6baf30',
-    'photo-1505156108126-02cd447e3a10',
-    'photo-1542038784456-1ea8e935640e',
-  ],
-  'Kave Home Series': [
-    'photo-1556228453-efd6c1ff04f6',
-    'photo-1586023492125-27b2c045efd7',
-    'photo-1501183638710-841dd1904471',
-    'photo-1616489953149-75573b1b5199',
-  ],
-  Windsurf: [
-    'photo-1521336575822-6da63fb45455',
-    'photo-1517176102644-b81682859942',
-    'photo-1500305060288-038335940608',
-    'photo-1508739773434-c26b3d09e071',
-  ],
-  'Sessions for X': [
-    'photo-1492724441997-5dc865305da7',
-    'photo-1494790108377-be9c29b29330',
-    'photo-1517841905240-472988babdf9',
-    'photo-1534528741775-53994a69daeb',
-  ],
+const galleryAssets = (
+  import.meta as ImportMeta & {
+    glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
+  }
+).glob('../Gallery/**/*.{jpg,JPG,jpeg,png}', {
+  eager: true,
+  import: 'default',
+});
+
+const buildGalleryImages = () => {
+  const imagesByFolder: Record<FolderName, GalleryItem[]> = {
+    'Free Surf Photography': [],
+    'Water Study': [],
+    Cofanetti: [],
+    'Kave Home Series': [],
+    Windsurf: [],
+    'Sessions for X': [],
+  };
+  const folderDirectoryMap = new Map(FOLDER_CONFIGS.map((folder) => [folder.directory, folder.name]));
+  const counts: Record<FolderName, number> = {
+    'Free Surf Photography': 0,
+    'Water Study': 0,
+    Cofanetti: 0,
+    'Kave Home Series': 0,
+    Windsurf: 0,
+    'Sessions for X': 0,
+  };
+  let id = 1;
+
+  Object.entries(galleryAssets)
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+    .forEach(([path, url]) => {
+      const segments = path.split('/');
+      const directory = segments[segments.length - 2];
+      const folderName = folderDirectoryMap.get(directory);
+      if (!folderName) return;
+      counts[folderName] += 1;
+      imagesByFolder[folderName].push({
+        id,
+        folder: folderName,
+        title: `${folderName} ${counts[folderName]}`,
+        url,
+      });
+      id += 1;
+    });
+
+  const allImages = Object.values(imagesByFolder).flat();
+  return { imagesByFolder, allImages };
 };
 
-const generateImages = (): GalleryItem[] => {
-  const allImages: GalleryItem[] = [];
-  FOLDERS.forEach((folder) => {
-    const seeds = unsplashSeeds[folder.name];
-    for (let i = 0; i < 12; i += 1) {
-      const baseId = seeds[i % seeds.length];
-      allImages.push({
-        id: allImages.length + 1,
-        folder: folder.name,
-        title: `${folder.name} Study ${i + 1}`,
-        url: `https://images.unsplash.com/${baseId}?auto=format&fit=crop&q=80&w=1200&h=1500`,
-      });
-    }
-  });
-  return allImages;
-};
+const { imagesByFolder, allImages } = buildGalleryImages();
+
+const FOLDERS: {
+  name: FolderName;
+  cover: string;
+  description: string;
+  longDescription: string;
+}[] = FOLDER_CONFIGS.map((folder) => ({
+  name: folder.name,
+  cover: imagesByFolder[folder.name]?.[0]?.url ?? '',
+  description: folder.description,
+  longDescription: folder.longDescription,
+}));
 
 const TorrentGallery: React.FC = () => {
-  const allImages = useMemo(() => generateImages(), []);
   const [expandedFolder, setExpandedFolder] = useState<typeof FOLDERS[0] | null>(null);
 
   const folderImages = useMemo(() => {
@@ -159,7 +168,7 @@ const TorrentGallery: React.FC = () => {
               whileHover={{ y: -5 }}
               onClick={() => setExpandedFolder(folder)}
             >
-              <div className="relative aspect-[16/10] rounded-[2rem] overflow-hidden bg-white border border-black/5 shadow-sm group-hover:shadow-2xl transition-all duration-700">
+              <div className="relative aspect-[3/2] overflow-hidden bg-white border border-black/5 shadow-sm group-hover:shadow-2xl transition-all duration-700">
                 <img
                   src={folder.cover}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
@@ -225,9 +234,9 @@ const TorrentGallery: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="relative aspect-[3/2] rounded-[2.5rem] overflow-hidden bg-white/5 shadow-lg"
+                    className="relative overflow-hidden bg-white/5 shadow-lg"
                   >
-                    <img src={img.url} className="w-full h-full object-cover" alt={img.title} />
+                    <img src={img.url} className="w-full h-auto object-contain" alt={img.title} />
                   </motion.div>
                 ))}
               </div>
