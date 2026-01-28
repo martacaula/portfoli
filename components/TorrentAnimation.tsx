@@ -2,8 +2,92 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Zap, ShieldCheck, Timer, MousePointer2 } from 'lucide-react';
+import { type Language } from '../types';
 
-const TorrentAnimation: React.FC = () => {
+const COPY: Record<Language, {
+  manualLabel: string;
+  torrentLabel: string;
+  manualCaption: string;
+  torrentCaption: string;
+  strategicGuidance: string;
+  aiProtected: string;
+  methodologyAudit: string;
+  auditManual: string;
+  auditTorrent: string;
+  efficiencyGain: string;
+  reductionNote: string;
+  humanLead: string;
+  humanLeadValue: string;
+  humanLeadNote: string;
+  architecture: string;
+  architectureValue: string;
+  architectureNote: string;
+  torrentSteps: string[];
+}> = {
+  en: {
+    manualLabel: 'Manual Sprint',
+    torrentLabel: 'Torrent Flow',
+    manualCaption: 'Manual Sprint: Distributed Effort / Linear Time',
+    torrentCaption: 'Torrent: Accelerated Methodology / Fluid Impact',
+    strategicGuidance: 'Strategic Guidance / Human Lead',
+    aiProtected: 'AI Protected',
+    methodologyAudit: 'Methodology Audit',
+    auditManual: 'Disconnected workflows lead to resource fragmentation and fatigue.',
+    auditTorrent: 'Torrent collapses multiple cycles into a single path directed by human strategy.',
+    efficiencyGain: 'Efficiency Gain',
+    reductionNote: 'Reduction in cycle redundancy',
+    humanLead: 'Human Lead',
+    humanLeadValue: 'Guided',
+    humanLeadNote: 'Decision-driven automation',
+    architecture: 'Architecture',
+    architectureValue: 'Unified',
+    architectureNote: 'Single-path logic deployment',
+    torrentSteps: ['Synthesis', 'Map', 'Incubation', 'Build', 'Test']
+  },
+  es: {
+    manualLabel: 'Sprint manual',
+    torrentLabel: 'Flujo Torrent',
+    manualCaption: 'Sprint manual: esfuerzo distribuido / tiempo lineal',
+    torrentCaption: 'Torrent: metodología acelerada / impacto fluido',
+    strategicGuidance: 'Guía estratégica / liderazgo humano',
+    aiProtected: 'Protegido por IA',
+    methodologyAudit: 'Auditoría de metodología',
+    auditManual: 'Los flujos desconectados generan fragmentación de recursos y fatiga.',
+    auditTorrent: 'Torrent compacta múltiples ciclos en un solo camino dirigido por estrategia humana.',
+    efficiencyGain: 'Ganancia de eficiencia',
+    reductionNote: 'Reducción de redundancia en ciclos',
+    humanLead: 'Liderazgo humano',
+    humanLeadValue: 'Guiado',
+    humanLeadNote: 'Automatización guiada por decisiones',
+    architecture: 'Arquitectura',
+    architectureValue: 'Unificada',
+    architectureNote: 'Despliegue de lógica de ruta única',
+    torrentSteps: ['Síntesis', 'Mapa', 'Incubación', 'Construcción', 'Prueba']
+  },
+  ca: {
+    manualLabel: 'Sprint manual',
+    torrentLabel: 'Flux Torrent',
+    manualCaption: 'Sprint manual: esforç distribuït / temps lineal',
+    torrentCaption: 'Torrent: metodologia accelerada / impacte fluid',
+    strategicGuidance: 'Guia estratègica / lideratge humà',
+    aiProtected: 'Protegit per IA',
+    methodologyAudit: 'Auditoria de metodologia',
+    auditManual: 'Els fluxos desconnectats generen fragmentació de recursos i fatiga.',
+    auditTorrent: "Torrent compacta múltiples cicles en un sol camí dirigit per l'estratègia humana.",
+    efficiencyGain: "Guany d'eficiència",
+    reductionNote: 'Reducció de redundància de cicle',
+    humanLead: 'Lideratge humà',
+    humanLeadValue: 'Guiat',
+    humanLeadNote: 'Automatització guiada per decisions',
+    architecture: 'Arquitectura',
+    architectureValue: 'Unificada',
+    architectureNote: 'Desplegament de lògica de camí únic',
+    torrentSteps: ['Síntesi', 'Mapa', 'Incubació', 'Construcció', 'Prova']
+  }
+};
+
+const TorrentAnimation: React.FC<{ lang: Language }> = ({ lang }) => {
+  const copy = COPY[lang];
   const [stage, setStage] = useState<'manual' | 'torrent'>('manual');
 
   useEffect(() => {
@@ -14,7 +98,7 @@ const TorrentAnimation: React.FC = () => {
   }, []);
 
   const manualLines = Array.from({ length: 4 });
-  const torrentSteps = ['Synthesis', 'Map', 'Incubation', 'Build', 'Test'];
+  const torrentSteps = copy.torrentSteps;
 
   return (
     <div className="w-full flex flex-col gap-8">
@@ -53,7 +137,7 @@ const TorrentAnimation: React.FC = () => {
                   </g>
                 ))}
                 <text x="800" y="560" textAnchor="middle" className="text-[10px] font-mono tracking-[0.8em] fill-white/20 uppercase">
-                  Manual Sprint: Distributed Effort / Linear Time
+                  {copy.manualCaption}
                 </text>
               </motion.g>
             ) : (
@@ -77,7 +161,7 @@ const TorrentAnimation: React.FC = () => {
                   />
                   <User className="text-[#ff6700] w-7 h-7 -translate-x-3.5 -translate-y-3.5" />
                   <motion.text y="70" textAnchor="middle" className="text-[10px] fill-[#ff6700] font-mono font-bold uppercase tracking-[0.4em]">
-                    Strategic Guidance / Human Lead
+                    {copy.strategicGuidance}
                   </motion.text>
 
                   {[250, 525, 800, 1075, 1350].map((x, i) => (
@@ -176,7 +260,7 @@ const TorrentAnimation: React.FC = () => {
 
                       {isIncubation && (
                         <text y="22" textAnchor="middle" className="text-[7px] fill-white uppercase font-mono tracking-widest opacity-70">
-                          AI Protected
+                          {copy.aiProtected}
                         </text>
                       )}
                     </g>
@@ -188,7 +272,7 @@ const TorrentAnimation: React.FC = () => {
                 </motion.circle>
 
                 <text x="800" y="580" textAnchor="middle" className="text-[10px] font-mono tracking-[0.8em] fill-[#ff6700] uppercase">
-                  Torrent: Accelerated Methodology / Fluid Impact
+                  {copy.torrentCaption}
                 </text>
               </motion.g>
             )}
@@ -202,7 +286,7 @@ const TorrentAnimation: React.FC = () => {
             }`}
           >
             <User className="w-3.5 h-3.5" />
-            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Manual Sprint</span>
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">{copy.manualLabel}</span>
           </div>
           <div
             className={`flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500 ${
@@ -212,19 +296,19 @@ const TorrentAnimation: React.FC = () => {
             }`}
           >
             <Zap className="w-3.5 h-3.5 text-[#ff6700]" />
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#ff6700]">Torrent Flow</span>
+            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#ff6700]">{copy.torrentLabel}</span>
           </div>
         </div>
 
         <div className="absolute bottom-12 right-12 w-80 p-6 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl">
           <div className="flex items-center gap-3 mb-3">
             <ShieldCheck className="w-4 h-4 text-[#ff6700]" />
-            <h5 className="text-[10px] font-bold uppercase tracking-widest text-white">Methodology Audit</h5>
+            <h5 className="text-[10px] font-bold uppercase tracking-widest text-white">{copy.methodologyAudit}</h5>
           </div>
           <p className="text-[10px] font-mono leading-relaxed text-white/40 uppercase">
             {stage === 'manual'
-              ? 'Disconnected workflows lead to resource fragmentation and fatigue.'
-              : 'Torrent collapses multiple cycles into a single path directed by human strategy.'}
+              ? copy.auditManual
+              : copy.auditTorrent}
           </p>
         </div>
       </div>
@@ -232,24 +316,24 @@ const TorrentAnimation: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:border-[#ff6700]/30 transition-all duration-500">
           <h6 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3 flex items-center gap-2">
-            <Timer className="w-3 h-3" /> Efficiency Gain
+            <Timer className="w-3 h-3" /> {copy.efficiencyGain}
           </h6>
           <p className="text-4xl font-heading font-bold text-[#ff6700]">-60%</p>
-          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">Reduction in cycle redundancy</p>
+          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">{copy.reductionNote}</p>
         </div>
         <div className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:border-[#ff6700]/30 transition-all duration-500">
           <h6 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3 flex items-center gap-2">
-            <MousePointer2 className="w-3 h-3" /> Human Lead
+            <MousePointer2 className="w-3 h-3" /> {copy.humanLead}
           </h6>
-          <p className="text-4xl font-heading font-bold">Guided</p>
-          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">Decision-driven automation</p>
+          <p className="text-4xl font-heading font-bold">{copy.humanLeadValue}</p>
+          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">{copy.humanLeadNote}</p>
         </div>
         <div className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:border-[#ff6700]/30 transition-all duration-500">
           <h6 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3 flex items-center gap-2">
-            <ShieldCheck className="w-3 h-3" /> Architecture
+            <ShieldCheck className="w-3 h-3" /> {copy.architecture}
           </h6>
-          <p className="text-4xl font-heading font-bold">Unified</p>
-          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">Single-path logic deployment</p>
+          <p className="text-4xl font-heading font-bold">{copy.architectureValue}</p>
+          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">{copy.architectureNote}</p>
         </div>
       </div>
     </div>

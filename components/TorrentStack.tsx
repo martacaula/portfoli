@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Database, Terminal, ShieldCheck, Zap, Hexagon, BrainCircuit, Mic, Figma, Lock, Sparkles } from 'lucide-react';
+import { type Language } from '../types';
 
 interface Tool {
   name: string;
@@ -9,17 +10,49 @@ interface Tool {
   color: string;
 }
 
+type BranchId = 'synthesis' | 'build' | 'automation';
+
 interface Branch {
-  id: string;
-  title: string;
+  id: BranchId;
+  title: Record<Language, string>;
   tools: Tool[];
   accent: string;
 }
 
+const COPY: Record<Language, {
+  title: string;
+  subtitle: string;
+  lockText: string;
+  badges: [string, string, string];
+}> = {
+  en: {
+    title: 'TORRENT STACK',
+    subtitle: 'AI INJECTION POINTS BY SPRINT PHASE',
+    lockText: 'PHASE 2-3: NO AI INJECTION. PROTECTED ZONE FOR MANUAL IDEATION, INCUBATION AND HUMAN DECISION.',
+    badges: ['Governance First', 'Make.com Testing', 'Human Decision Core']
+  },
+  es: {
+    title: 'STACK TORRENT',
+    subtitle: 'PUNTOS DE INYECCIÓN DE IA POR FASE DE SPRINT',
+    lockText: 'FASE 2-3: SIN INYECCIÓN DE IA. ZONA PROTEGIDA PARA IDEACIÓN MANUAL, INCUBACIÓN Y DECISIÓN HUMANA.',
+    badges: ['Gobernanza primero', 'Pruebas en Make.com', 'Núcleo de decisión humana']
+  },
+  ca: {
+    title: 'STACK TORRENT',
+    subtitle: "PUNTS D'INJECCIÓ D'IA PER FASE DE SPRINT",
+    lockText: "FASE 2-3: SENSE INJECCIÓ D'IA. ZONA PROTEGIDA PER A IDEACIÓ MANUAL, INCUBACIÓ I DECISIÓ HUMANA.",
+    badges: ['Governança primer', 'Proves a Make.com', 'Nucli de decisió humana']
+  }
+};
+
 const BRANCHES: Branch[] = [
   {
     id: 'synthesis',
-    title: 'Phase 1: Synthesis',
+    title: {
+      en: 'Phase 1: Synthesis',
+      es: 'Fase 1: Síntesis',
+      ca: 'Fase 1: Síntesi'
+    },
     accent: '#ff6700',
     tools: [
       { name: 'NotebookLM', brand: 'Source Grounding', icon: <Database className="w-4 h-4" />, color: '#4285F4' },
@@ -29,7 +62,11 @@ const BRANCHES: Branch[] = [
   },
   {
     id: 'build',
-    title: 'Phase 4: Build Support',
+    title: {
+      en: 'Phase 4: Build Support',
+      es: 'Fase 4: Soporte de construcción',
+      ca: 'Fase 4: Suport de construcció'
+    },
     accent: '#ff6700',
     tools: [
       { name: 'Google AI Studio', brand: 'System Prompting', icon: <Terminal className="w-4 h-4" />, color: '#3a6ea5' },
@@ -39,7 +76,11 @@ const BRANCHES: Branch[] = [
   },
   {
     id: 'automation',
-    title: 'Phase 5: Test Automation',
+    title: {
+      en: 'Phase 5: Test Automation',
+      es: 'Fase 5: Automatización de pruebas',
+      ca: 'Fase 5: Automatització de proves'
+    },
     accent: '#3a6ea5',
     tools: [{ name: 'Make.com', brand: 'Rapid Validation', icon: <Zap className="w-4 h-4" />, color: '#FF9A00' }]
   }
@@ -60,12 +101,13 @@ const ToolModule: React.FC<{ tool: Tool }> = ({ tool }) => (
   </motion.div>
 );
 
-const TorrentStack: React.FC = () => {
+const TorrentStack: React.FC<{ lang: Language }> = ({ lang }) => {
+  const copy = COPY[lang];
   return (
     <section className="space-y-12">
       <div className="flex items-center justify-between">
-        <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-[#ff6700]">TORRENT STACK</h3>
-        <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">AI INJECTION POINTS BY SPRINT PHASE</span>
+        <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-[#ff6700]">{copy.title}</h3>
+        <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">{copy.subtitle}</span>
       </div>
 
       <div className="relative w-full py-12 px-8 bg-black/20 rounded-[3rem] border border-white/5 overflow-hidden">
@@ -74,10 +116,7 @@ const TorrentStack: React.FC = () => {
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="flex items-center gap-4 p-6 bg-[#ff6700]/5 border border-[#ff6700]/20 rounded-2xl">
             <Lock className="w-5 h-5 text-[#ff6700]" />
-            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/70">
-              <span className="text-[#ff6700] font-bold">PHASE 2-3: NO AI INJECTION.</span> PROTECTED ZONE FOR MANUAL IDEATION, INCUBATION AND
-              HUMAN DECISION.
-            </p>
+            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/70">{copy.lockText}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -92,7 +131,7 @@ const TorrentStack: React.FC = () => {
               >
                 <div className="flex items-center gap-3 pb-4 border-b border-white/5">
                   <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: branch.accent }} />
-                  <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.4em] text-white/40">{branch.title}</h4>
+                  <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.4em] text-white/40">{branch.title[lang]}</h4>
                 </div>
 
                 <div className="space-y-3">
@@ -107,15 +146,15 @@ const TorrentStack: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-12 pt-12 opacity-30 border-t border-white/5">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-3 h-3" />
-              <span className="text-[8px] font-mono uppercase tracking-[0.3em]">Governance First</span>
+              <span className="text-[8px] font-mono uppercase tracking-[0.3em]">{copy.badges[0]}</span>
             </div>
             <div className="flex items-center gap-2">
               <Zap className="w-3 h-3 text-[#ff6700]" />
-              <span className="text-[8px] font-mono uppercase tracking-[0.3em]">Make.com Testing</span>
+              <span className="text-[8px] font-mono uppercase tracking-[0.3em]">{copy.badges[1]}</span>
             </div>
             <div className="flex items-center gap-2">
               <Sparkles className="w-3 h-3" />
-              <span className="text-[8px] font-mono uppercase tracking-[0.3em]">Human Decision Core</span>
+              <span className="text-[8px] font-mono uppercase tracking-[0.3em]">{copy.badges[2]}</span>
             </div>
           </div>
         </div>

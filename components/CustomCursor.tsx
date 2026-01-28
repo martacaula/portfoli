@@ -6,8 +6,19 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
+import { type Language } from '../types';
 
-const CustomCursor: React.FC = () => {
+interface CustomCursorProps {
+  lang: Language;
+}
+
+const CURSOR_LABEL: Record<Language, string> = {
+  en: 'View',
+  es: 'Ver',
+  ca: 'Veure'
+};
+
+const CustomCursor: React.FC<CustomCursorProps> = ({ lang }) => {
   const [isHovering, setIsHovering] = useState(false);
   
   // Initialize off-screen to prevent flash
@@ -60,7 +71,7 @@ const CustomCursor: React.FC = () => {
           }}
           transition={{ duration: 0.2 }}
         >
-          View
+          {CURSOR_LABEL[lang]}
         </motion.span>
       </motion.div>
     </motion.div>

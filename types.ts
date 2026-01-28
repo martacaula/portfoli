@@ -16,6 +16,8 @@ export interface Artist {
   description: string;
 }
 
+export type Language = 'en' | 'es' | 'ca';
+
 export interface ChatMessage {
   role: 'user' | 'model';
   text: string;

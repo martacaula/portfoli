@@ -6,7 +6,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Ticket, Globe, Zap, Music, MapPin, Menu, X, Calendar, Play, ChevronLeft, ChevronRight, ArrowLeft, Camera, Layers, Cpu, ArrowRight, Activity, Terminal, Briefcase, Workflow, Maximize2, ExternalLink, Eye, Image as ImageIcon, Languages, ShieldCheck, ShieldAlert, UserCheck, Timer, Target, Users, Lightbulb, TrendingUp, HelpCircle, GraduationCap, Waves, Coffee, Camera as CameraIcon, CheckCircle2, FileText, Instagram, Linkedin, Github } from 'lucide-react';
+import { Ticket, Globe, Zap, MapPin, Menu, X, Calendar, ChevronLeft, ChevronRight, ArrowLeft, Camera, Layers, Cpu, ArrowRight, Activity, Terminal, Briefcase, Workflow, Maximize2, ExternalLink, Eye, Image as ImageIcon, Languages, ShieldCheck, ShieldAlert, UserCheck, Timer, Target, Users, Lightbulb, TrendingUp, HelpCircle, GraduationCap, Waves, Coffee, Camera as CameraIcon, CheckCircle2, FileText, Instagram, Linkedin, Github } from 'lucide-react';
 import FluidBackground from './components/FluidBackground';
 import GradientText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
@@ -16,12 +16,11 @@ import TorrentAnimation from './components/TorrentAnimation';
 import ToolAquarium from './components/ToolAquarium';
 import TorrentStack from './components/TorrentStack';
 import TorrentGallery, { type FolderName } from './components/TorrentGallery';
-import { Artist as Work } from './types';
-
-type Language = 'en' | 'es' | 'ca';
+import { Artist as Work, type Language } from './types';
 
 const TRANSLATIONS = {
   en: {
+    home: "Home",
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
     lineupSubtitle: "(projects) mossfera x quant, internship at kave home",
@@ -32,8 +31,7 @@ const TRANSLATIONS = {
     methodology: "Digital products evolved via TORRENT methodology.",
     viewMethod: "View Method",
     whoAmI: "Who AM I",
-    aboutIntro: "Creative & Surfer focused on high-velocity innovation.",
-    aboutBio: "I am currently finishing my BA in Visual Communication and Multimedia at ERAM University School (UdG). My perspective was recently expanded by a 6-month Erasmus at Copenhagen Business School (CBS).",
+    aboutBio: "My name is Marta Caula Riera and I am 25 years old. I'm from Girona. There, at the ERAM University School, I studied a degree in Audiovisual and Multimedia Communication, 100% in English. This degree opened a door for me into underwater photography. I specialized in these techniques and learned skills that quickly led me into studio photography. After six months in Copenhagen, I now see a future in optimizing creative processes. This makes us one of the most important departments in times of AI, because creativity is born from the most unique things, not from high probabilities. But it is true that this artificial intelligence can help us improve our results by optimizing the most mechanical workloads. I hope to contribute as much as possible from everything I have learned in this department and, if possible, one day leave a mark.",
     workExp: "Diverse professional path: waitress since 18, underwater photographer, and studio photographer at Kave Home. I handle projects with full professionalism.",
     surferText: "Energetic, determined, and ready to develop my full potential.",
     iterateDeployRefine: "Observe. Capture. Iterate.",
@@ -96,21 +94,22 @@ const TRANSLATIONS = {
     projectPdfs: "Project PDFs",
     noPdfs: "No PDFs available",
     nextSteps: ["Beta testing", "Tone fine-tuning", "Accessibility audit"],
-    successMetrics: ["Daily active users", "Completion rate", "Conversion to premium"]
+    successMetrics: ["Daily active users", "Completion rate", "Conversion to premium"],
+    languageLabel: "Language"
   },
   es: {
+    home: "Inicio",
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
     lineupSubtitle: "(proyectos) mossfera x quant, prácticas en kave home",
     gallery: "Galería",
     tfg: "PROYECTO DE FINAL DE GRADO",
-    iteration: "Iteration 2025",
-    designSprint: "Design Sprint",
+    iteration: "Iteración 2025",
+    designSprint: "Sprint de Diseño",
     methodology: "Productos digitales evolucionados mediante la metodología TORRENT.",
     viewMethod: "Ver Método",
     whoAmI: "Quién SOY",
-    aboutIntro: "Creativa y surfista enfocada en la innovación de alta velocidad.",
-    aboutBio: "Terminando mi Grado en Comunicación Visual y Multimedia en la Escuela Universitaria ERAM (UdG). Erasmus de 6 meses en la Copenhagen Business School (CBS).",
+    aboutBio: "Me llamo Marta Caula Riera y tengo 25 años. Soy de Girona. Allí, en la Escuela Universitaria ERAM, estudié un grado en Comunicación Audiovisual y Multimedia, 100 % en inglés. Esta carrera me abrió un camino hacia la fotografía acuática. Me especialicé en estas técnicas y aprendí conocimientos que me llevaron muy rápido a la fotografía de estudio. Después de seis meses en Copenhague, ahora veo un futuro en la optimización de procesos creativos. Esto nos convierte en uno de los departamentos más importantes en épocas de IA, ya que la creatividad nace de las cosas más únicas, no de las altas probabilidades. Pero es cierto que esta inteligencia artificial nos puede servir para mejorar nuestros resultados, optimizando las cargas más mecánicas. Espero poder aportar al máximo todo lo que he aprendido en este departamento y, si es posible, algún día dejar huella.",
     workExp: "Trayectoria profesional diversa: camarera desde los 18, fotógrafa submarina y de estudio en Kave Home. Gestión profesional de proyectos.",
     surferText: "Enérgica, decidida y lista para desarrollar todo mi potencial.",
     iterateDeployRefine: "Observar. Capturar. Iterar.",
@@ -135,7 +134,7 @@ const TRANSLATIONS = {
     analyzeText: "Destilando el ajuste producto-mercado.",
     iterate: "[ITERAR]",
     iterateText: "Generando más de 25 variaciones al instante.",
-    initialize: "Initialize Protocol",
+    initialize: "Inicializar Protocolo",
     narrative: "La Narrativa",
     challenge: "Desafío",
     outcome: "Resultado",
@@ -145,19 +144,19 @@ const TRANSLATIONS = {
     gallerySubtitle: "Un viaje visual a través de mi mirada",
     exitEnvironment: "Salir del Entorno",
     project: "PROYECTO",
-    methodTitle: "MÉTODO DE DESENVOLUPAMENT DE PRODUCTES DIGITALS",
+    methodTitle: "MÉTODO DE DESARROLLO DE PRODUCTOS DIGITALES",
     forCreative: "PARA DEPARTAMENTOS CREATIVOS",
     nextWork: "Siguiente Trabajo",
     problemAnalysis: "Problema / Insight",
     solutionTitle: "La Solución",
-    personaTitle: "User Persona",
+    personaTitle: "Perfil de Usuario",
     metricsTitle: "Métricas de Éxito",
     taskTitle: "Tu Tarea",
     takeOnTitle: "Danos tu opinión sobre",
     note: "Nota",
     sideCardButton: "Ver Caso",
     yourTaskPreLine: "Exploración estratégica",
-    yourTaskQuestion: "¿Qué haría que esta experiencia fuese effortless para las personas?",
+    yourTaskQuestion: "¿Qué haría que esta experiencia fuese sin esfuerzo para las personas?",
     yourTaskReframe: "Convertir la complejidad en un ritmo guiado y humano.",
     takeOnQuestions: ["¿El valor es obvio en 10 segundos?", "¿Qué genera hábito diario?", "¿Dónde falla primero la confianza?"],
     takeOnNote: "Las decisiones priorizan la claridad sobre el ruido.",
@@ -172,46 +171,47 @@ const TRANSLATIONS = {
     successMetricsLabel: "Métricas de éxito",
     projectPdfs: "PDFs del proyecto",
     noPdfs: "No hay PDFs disponibles",
-    nextSteps: ["Beta testing", "Ajuste de tono", "Auditoría de accesibilidad"],
-    successMetrics: ["Usuarios activos diarios", "Tasa de finalización", "Conversión a premium"]
+    nextSteps: ["Pruebas beta", "Ajuste de tono", "Auditoría de accesibilidad"],
+    successMetrics: ["Usuarios activos diarios", "Tasa de finalización", "Conversión a premium"],
+    languageLabel: "Idioma"
   },
   ca: {
+    home: "Inici",
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
     lineupSubtitle: "(projectes) mossfera x quant, pràctiques a kave home",
     gallery: "Galeria",
     tfg: "TREBALL FINAL DE GRAU",
     iteration: "Iteració 2025",
-    designSprint: "Design Sprint",
+    designSprint: "Sprint de Disseny",
     methodology: "Productes digitals evolucionats mitjançant la metodologia TORRENT.",
     viewMethod: "Veure Mètode",
     whoAmI: "Qui SÓC",
-    aboutIntro: "Creativa i surfista enfocada en la innovació d'alta velocitat.",
-    aboutBio: "Acabant el meu Grau en Comunicació Visual i Multimèdia a l'Escola Universitària ERAM (UdG). Erasmus de 6 mesos a l'Copenhagen Business School (CBS).",
-    workExp: "Trajectòria profesional diversa: cambrera des dels 18, fotògrafa submarina i d'estudi a Kave Home. Gestió professional de projectes.",
+    aboutBio: "Em dic Marta Caula Riera i tinc 25 anys. Soc de Girona. I allà, a l’Escola Universitària ERAM, vaig estudiar un grau en Comunicació Audiovisual i Multimèdia, 100 % en anglès. Aquesta carrera va fer-me un forat en la fotografia aquàtica. Em vaig especialitzar en aquestes tècniques i vaig aprendre uns coneixements que em van portar a fotografia d’estudi molt ràpid. Després de sis mesos a Copenhaguen, ara veig un futur en optimitzacions de processos creatius. Fet que som un dels departaments més importants en èpoques d’IA, ja que la creativitat neix de les coses més úniques, pas de les altes probabilitats. Però és cert que aquesta intel·ligència artificial ens pot servir per millorar els nostres resultats, optimitzant les càrregues més mecàniques. Espero poder aportar el màxim possible de tot el que he après en aquest departament i a poder ser, algun dia, deixar empremta.",
+    workExp: "Trajectòria professional diversa: cambrera des dels 18, fotògrafa submarina i d'estudi a Kave Home. Gestió professional de projectes.",
     surferText: "Enèrgica, decidida i llista per desenvolupar tot el meu potencial.",
     iterateDeployRefine: "Observar. Capturar. Iterar.",
     vision: "Nucli Creatiu",
-    engine: "Alta Velocidad",
-    threeBranches: "Tres Branques amb les que treballo",
+    engine: "Alta Velocitat",
+    threeBranches: "Tres branques amb les quals treballo",
     designBranch: "Disseny i Identitat",
     designList: ["Sistemes d'Experiència UI/UX", "Brànding i Estratègia"],
     visualBranch: "Arts Visuals",
     visualList: ["Fotografia d'Estudi", "Captura Submarina"],
     digitalBranch: "Transformació Digital",
-    digitalList: ["Integración AI TORRENT", "Desenvolupament de Producte"],
+    digitalList: ["Integració d'IA TORRENT", "Desenvolupament de Producte"],
     ecosystemTitle: "Ecosistema Creatiu",
     method: "El Mètode",
     methodText: "TORRENT és un marc especialitzat per a la innovació digital.",
     coachTitle: "L'EXPERIÈNCIA AMB COACH",
-    coachText: "Un sprint TORRENT és un viatge guiat. L'acompanyament profesional assegura que l'acceleració de la IA s'equilibri amb el criteri creatiu humà.",
-    framework: "El Marco Cognitivu",
+    coachText: "Un sprint TORRENT és un viatge guiat. L'acompanyament professional assegura que l'acceleració de la IA s'equilibri amb el criteri creatiu humà.",
+    framework: "El Marc Cognitiu",
     frameworkText: "TORRENT és un mètode de desenvolupament de productes digitals especialitzat per a departaments creatius d'alt rendiment.",
     statusReady: "Estat: Llest",
     analyze: "[ANALITZAR]",
     analyzeText: "Destil·lant l'ajust producte-mercat.",
     iterate: "[ITERAR]",
-    iterateText: "Generant més de 25 variacions al instante.",
+    iterateText: "Generant més de 25 variacions a l'instant.",
     initialize: "Inicialitzar Protocol",
     narrative: "La Narrativa",
     challenge: "Repte",
@@ -220,21 +220,21 @@ const TRANSLATIONS = {
     lineupFeed: "Feed de The Waves",
     returnHome: "Tornar a l'Inici",
     gallerySubtitle: "Un viatge visual a través de la meva mirada",
-    exitEnvironment: "Sortir de l'Entorno",
+    exitEnvironment: "Sortir de l'Entorn",
     project: "PROJECTE",
     methodTitle: "MÈTODE DE DESENVOLUPAMENT DE PRODUCTES DIGITALS",
     forCreative: "PER A DEPARTAMENTS CREATIUS",
     nextWork: "Següent Treball",
     problemAnalysis: "Problema / Insight",
     solutionTitle: "La Solució",
-    personaTitle: "User Persona",
+    personaTitle: "Perfil d'Usuari",
     metricsTitle: "Mètriques d'Èxit",
     taskTitle: "La teva tasca",
     takeOnTitle: "Dona'ns la teva visió sobre",
     note: "Nota",
     sideCardButton: "Veure Cas",
     yourTaskPreLine: "Exploració estratègica",
-    yourTaskQuestion: "Què faria que aquesta experiència fos effortless per a les persones?",
+    yourTaskQuestion: "Què faria que aquesta experiència fos sense esforç per a les persones?",
     yourTaskReframe: "Convertir la complexitat en un ritme guiat i humà.",
     takeOnQuestions: ["El valor és obvi en 10 segons?", "Què genera hàbit diari?", "On falla primer la confiança?"],
     takeOnNote: "Les decisions prioritzen la claredat per sobre del soroll.",
@@ -249,8 +249,9 @@ const TRANSLATIONS = {
     successMetricsLabel: "Mètriques d'èxit",
     projectPdfs: "PDFs del projecte",
     noPdfs: "No hi ha PDFs disponibles",
-    nextSteps: ["Beta testing", "Ajust de to", "Auditoria d'accessibilitat"],
-    successMetrics: ["Usuaris actius diaris", "Taxa de finalització", "Conversió a premium"]
+    nextSteps: ["Proves beta", "Ajust de to", "Auditoria d'accessibilitat"],
+    successMetrics: ["Usuaris actius diaris", "Taxa de finalització", "Conversió a premium"],
+    languageLabel: "Llengua"
   }
 };
 
@@ -2040,9 +2041,9 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen text-[#ebebeb] selection:bg-[#ff6700] selection:text-white cursor-auto md:cursor-none overflow-x-hidden bg-[#1a2a3a]">
-      <CustomCursor />
+      <CustomCursor lang={lang} />
       <FluidBackground />
-      <AIChat />
+      <AIChat lang={lang} />
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-6 mix-blend-difference">
         <button onClick={() => navigateTo('home')} className="bebas-neue-regular text-2xl md:text-4xl tracking-[0.15em] text-white bg-transparent border-none z-50">
@@ -2075,11 +2076,11 @@ const App: React.FC = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }} className="fixed inset-0 z-40 bg-[#1a3a5a] flex flex-col items-center justify-center gap-8 md:hidden">
-            <button onClick={() => navigateTo('home')} className="text-4xl font-heading font-bold text-white uppercase">Home</button>
+            <button onClick={() => navigateTo('home')} className="text-4xl font-heading font-bold text-white uppercase">{t('home')}</button>
             <button onClick={() => navigateTo('lineup')} className="text-4xl font-heading font-bold text-white uppercase">{t('lineupNav')}</button>
             <button onClick={() => navigateTo('gallery')} className="text-4xl font-heading font-bold text-white uppercase">{t('gallery')}</button>
             <button onClick={() => navigateTo('torrent')} className="bitcount-single-hero text-6xl text-[#ff6700]">TORRENT</button>
-            <button onClick={toggleLang} className="mt-8 text-xl font-mono text-[#ff6700] uppercase border-b border-[#ff6700]">Language: {lang.toUpperCase()}</button>
+            <button onClick={toggleLang} className="mt-8 text-xl font-mono text-[#ff6700] uppercase border-b border-[#ff6700]">{t('languageLabel')}: {lang.toUpperCase()}</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -2118,7 +2119,6 @@ const App: React.FC = () => {
                           {lang === 'en' ? 'Who' : lang === 'es' ? 'Quién' : 'Qui'} <br />
                           <GradientText text={lang === 'en' ? 'AM I' : lang === 'es' ? 'SOY' : 'SÓC'} className="text-6xl md:text-9xl" />
                         </h2>
-                        <p className="text-2xl font-bold text-[#ff6700] leading-tight uppercase tracking-tight">{t('aboutIntro')}</p>
                       </div>
 
                       <div className="space-y-8 text-lg md:text-xl text-white/70 leading-relaxed font-light">
@@ -2165,59 +2165,6 @@ const App: React.FC = () => {
                           className="w-full h-full object-contain opacity-95 group-hover:opacity-100 transition-all duration-1000"
                         />
 
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <div className="backdrop-blur-xl bg-black/40 p-4 rounded-2xl border border-white/10 flex items-center gap-4">
-                            <button
-                              onClick={() => {
-                                const voice = document.getElementById('about-audio-voice') as HTMLAudioElement | null;
-                                const bed = document.getElementById('about-audio-bed') as HTMLAudioElement | null;
-                                if (!voice || !bed) return;
-                                if (voice.paused) {
-                                  voice.volume = 1;
-                                  bed.volume = 0.2;
-                                  bed.play().catch(() => null);
-                                  voice.play().catch(() => null);
-                                } else {
-                                  voice.pause();
-                                  bed.pause();
-                                }
-                              }}
-                              className="w-12 h-12 flex-shrink-0 rounded-full bg-[#ff6700] hover:bg-[#ff8533] transition-all flex items-center justify-center shadow-lg"
-                            >
-                              <Play className="w-5 h-5 text-white fill-current" />
-                            </button>
-
-                            <div className="flex-1 space-y-2">
-                              <div className="flex justify-between items-center text-[10px] uppercase tracking-widest text-white/60">
-                                <span>About Me</span>
-                                <Music className="w-3 h-3 text-[#ff6700]" />
-                              </div>
-                              <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                <motion.div
-                                  initial={{ width: "0%" }}
-                                  whileInView={{ width: "100%" }}
-                                  transition={{ duration: 45, ease: "linear" }}
-                                  className="h-full bg-[#ff6700]"
-                                />
-                              </div>
-                            </div>
-                            <audio
-                              id="about-audio-voice"
-                              onEnded={() => {
-                                const bed = document.getElementById('about-audio-bed') as HTMLAudioElement | null;
-                                if (bed) {
-                                  bed.pause();
-                                  bed.currentTime = 0;
-                                }
-                              }}
-                            >
-                              <source src="./Assets/marta_caula_audio.ogg" type="audio/ogg" />
-                            </audio>
-                            <audio id="about-audio-bed" loop>
-                              <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg" />
-                            </audio>
-                          </div>
-                        </div>
                       </motion.div>
                     </div>
                   </div>
@@ -2257,7 +2204,7 @@ const App: React.FC = () => {
                   </div>
                   <div className="space-y-12">
                     <div className="text-center"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase tracking-tighter leading-none mb-6">{t('ecosystemTitle')}</h2></div>
-                    <ToolAquarium />
+                    <ToolAquarium lang={lang} />
                   </div>
                 </div>
               </section>
@@ -2276,7 +2223,7 @@ const App: React.FC = () => {
             </motion.div>
           ) : currentPage === 'gallery' ? (
             <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <TorrentGallery initialFolder={galleryFocus} />
+              <TorrentGallery lang={lang} initialFolder={galleryFocus} />
             </motion.div>
           ) : currentPage === 'work-detail' && selectedWork ? (
             <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#f8f8f8] text-black pb-40">
@@ -2540,7 +2487,7 @@ const App: React.FC = () => {
 
                 <div className="mb-40">
                   <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-white/30 text-center mb-12">METHODOLOGY COMPARISON (DECISION TREE)</h3>
-                  <TorrentAnimation />
+                  <TorrentAnimation lang={lang} />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-40">
@@ -2566,7 +2513,7 @@ const App: React.FC = () => {
                 </div>
 
                 <div className="space-y-8">
-                  <TorrentStack />
+                  <TorrentStack lang={lang} />
                 </div>
               </section>
             </motion.div>
