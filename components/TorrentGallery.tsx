@@ -1,9 +1,9 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Maximize2, FolderOpen, ArrowRight } from 'lucide-react';
 
-type FolderName =
+export type FolderName =
   | 'Free Surf Photography'
   | 'Water Study'
   | 'Cofanetti'
@@ -140,8 +140,22 @@ const FOLDERS: {
   longDescription: folder.longDescription,
 }));
 
-const TorrentGallery: React.FC = () => {
+interface TorrentGalleryProps {
+  initialFolder?: FolderName | null;
+}
+
+const TorrentGallery: React.FC<TorrentGalleryProps> = ({ initialFolder = null }) => {
   const [expandedFolder, setExpandedFolder] = useState<typeof FOLDERS[0] | null>(null);
+  const lastInitialFolder = useRef<FolderName | null>(null);
+
+  useEffect(() => {
+    if (!initialFolder || initialFolder === lastInitialFolder.current) return;
+    const folder = FOLDERS.find((item) => item.name === initialFolder);
+    if (folder) {
+      setExpandedFolder(folder);
+      lastInitialFolder.current = initialFolder;
+    }
+  }, [initialFolder]);
 
   const folderImages = useMemo(() => {
     if (!expandedFolder) return [];

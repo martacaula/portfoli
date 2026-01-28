@@ -15,7 +15,7 @@ import AIChat from './components/AIChat';
 import TorrentAnimation from './components/TorrentAnimation';
 import ToolAquarium from './components/ToolAquarium';
 import TorrentStack from './components/TorrentStack';
-import TorrentGallery from './components/TorrentGallery';
+import TorrentGallery, { type FolderName } from './components/TorrentGallery';
 import { Artist as Work } from './types';
 
 type Language = 'en' | 'es' | 'ca';
@@ -93,9 +93,7 @@ const TRANSLATIONS = {
     solutionPhrases: ["Frictionless start", "Human verified AI", "Contextual delivery"],
     nextStepsLabel: "Next Steps",
     successMetricsLabel: "Success Metrics",
-    interestingLinks: "Interesting Links",
     projectPdfs: "Project PDFs",
-    noLinks: "No links available",
     noPdfs: "No PDFs available",
     nextSteps: ["Beta testing", "Tone fine-tuning", "Accessibility audit"],
     successMetrics: ["Daily active users", "Completion rate", "Conversion to premium"]
@@ -172,9 +170,7 @@ const TRANSLATIONS = {
     solutionPhrases: ["Inicio sin fricción", "IA verificada por humanos", "Entrega contextual"],
     nextStepsLabel: "Próximos pasos",
     successMetricsLabel: "Métricas de éxito",
-    interestingLinks: "Enlaces interesantes",
     projectPdfs: "PDFs del proyecto",
-    noLinks: "No hay enlaces disponibles",
     noPdfs: "No hay PDFs disponibles",
     nextSteps: ["Beta testing", "Ajuste de tono", "Auditoría de accesibilidad"],
     successMetrics: ["Usuarios activos diarios", "Tasa de finalización", "Conversión a premium"]
@@ -251,9 +247,7 @@ const TRANSLATIONS = {
     solutionPhrases: ["Inici sense fricció", "IA verificada per humans", "Entrega contextual"],
     nextStepsLabel: "Següents passos",
     successMetricsLabel: "Mètriques d'èxit",
-    interestingLinks: "Enllacos interessants",
     projectPdfs: "PDFs del projecte",
-    noLinks: "No hi ha enllacos disponibles",
     noPdfs: "No hi ha PDFs disponibles",
     nextSteps: ["Beta testing", "Ajust de to", "Auditoria d'accessibilitat"],
     successMetrics: ["Usuaris actius diaris", "Taxa de finalització", "Conversió a premium"]
@@ -313,11 +307,12 @@ const buildFolderLinks = (folderName: string): ProjectLink[] =>
 
 type ProjectMedia = { url: string; type: 'image' | 'video' };
 
-const buildFolderMedia = (folderName: string): ProjectMedia[] => {
+const buildFolderMedia = (folderName: string, excludeUrls: Set<string> = new Set()): ProjectMedia[] => {
   const images = Object.entries(lineupAssets)
     .filter(([path]) => path.includes(`/Assets/${folderName}/`))
     .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
-    .map(([, url]) => ({ url, type: 'image' as const }));
+    .map(([, url]) => ({ url, type: 'image' as const }))
+    .filter((media) => !excludeUrls.has(media.url));
   const videos = Object.entries(lineupVideos)
     .filter(([path]) => path.includes(`/Assets/${folderName}/`))
     .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
@@ -327,23 +322,36 @@ const buildFolderMedia = (folderName: string): ProjectMedia[] => {
 };
 
 const LINEUP_IMAGES = {
-  reconnect: findLineupAsset('Assets/reconnectmedia/Captura de pantalla 2026-01-28 a las 13.23.06.png'),
+  reconnect: findLineupAsset('Assets/reconnectmedia/hero_reconect.jpeg') || '/hero_reconect.jpeg',
   ditmad: findLineupAsset('Assets/ditmadmedia/heroditmad.jpg'),
   redcross: findLineupAsset('Assets/redcrossmedia/heroredcross.png'),
-  moss: findLineupAsset('Assets/mossmedia/heromoss.jpg'),
+  moss: findLineupAsset('Assets/mossmedia/Captura de pantalla 2026-01-28 a las 14.46.49.png'),
+  blu: findLineupAsset('Assets/blu/hero_blu.jpeg'),
   kave: findLineupAsset('Assets/kavehomeinternship/herokave.jpg'),
   neety: findLineupAsset('Assets/neetymedia/heroneety.png'),
   strenes: findLineupAsset('Assets/strenesmedia/herostrenes.png'),
 };
 
+const LINEUP_HERO_EXCLUDES: Record<string, Set<string>> = {
+  '1': new Set([LINEUP_IMAGES.reconnect]),
+  '2': new Set([LINEUP_IMAGES.ditmad]),
+  '3': new Set([LINEUP_IMAGES.redcross]),
+  '4': new Set([LINEUP_IMAGES.moss]),
+  '5': new Set([LINEUP_IMAGES.blu]),
+  '6': new Set([LINEUP_IMAGES.kave]),
+  '8': new Set([LINEUP_IMAGES.neety]),
+  '9': new Set([LINEUP_IMAGES.strenes]),
+};
+
 const LINEUP_LOGS: Record<string, ProjectMedia[]> = {
-  '1': buildFolderMedia('reconnectmedia'),
-  '2': buildFolderMedia('ditmadmedia'),
-  '3': buildFolderMedia('redcrossmedia'),
-  '4': buildFolderMedia('mossmedia'),
-  '6': buildFolderMedia('kavehomeinternship'),
-  '8': buildFolderMedia('neetymedia'),
-  '9': buildFolderMedia('strenesmedia'),
+  '1': buildFolderMedia('reconnectmedia', LINEUP_HERO_EXCLUDES['1']),
+  '2': [],
+  '3': buildFolderMedia('redcrossmedia', LINEUP_HERO_EXCLUDES['3']),
+  '4': buildFolderMedia('mossmedia', LINEUP_HERO_EXCLUDES['4']),
+  '5': buildFolderMedia('blu', LINEUP_HERO_EXCLUDES['5']),
+  '6': buildFolderMedia('kavehomeinternship', LINEUP_HERO_EXCLUDES['6']),
+  '8': buildFolderMedia('neetymedia', LINEUP_HERO_EXCLUDES['8']),
+  '9': buildFolderMedia('strenesmedia', LINEUP_HERO_EXCLUDES['9']),
 };
 
 const LINEUP_LINKS: Record<string, ProjectLink[]> = {
@@ -351,6 +359,7 @@ const LINEUP_LINKS: Record<string, ProjectLink[]> = {
   '2': buildFolderLinks('ditmadmedia'),
   '3': buildFolderLinks('redcrossmedia'),
   '4': buildFolderLinks('mossmedia'),
+  '5': buildFolderLinks('blu'),
   '6': buildFolderLinks('kavehomeinternship'),
   '8': buildFolderLinks('neetymedia'),
   '9': buildFolderLinks('strenesmedia'),
@@ -902,34 +911,450 @@ const WORKS: MultilangWork[] = [
     day: 'Eram (UdG)',
     year: 'Jun 2025',
     image: LINEUP_IMAGES.moss,
-    description: 'Experimental digital identity merging bio-elements with quantum logic.',
+    description: 'Art direction for material memory.',
     subtitle: {
-      en: 'A strategic exploration of digital identity where nature meets quantum computing.',
-      es: 'Una exploración estratégica de la identidad digital donde la naturaleza se encuentra con la computación cuántica.',
-      ca: 'Una exploració estratègica de la identitat digital on la natura es troba amb la computació quàntica.'
+      en: 'A site-specific object, brand system, and process film rooted in craft and cultural heritage.',
+      es: 'A site-specific object, brand system, and process film rooted in craft and cultural heritage.',
+      ca: 'A site-specific object, brand system, and process film rooted in craft and cultural heritage.'
     },
     challenge: {
-      en: 'CREATING A VISUAL LANGUAGE FOR NON-LINEAR DIGITAL ENTITIES.',
-      es: 'CREAR UN LENGUAJE VISUAL PARA ENTIDADES DIGITALES NO LINEALES.',
-      ca: 'CREAR UN LLENGUATGE VISUAL PER A ENTITATS DIGITALS NO LINEALS.'
+      en: 'Create a conceptually strong art direction project with real-world production constraints, no budget, and access to highly specialized artisans. The outcome needed to be coherent across object, identity, and narrative, not just visually appealing.',
+      es: 'Create a conceptually strong art direction project with real-world production constraints, no budget, and access to highly specialized artisans. The outcome needed to be coherent across object, identity, and narrative, not just visually appealing.',
+      ca: 'Create a conceptually strong art direction project with real-world production constraints, no budget, and access to highly specialized artisans. The outcome needed to be coherent across object, identity, and narrative, not just visually appealing.'
     },
     outcome: {
-      en: 'A dynamic, AI-generated branding system that adapts to user interactions in real-time.',
-      es: 'Un sistema de branding dinámico generado por IA que se adapta a las interacciones del usuario.',
-      ca: 'Un sistema de brànding dinàmic generat per IA que s\'adapta a les interaccions de l\'usuari.'
+      en: 'A complete project including naming, brand identity, art direction system, a one-off physical prototype, and a documentary process film. Awarded highest academic distinction.',
+      es: 'A complete project including naming, brand identity, art direction system, a one-off physical prototype, and a documentary process film. Awarded highest academic distinction.',
+      ca: 'A complete project including naming, brand identity, art direction system, a one-off physical prototype, and a documentary process film. Awarded highest academic distinction.'
     },
     longDescription: {
-      en: 'Mossfera x Quant represents the convergence of biological inspiration and algorithmic precision.',
-      es: 'Mossfera x Quant representa la convergencia de la inspiración biológica y la precisión algorítmica.',
-      ca: 'Mossfera x Quant representa la convergència de la inspiració biològica i la precisió algorítmica.'
+      en: 'This project explores how contemporary art direction can translate rare craftsmanship into a coherent identity, physical artifact, and narrative. It resulted in a unique prototype developed with expert mold-makers behind the final tower of the Sagrada Familia and was awarded Matricula d\'Honor.',
+      es: 'This project explores how contemporary art direction can translate rare craftsmanship into a coherent identity, physical artifact, and narrative. It resulted in a unique prototype developed with expert mold-makers behind the final tower of the Sagrada Familia and was awarded Matricula d\'Honor.',
+      ca: 'This project explores how contemporary art direction can translate rare craftsmanship into a coherent identity, physical artifact, and narrative. It resulted in a unique prototype developed with expert mold-makers behind the final tower of the Sagrada Familia and was awarded Matricula d\'Honor.'
     },
-    // Placeholders for structure
-    problem: { en: 'Placeholder Problem', es: 'Problema Placeholder', ca: 'Problema Placeholder' },
-    persona: { en: 'Placeholder Persona', es: 'Persona Placeholder', ca: 'Persona Placeholder' },
-    solution: { en: 'Placeholder Solution', es: 'Solución Placeholder', ca: 'Solució Placeholder' },
-    task: { en: 'Placeholder Task', es: 'Tarea Placeholder', ca: 'Tasca Placeholder' },
-    takeOn: { en: 'Placeholder Take', es: 'Opinión Placeholder', ca: 'Opinió Placeholder' },
-    metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
+    content: {
+      en: {
+        hero: {
+          title: 'Mossfera × Quant | Art Direction for Material Memory',
+          subtitle: 'A site-specific object, brand system, and process film rooted in craft and cultural heritage.',
+          narrative: 'This project explores how contemporary art direction can translate rare craftsmanship into a coherent identity, physical artifact, and narrative. It resulted in a unique prototype developed with expert mold-makers behind the final tower of the Sagrada Familia and was awarded Matricula d\'Honor.'
+        },
+        sideCard: {
+          challenge: 'Create a conceptually strong art direction project with real-world production constraints, no budget, and access to highly specialized artisans. The outcome needed to be coherent across object, identity, and narrative, not just visually appealing.',
+          outcome: 'A complete project including naming, brand identity, art direction system, a one-off physical prototype, and a documentary process film. Awarded highest academic distinction.',
+          buttonLabel: 'View Project'
+        },
+        yourTask: {
+          preLine: 'Direction is not decoration.',
+          question: 'How can art direction honor tradition while still proposing a contemporary cultural object?',
+          reframe: 'In other words: How do you transform a technical process into a meaningful visual language? When does an object become a symbol rather than just a product?'
+        },
+        takeOn: {
+          questions: [
+            'When does a crafted object cross the line into cultural artifact?',
+            'How important is process transparency in contemporary design and art direction?',
+            'Should sustainability shape aesthetics, even when it limits symbolism?',
+            'What makes branding feel respectful in heritage-related projects?',
+            'Would you value an object more if you knew the story of how it was made?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Many cultural and artisanal processes are visually undocumented or poorly translated into contemporary visual systems, which limits their relevance and longevity.',
+          tensions: [
+            'Conceptual depth vs physical feasibility',
+            'Sustainability constraints vs symbolic ambition',
+            'Heritage respect vs contemporary authorship'
+          ]
+        },
+        persona: {
+          title: 'Culture-Oriented Design Audience',
+          oneLiner: 'Engages with design, art, and heritage through meaning, not trends.',
+          needs: [
+            'Objects that carry narrative and intention',
+            'Visual systems that feel coherent, not superficial',
+            'Proof of process and authorship'
+          ]
+        },
+        solution: {
+          title: 'Art Direction Across Object, Identity, and Story',
+          paragraph: 'I developed Mossfera as a complete art direction project: naming, conceptual framework, visual identity, and physical artifact. Through a collaboration with Quant, the prototype was produced using a rare plaster mold technique, while the accompanying film documents the process as part of the project’s narrative system. The work is designed to evolve into a future collection with more symbolic and less sustainability-constrained forms.',
+          definingPhrases: [
+            'Object as narrative medium',
+            'Process embedded in identity',
+            'Direction beyond aesthetics'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Develop a second iteration of Mossfera with more symbolic, conceptual forms.',
+            'Expand the system into a small collection rather than a single artifact.',
+            'Exhibit the project in cultural or design-focused contexts.'
+          ],
+          successMetrics: [
+            'Continuity of the project beyond academic context into real practice.',
+            'Interest from curators, institutions, or cultural platforms.',
+            'Coherence maintained across future objects, identity, and narrative.'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'Mossfera × Quant | Art Direction for Material Memory',
+          subtitle: 'A site-specific object, brand system, and process film rooted in craft and cultural heritage.',
+          narrative: 'This project explores how contemporary art direction can translate rare craftsmanship into a coherent identity, physical artifact, and narrative. It resulted in a unique prototype developed with expert mold-makers behind the final tower of the Sagrada Familia and was awarded Matricula d\'Honor.'
+        },
+        sideCard: {
+          challenge: 'Create a conceptually strong art direction project with real-world production constraints, no budget, and access to highly specialized artisans. The outcome needed to be coherent across object, identity, and narrative, not just visually appealing.',
+          outcome: 'A complete project including naming, brand identity, art direction system, a one-off physical prototype, and a documentary process film. Awarded highest academic distinction.',
+          buttonLabel: 'View Project'
+        },
+        yourTask: {
+          preLine: 'Direction is not decoration.',
+          question: 'How can art direction honor tradition while still proposing a contemporary cultural object?',
+          reframe: 'In other words: How do you transform a technical process into a meaningful visual language? When does an object become a symbol rather than just a product?'
+        },
+        takeOn: {
+          questions: [
+            'When does a crafted object cross the line into cultural artifact?',
+            'How important is process transparency in contemporary design and art direction?',
+            'Should sustainability shape aesthetics, even when it limits symbolism?',
+            'What makes branding feel respectful in heritage-related projects?',
+            'Would you value an object more if you knew the story of how it was made?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Many cultural and artisanal processes are visually undocumented or poorly translated into contemporary visual systems, which limits their relevance and longevity.',
+          tensions: [
+            'Conceptual depth vs physical feasibility',
+            'Sustainability constraints vs symbolic ambition',
+            'Heritage respect vs contemporary authorship'
+          ]
+        },
+        persona: {
+          title: 'Culture-Oriented Design Audience',
+          oneLiner: 'Engages with design, art, and heritage through meaning, not trends.',
+          needs: [
+            'Objects that carry narrative and intention',
+            'Visual systems that feel coherent, not superficial',
+            'Proof of process and authorship'
+          ]
+        },
+        solution: {
+          title: 'Art Direction Across Object, Identity, and Story',
+          paragraph: 'I developed Mossfera as a complete art direction project: naming, conceptual framework, visual identity, and physical artifact. Through a collaboration with Quant, the prototype was produced using a rare plaster mold technique, while the accompanying film documents the process as part of the project’s narrative system. The work is designed to evolve into a future collection with more symbolic and less sustainability-constrained forms.',
+          definingPhrases: [
+            'Object as narrative medium',
+            'Process embedded in identity',
+            'Direction beyond aesthetics'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Develop a second iteration of Mossfera with more symbolic, conceptual forms.',
+            'Expand the system into a small collection rather than a single artifact.',
+            'Exhibit the project in cultural or design-focused contexts.'
+          ],
+          successMetrics: [
+            'Continuity of the project beyond academic context into real practice.',
+            'Interest from curators, institutions, or cultural platforms.',
+            'Coherence maintained across future objects, identity, and narrative.'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'Mossfera × Quant | Art Direction for Material Memory',
+          subtitle: 'A site-specific object, brand system, and process film rooted in craft and cultural heritage.',
+          narrative: 'This project explores how contemporary art direction can translate rare craftsmanship into a coherent identity, physical artifact, and narrative. It resulted in a unique prototype developed with expert mold-makers behind the final tower of the Sagrada Familia and was awarded Matricula d\'Honor.'
+        },
+        sideCard: {
+          challenge: 'Create a conceptually strong art direction project with real-world production constraints, no budget, and access to highly specialized artisans. The outcome needed to be coherent across object, identity, and narrative, not just visually appealing.',
+          outcome: 'A complete project including naming, brand identity, art direction system, a one-off physical prototype, and a documentary process film. Awarded highest academic distinction.',
+          buttonLabel: 'View Project'
+        },
+        yourTask: {
+          preLine: 'Direction is not decoration.',
+          question: 'How can art direction honor tradition while still proposing a contemporary cultural object?',
+          reframe: 'In other words: How do you transform a technical process into a meaningful visual language? When does an object become a symbol rather than just a product?'
+        },
+        takeOn: {
+          questions: [
+            'When does a crafted object cross the line into cultural artifact?',
+            'How important is process transparency in contemporary design and art direction?',
+            'Should sustainability shape aesthetics, even when it limits symbolism?',
+            'What makes branding feel respectful in heritage-related projects?',
+            'Would you value an object more if you knew the story of how it was made?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Many cultural and artisanal processes are visually undocumented or poorly translated into contemporary visual systems, which limits their relevance and longevity.',
+          tensions: [
+            'Conceptual depth vs physical feasibility',
+            'Sustainability constraints vs symbolic ambition',
+            'Heritage respect vs contemporary authorship'
+          ]
+        },
+        persona: {
+          title: 'Culture-Oriented Design Audience',
+          oneLiner: 'Engages with design, art, and heritage through meaning, not trends.',
+          needs: [
+            'Objects that carry narrative and intention',
+            'Visual systems that feel coherent, not superficial',
+            'Proof of process and authorship'
+          ]
+        },
+        solution: {
+          title: 'Art Direction Across Object, Identity, and Story',
+          paragraph: 'I developed Mossfera as a complete art direction project: naming, conceptual framework, visual identity, and physical artifact. Through a collaboration with Quant, the prototype was produced using a rare plaster mold technique, while the accompanying film documents the process as part of the project’s narrative system. The work is designed to evolve into a future collection with more symbolic and less sustainability-constrained forms.',
+          definingPhrases: [
+            'Object as narrative medium',
+            'Process embedded in identity',
+            'Direction beyond aesthetics'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Develop a second iteration of Mossfera with more symbolic, conceptual forms.',
+            'Expand the system into a small collection rather than a single artifact.',
+            'Exhibit the project in cultural or design-focused contexts.'
+          ],
+          successMetrics: [
+            'Continuity of the project beyond academic context into real practice.',
+            'Interest from curators, institutions, or cultural platforms.',
+            'Coherence maintained across future objects, identity, and narrative.'
+          ]
+        }
+      }
+    }
+  },
+  {
+    id: '5',
+    name: 'blu.',
+    genre: 'Cultural Event Production',
+    day: 'blu.',
+    year: 'Jan 2026',
+    image: LINEUP_IMAGES.blu,
+    description: 'A curated cultural event in Girona with short performances and talks.',
+    subtitle: {
+      en: 'A curated local event that brings emerging voices into the room.',
+      es: 'A curated local event that brings emerging voices into the room.',
+      ca: 'A curated local event that brings emerging voices into the room.'
+    },
+    challenge: {
+      en: 'Build a real cultural event from scratch with limited budget, shifting team dynamics, and no existing infrastructure. Define format, manage production, coordinate artists, venue, operations, and ensure the project actually happens.',
+      es: 'Build a real cultural event from scratch with limited budget, shifting team dynamics, and no existing infrastructure. Define format, manage production, coordinate artists, venue, operations, and ensure the project actually happens.',
+      ca: 'Build a real cultural event from scratch with limited budget, shifting team dynamics, and no existing infrastructure. Define format, manage production, coordinate artists, venue, operations, and ensure the project actually happens.'
+    },
+    outcome: {
+      en: 'A delivered live event with curated program, controlled capacity, clear run-of-show, cohesive visual identity, and extended life through digital content.',
+      es: 'A delivered live event with curated program, controlled capacity, clear run-of-show, cohesive visual identity, and extended life through digital content.',
+      ca: 'A delivered live event with curated program, controlled capacity, clear run-of-show, cohesive visual identity, and extended life through digital content.'
+    },
+    longDescription: {
+      en: 'I co-created and produced a 40+ person cultural event in Girona built around short performances, talks, and intentional community. Alongside production, I also contributed to the brand direction as part of a small, cross-functional team.',
+      es: 'I co-created and produced a 40+ person cultural event in Girona built around short performances, talks, and intentional community. Alongside production, I also contributed to the brand direction as part of a small, cross-functional team.',
+      ca: 'I co-created and produced a 40+ person cultural event in Girona built around short performances, talks, and intentional community. Alongside production, I also contributed to the brand direction as part of a small, cross-functional team.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'blu. | Bringing Life to Uniqueness',
+          subtitle: 'A curated local event that brings emerging voices into the room.',
+          narrative: 'I co-created and produced a 40+ person cultural event in Girona built around short performances, talks, and intentional community. Alongside production, I also contributed to the brand direction as part of a small, cross-functional team.'
+        },
+        sideCard: {
+          challenge: 'Build a real cultural event from scratch with limited budget, shifting team dynamics, and no existing infrastructure. Define format, manage production, coordinate artists, venue, operations, and ensure the project actually happens.',
+          outcome: 'A delivered live event with curated program, controlled capacity, clear run-of-show, cohesive visual identity, and extended life through digital content.',
+          buttonLabel: 'View Event Case'
+        },
+        yourTask: {
+          preLine: 'Culture only works if people show up.',
+          question: 'How do you design a local event that people actually commit to attending, not just liking online?',
+          reframe: 'In other words: What makes an event feel worth leaving the house for? What makes it memorable enough to talk about afterward?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you commit to a local cultural event in advance?',
+            'Do you prefer short dynamic formats or longer uninterrupted performances? Why?',
+            'How important is visual identity when deciding whether an event feels serious?',
+            'Would you attend alone if the atmosphere felt safe and curated?',
+            'What makes an event feel authentic rather than overproduced?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Local talent exists, but without strong curation, structure, and identity, both audiences and creators assume that meaningful culture happens elsewhere.',
+          tensions: [
+            'Intimacy vs scalability',
+            'Creative freedom vs logistical constraints',
+            'Authentic community vs perceived professionalism'
+          ]
+        },
+        persona: {
+          title: 'Culture-Curious Local',
+          oneLiner: 'Wants to discover new voices but needs the experience to feel intentional, safe, and worth their time.',
+          needs: [
+            'A clear format and timing they can trust',
+            'Visual signals that communicate quality and care',
+            'A sense of belonging, not just passive consumption'
+          ]
+        },
+        solution: {
+          title: 'A Produced Cultural Format, Not Just an Event',
+          paragraph: 'blu. was designed as a repeatable event concept: curated artists, short formats, strong hosting, clear program structure, and controlled capacity. I led production planning, budgeting, scheduling, logistics, coordination with venue and artists, and contributed to shaping the brand identity with the team to ensure coherence between concept and visual expression.',
+          definingPhrases: [
+            'Curated program over open mic chaos',
+            'Structure that protects the experience',
+            'Identity that feels human, not corporate'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Package blu. into a repeatable event format with documented playbook.',
+            'Strengthen the brand system so future editions stay consistent.',
+            'Build partnerships with venues and local cultural networks to scale sustainably.'
+          ],
+          successMetrics: [
+            'Audience quality: attendance stability, repeat guests, organic word of mouth.',
+            'Artist value: willingness to return, referrals, post-event visibility.',
+            'Format viability: ability to reproduce the event without burnout or over-dependence on one person.'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'blu. | Bringing Life to Uniqueness',
+          subtitle: 'A curated local event that brings emerging voices into the room.',
+          narrative: 'I co-created and produced a 40+ person cultural event in Girona built around short performances, talks, and intentional community. Alongside production, I also contributed to the brand direction as part of a small, cross-functional team.'
+        },
+        sideCard: {
+          challenge: 'Build a real cultural event from scratch with limited budget, shifting team dynamics, and no existing infrastructure. Define format, manage production, coordinate artists, venue, operations, and ensure the project actually happens.',
+          outcome: 'A delivered live event with curated program, controlled capacity, clear run-of-show, cohesive visual identity, and extended life through digital content.',
+          buttonLabel: 'View Event Case'
+        },
+        yourTask: {
+          preLine: 'Culture only works if people show up.',
+          question: 'How do you design a local event that people actually commit to attending, not just liking online?',
+          reframe: 'In other words: What makes an event feel worth leaving the house for? What makes it memorable enough to talk about afterward?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you commit to a local cultural event in advance?',
+            'Do you prefer short dynamic formats or longer uninterrupted performances? Why?',
+            'How important is visual identity when deciding whether an event feels serious?',
+            'Would you attend alone if the atmosphere felt safe and curated?',
+            'What makes an event feel authentic rather than overproduced?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Local talent exists, but without strong curation, structure, and identity, both audiences and creators assume that meaningful culture happens elsewhere.',
+          tensions: [
+            'Intimacy vs scalability',
+            'Creative freedom vs logistical constraints',
+            'Authentic community vs perceived professionalism'
+          ]
+        },
+        persona: {
+          title: 'Culture-Curious Local',
+          oneLiner: 'Wants to discover new voices but needs the experience to feel intentional, safe, and worth their time.',
+          needs: [
+            'A clear format and timing they can trust',
+            'Visual signals that communicate quality and care',
+            'A sense of belonging, not just passive consumption'
+          ]
+        },
+        solution: {
+          title: 'A Produced Cultural Format, Not Just an Event',
+          paragraph: 'blu. was designed as a repeatable event concept: curated artists, short formats, strong hosting, clear program structure, and controlled capacity. I led production planning, budgeting, scheduling, logistics, coordination with venue and artists, and contributed to shaping the brand identity with the team to ensure coherence between concept and visual expression.',
+          definingPhrases: [
+            'Curated program over open mic chaos',
+            'Structure that protects the experience',
+            'Identity that feels human, not corporate'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Package blu. into a repeatable event format with documented playbook.',
+            'Strengthen the brand system so future editions stay consistent.',
+            'Build partnerships with venues and local cultural networks to scale sustainably.'
+          ],
+          successMetrics: [
+            'Audience quality: attendance stability, repeat guests, organic word of mouth.',
+            'Artist value: willingness to return, referrals, post-event visibility.',
+            'Format viability: ability to reproduce the event without burnout or over-dependence on one person.'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'blu. | Bringing Life to Uniqueness',
+          subtitle: 'A curated local event that brings emerging voices into the room.',
+          narrative: 'I co-created and produced a 40+ person cultural event in Girona built around short performances, talks, and intentional community. Alongside production, I also contributed to the brand direction as part of a small, cross-functional team.'
+        },
+        sideCard: {
+          challenge: 'Build a real cultural event from scratch with limited budget, shifting team dynamics, and no existing infrastructure. Define format, manage production, coordinate artists, venue, operations, and ensure the project actually happens.',
+          outcome: 'A delivered live event with curated program, controlled capacity, clear run-of-show, cohesive visual identity, and extended life through digital content.',
+          buttonLabel: 'View Event Case'
+        },
+        yourTask: {
+          preLine: 'Culture only works if people show up.',
+          question: 'How do you design a local event that people actually commit to attending, not just liking online?',
+          reframe: 'In other words: What makes an event feel worth leaving the house for? What makes it memorable enough to talk about afterward?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you commit to a local cultural event in advance?',
+            'Do you prefer short dynamic formats or longer uninterrupted performances? Why?',
+            'How important is visual identity when deciding whether an event feels serious?',
+            'Would you attend alone if the atmosphere felt safe and curated?',
+            'What makes an event feel authentic rather than overproduced?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Local talent exists, but without strong curation, structure, and identity, both audiences and creators assume that meaningful culture happens elsewhere.',
+          tensions: [
+            'Intimacy vs scalability',
+            'Creative freedom vs logistical constraints',
+            'Authentic community vs perceived professionalism'
+          ]
+        },
+        persona: {
+          title: 'Culture-Curious Local',
+          oneLiner: 'Wants to discover new voices but needs the experience to feel intentional, safe, and worth their time.',
+          needs: [
+            'A clear format and timing they can trust',
+            'Visual signals that communicate quality and care',
+            'A sense of belonging, not just passive consumption'
+          ]
+        },
+        solution: {
+          title: 'A Produced Cultural Format, Not Just an Event',
+          paragraph: 'blu. was designed as a repeatable event concept: curated artists, short formats, strong hosting, clear program structure, and controlled capacity. I led production planning, budgeting, scheduling, logistics, coordination with venue and artists, and contributed to shaping the brand identity with the team to ensure coherence between concept and visual expression.',
+          definingPhrases: [
+            'Curated program over open mic chaos',
+            'Structure that protects the experience',
+            'Identity that feels human, not corporate'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Package blu. into a repeatable event format with documented playbook.',
+            'Strengthen the brand system so future editions stay consistent.',
+            'Build partnerships with venues and local cultural networks to scale sustainably.'
+          ],
+          successMetrics: [
+            'Audience quality: attendance stability, repeat guests, organic word of mouth.',
+            'Artist value: willingness to return, referrals, post-event visibility.',
+            'Format viability: ability to reproduce the event without burnout or over-dependence on one person.'
+          ]
+        }
+      }
+    }
   },
   {
     id: '6',
@@ -957,66 +1382,66 @@ const WORKS: MultilangWork[] = [
     content: {
       en: {
         hero: {
-          title: 'Kave Home | Mirrors Category Refresh',
-          subtitle: 'A reshoot brief to modernize a high-visual category and restore momentum.',
-          narrative: 'The mirrors category was tracking below plan, while key SKUs carried outdated or missing lifestyle imagery. I defined a focused reshoot scope that upgrades context, scale cues, and cross-room usage without overextending production.'
+          title: 'Kave Home | Category Image Direction',
+          subtitle: 'A collaborative visual refresh to restore consistency and confidence in a high-visual category.',
+          narrative: 'I worked within a small team to rethink the mirrors category, contributing both to the reshoot strategy and to broader visual and branding decisions. The goal was to align imagery, context, and tone with Kave Home’s evolving identity while improving how products are perceived in listings.'
         },
         sideCard: {
-          challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
-          outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
-          buttonLabel: 'View Reshoot Brief'
+          challenge: 'The category suffered from outdated ambients, inconsistent visual language, and missing lifestyle context on key products. At the same time, any proposal needed to respect Kave Home’s established brand while pushing it forward.',
+          outcome: 'A prioritized reshoot brief, updated visual criteria, and shared direction that informed both imagery decisions and category-level consistency.',
+          buttonLabel: 'View Visual Direction'
         },
         yourTask: {
-          preLine: 'Make imagery earn its space.',
-          question: 'What should we reshoot first to improve discovery and confidence from listing to PDP?',
-          reframe: 'If we can only refresh a shortlist, which scenes best communicate style and true scale? What would you keep consistent across every mirror for faster comparison?'
+          preLine: 'Images define perception.',
+          question: 'How do we evolve a category visually without breaking brand consistency?',
+          reframe: 'In other words: What should change to improve clarity and desirability, and what must stay stable to preserve identity? Where does art direction stop being decorative and start shaping trust?'
         },
         takeOn: {
           questions: [
-            'Which room contexts matter most for mirrors in your market mix?',
-            'How should we balance lifestyle ambients vs clean product-first images?',
-            'What is the one scale cue you want shoppers to feel instantly?',
-            'Should bathroom mirrors be deliberately styled in other rooms to expand intent?',
-            'What consistency rule should never change across the category (crop, angle, lighting, props)?'
+            'What makes a furniture brand feel visually premium rather than generic?',
+            'How much lifestyle context is useful before it becomes distracting?',
+            'What helps you understand scale faster: props, people, framing, or architecture?',
+            'Should every product follow the same visual system, or is flexibility necessary?',
+            'When browsing, what makes you trust that a product will look good in your own space?'
           ],
           note: ''
         },
         problem: {
-          insight: 'The category needed fresher, clearer visual cues to win attention and trust in a fast-scrolling environment.',
+          insight: 'In e-commerce, visual inconsistency does not just affect aesthetics, it directly affects perceived quality and trust.',
           tensions: [
-            'High-visual category, but stale or missing ambients on key products',
-            'Need to show real scale, while keeping production practical and repeatable',
-            'Bathroom-led assortment, but broader room potential that current imagery does not unlock'
+            'Brand coherence vs category flexibility',
+            'Lifestyle richness vs product clarity',
+            'Creative ambition vs production constraints'
           ]
         },
         persona: {
-          title: 'Mobile Home Shopper',
-          oneLiner: 'Decides visually in seconds and needs scale reassurance before committing.',
+          title: 'Design-Conscious Online Shopper',
+          oneLiner: 'Browses quickly, decides visually, and expects coherence from brands they trust.',
           needs: [
-            'A quick read on size and placement',
-            'Clear differentiation between similar styles and finishes',
-            'Confidence the mirror works beyond a single staged room'
+            'Clear understanding of scale and use',
+            'Consistent visual language across similar products',
+            'Imagery that feels real, not staged'
           ]
         },
         solution: {
-          title: 'Reshoot Scope + Category Image System',
-          paragraph: 'A production-ready brief that prioritizes best sellers and content gaps, then applies a consistent image system to improve browsing, comparison, and perceived fit. The approach also opens new room narratives for mirrors that were previously framed too narrowly.',
+          title: 'Shared Art Direction for Category-Level Consistency',
+          paragraph: 'Rather than treating each image independently, the work focused on defining a shared visual logic across the mirrors category. I contributed to shaping the reshoot priorities, defining what type of scenes and framing better represent the products, and aligning imagery decisions with the brand’s tone. The result is a direction that supports both product clarity and brand perception.',
           definingPhrases: [
-            'Prioritized, not blanket reshoots',
-            'Context that communicates scale',
-            'Cross-room storytelling built for listings'
+            'Category as visual system',
+            'Direction over decoration',
+            'Consistency that builds trust'
           ]
         },
         metrics: {
           nextSteps: [
-            'Lock the shortlist and shotlist, including required outputs per SKU (listing, PDP, variants).',
-            'Define the image system rules (crop, angle, lighting, prop limits) and apply across the reshoot.',
-            'Roll out refreshed ambients in priority listings and validate learnings before expanding scope.'
+            'Apply the same visual criteria to additional home decor categories.',
+            'Formalize the learnings into internal image guidelines.',
+            'Continue testing imagery styles through staged rollouts.'
           ],
           successMetrics: [
-            'Category listing engagement (CTR to PDP, scroll depth, time on listing).',
-            'PDP intent signals (gallery interaction, add-to-cart rate, variant selection rate).',
-            'Commercial impact on the refreshed set (sell-through, stock coverage, returns or complaints tied to "size expectation").'
+            'Internal adoption of the visual direction across teams.',
+            'Clearer category coherence as seen in listings and collections.',
+            'Perceived improvement in product clarity and visual trust (qualitative feedback, stakeholder alignment).'
           ]
         }
       },
@@ -1029,7 +1454,7 @@ const WORKS: MultilangWork[] = [
         sideCard: {
           challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
           outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
-          buttonLabel: 'View Reshoot Brief'
+          buttonLabel: 'Ver galería de Kave Home'
         },
         yourTask: {
           preLine: 'Make imagery earn its space.',
@@ -1094,7 +1519,7 @@ const WORKS: MultilangWork[] = [
         sideCard: {
           challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
           outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
-          buttonLabel: 'View Reshoot Brief'
+          buttonLabel: 'Veure galeria de Kave Home'
         },
         yourTask: {
           preLine: 'Make imagery earn its space.',
@@ -1552,6 +1977,7 @@ const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'lineup' | 'gallery' | 'torrent' | 'work-detail'>('home');
   const [selectedWork, setSelectedWork] = useState<MultilangWork | null>(null);
+  const [galleryFocus, setGalleryFocus] = useState<FolderName | null>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [lang, setLang] = useState<Language>('en');
   const torrentAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -1579,6 +2005,7 @@ const App: React.FC = () => {
   const navigateTo = (page: typeof currentPage, sectionId?: string, workData?: MultilangWork) => {
     setMobileMenuOpen(false);
     if (workData) setSelectedWork(workData);
+    if (page !== 'gallery') setGalleryFocus(null);
 
     if (page === 'torrent' && torrentAudioRef.current) {
       torrentAudioRef.current.volume = 0.5;
@@ -1757,15 +2184,14 @@ const App: React.FC = () => {
             </motion.div>
           ) : currentPage === 'gallery' ? (
             <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <TorrentGallery />
+              <TorrentGallery initialFolder={galleryFocus} />
             </motion.div>
           ) : currentPage === 'work-detail' && selectedWork ? (
             <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#f8f8f8] text-black pb-40">
               {(() => {
                 const content = buildWorkContent(selectedWork, lang);
                 const workLog = LINEUP_LOGS[selectedWork.id] ?? [];
-                const workLinks = LINEUP_LINKS[selectedWork.id] ?? [];
-                const pdfLinks = workLinks.filter((link) => link.kind === 'pdf');
+                const pdfLinks = LINEUP_LINKS[selectedWork.id] ?? [];
                 return (
                   <>
                     <section className="min-h-[70vh] flex flex-col justify-end px-6 md:px-24 pb-20 border-b border-black/5">
@@ -1794,9 +2220,15 @@ const App: React.FC = () => {
                           </div>
                         </div>
 
-                        <div className="relative aspect-video bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/5">
-                          <MediaRenderer url={selectedWork.image} type={selectedWork.mediaType} />
-                        </div>
+                        {selectedWork.id !== '1' ? (
+                          <div className={`relative bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/5 ${selectedWork.id === '6' ? '' : 'aspect-video'}`}>
+                            <MediaRenderer
+                              url={selectedWork.image}
+                              type={selectedWork.mediaType}
+                              className={selectedWork.id === '6' ? 'w-full h-auto object-contain' : undefined}
+                            />
+                          </div>
+                        ) : null}
 
                         {workLog.length ? (
                           <div>
@@ -1849,9 +2281,17 @@ const App: React.FC = () => {
                               <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#ff6700] mb-4">{t('outcome')}</h5>
                               <p className="text-sm leading-relaxed text-black/80">{content.sideCard.outcome}</p>
                             </div>
-                            <button className="w-full py-5 bg-black text-white text-[10px] font-bold uppercase tracking-[0.3em] rounded-xl hover:bg-[#ff6700] transition-colors">
-                              {content.sideCard.buttonLabel}
-                            </button>
+                            {selectedWork.id === '6' ? (
+                              <button
+                                onClick={() => {
+                                  setGalleryFocus('Kave Home Series');
+                                  navigateTo('gallery');
+                                }}
+                                className="w-full py-5 bg-black text-white text-[10px] font-bold uppercase tracking-[0.3em] rounded-xl hover:bg-[#ff6700] transition-colors"
+                              >
+                                {content.sideCard.buttonLabel}
+                              </button>
+                            ) : null}
                           </div>
                         </div>
 
@@ -1915,55 +2355,29 @@ const App: React.FC = () => {
                     </section>
 
                     <section className="px-6 md:px-24 py-24 max-w-7xl mx-auto border-t border-black/5">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                        <div className="space-y-6">
-                          <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('interestingLinks')}</h3>
-                          {workLinks.length ? (
-                            <div className="space-y-4">
-                              {workLinks.map((link) => (
-                                <a
-                                  key={link.url}
-                                  href={link.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center justify-between gap-4 p-5 bg-white border border-black/5 rounded-2xl hover:border-[#ff6700] transition-colors"
-                                >
-                                  <div className="flex items-center gap-4">
-                                    <ExternalLink className="w-4 h-4 text-[#ff6700]" />
-                                    <span className="text-xs font-bold uppercase tracking-tight text-black/70">{link.label}</span>
-                                  </div>
-                                  <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">PDF</span>
-                                </a>
-                              ))}
-                            </div>
-                          ) : (
-                            <p className="text-sm text-black/40">{t('noLinks')}</p>
-                          )}
-                        </div>
-                        <div className="space-y-6">
-                          <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('projectPdfs')}</h3>
-                          {pdfLinks.length ? (
-                            <div className="space-y-4">
-                              {pdfLinks.map((link) => (
-                                <a
-                                  key={link.url}
-                                  href={link.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center justify-between gap-4 p-5 bg-black/5 rounded-2xl hover:bg-black/10 transition-colors"
-                                >
-                                  <div className="flex items-center gap-4">
-                                    <FileText className="w-4 h-4 text-[#ff6700]" />
-                                    <span className="text-xs font-bold uppercase tracking-tight text-black/70">{link.label}</span>
-                                  </div>
-                                  <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">PDF</span>
-                                </a>
-                              ))}
-                            </div>
-                          ) : (
-                            <p className="text-sm text-black/40">{t('noPdfs')}</p>
-                          )}
-                        </div>
+                      <div className="space-y-6 max-w-3xl">
+                        <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('projectPdfs')}</h3>
+                        {pdfLinks.length ? (
+                          <div className="space-y-4">
+                            {pdfLinks.map((link) => (
+                              <a
+                                key={link.url}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-between gap-4 p-5 bg-black/5 rounded-2xl hover:bg-black/10 transition-colors"
+                              >
+                                <div className="flex items-center gap-4">
+                                  <FileText className="w-4 h-4 text-[#ff6700]" />
+                                  <span className="text-xs font-bold uppercase tracking-tight text-black/70">{link.label}</span>
+                                </div>
+                                <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">PDF</span>
+                              </a>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-sm text-black/40">{t('noPdfs')}</p>
+                        )}
                       </div>
                     </section>
 
