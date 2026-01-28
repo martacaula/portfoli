@@ -93,6 +93,10 @@ const TRANSLATIONS = {
     solutionPhrases: ["Frictionless start", "Human verified AI", "Contextual delivery"],
     nextStepsLabel: "Next Steps",
     successMetricsLabel: "Success Metrics",
+    interestingLinks: "Interesting Links",
+    projectPdfs: "Project PDFs",
+    noLinks: "No links available",
+    noPdfs: "No PDFs available",
     nextSteps: ["Beta testing", "Tone fine-tuning", "Accessibility audit"],
     successMetrics: ["Daily active users", "Completion rate", "Conversion to premium"]
   },
@@ -168,6 +172,10 @@ const TRANSLATIONS = {
     solutionPhrases: ["Inicio sin fricción", "IA verificada por humanos", "Entrega contextual"],
     nextStepsLabel: "Próximos pasos",
     successMetricsLabel: "Métricas de éxito",
+    interestingLinks: "Enlaces interesantes",
+    projectPdfs: "PDFs del proyecto",
+    noLinks: "No hay enlaces disponibles",
+    noPdfs: "No hay PDFs disponibles",
     nextSteps: ["Beta testing", "Ajuste de tono", "Auditoría de accesibilidad"],
     successMetrics: ["Usuarios activos diarios", "Tasa de finalización", "Conversión a premium"]
   },
@@ -243,6 +251,10 @@ const TRANSLATIONS = {
     solutionPhrases: ["Inici sense fricció", "IA verificada per humans", "Entrega contextual"],
     nextStepsLabel: "Següents passos",
     successMetricsLabel: "Mètriques d'èxit",
+    interestingLinks: "Enllacos interessants",
+    projectPdfs: "PDFs del projecte",
+    noLinks: "No hi ha enllacos disponibles",
+    noPdfs: "No hi ha PDFs disponibles",
     nextSteps: ["Beta testing", "Ajust de to", "Auditoria d'accessibilitat"],
     successMetrics: ["Usuaris actius diaris", "Taxa de finalització", "Conversió a premium"]
   }
@@ -263,6 +275,12 @@ const lineupAssets = (
   }
 ).glob('./Assets/**/*.{jpg,JPG,jpeg,png}', { eager: true, import: 'default' });
 
+const lineupDocs = (
+  import.meta as ImportMeta & {
+    glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
+  }
+).glob('./Assets/**/*.{pdf,PDF,mov,MOV,mp4,MP4}', { eager: true, import: 'default' });
+
 const findLineupAsset = (suffix: string) =>
   Object.entries(lineupAssets).find(([path]) => path.endsWith(suffix))?.[1] ?? '';
 
@@ -271,6 +289,23 @@ const buildFolderAssets = (folderName: string) =>
     .filter(([path]) => path.includes(`/Assets/${folderName}/`))
     .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
     .map(([, url]) => url);
+
+type ProjectLink = {
+  url: string;
+  label: string;
+  kind: 'pdf' | 'video' | 'file';
+};
+
+const buildFolderLinks = (folderName: string): ProjectLink[] =>
+  Object.entries(lineupDocs)
+    .filter(([path]) => path.includes(`/Assets/${folderName}/`))
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+    .map(([path, url]) => {
+      const lower = path.toLowerCase();
+      const filename = path.split('/').pop() ?? 'Document';
+      const kind = lower.endsWith('.pdf') ? 'pdf' : lower.endsWith('.mp4') || lower.endsWith('.mov') ? 'video' : 'file';
+      return { url, label: filename, kind };
+    });
 
 const LINEUP_IMAGES = {
   reconnect: findLineupAsset('Assets/reconnectmedia/Captura de pantalla 2026-01-28 a las 13.23.06.png'),
@@ -290,6 +325,16 @@ const LINEUP_LOGS: Record<string, string[]> = {
   '6': buildFolderAssets('kavehomeinternship'),
   '8': buildFolderAssets('neetymedia'),
   '9': buildFolderAssets('strenesmedia'),
+};
+
+const LINEUP_LINKS: Record<string, ProjectLink[]> = {
+  '1': buildFolderLinks('reconnectmedia'),
+  '2': buildFolderLinks('ditmadmedia'),
+  '3': buildFolderLinks('redcrossmedia'),
+  '4': buildFolderLinks('mossmedia'),
+  '6': buildFolderLinks('kavehomeinternship'),
+  '8': buildFolderLinks('neetymedia'),
+  '9': buildFolderLinks('strenesmedia'),
 };
 
 const WORKS: MultilangWork[] = [
@@ -1700,6 +1745,9 @@ const App: React.FC = () => {
               {(() => {
                 const content = buildWorkContent(selectedWork, lang);
                 const workLog = LINEUP_LOGS[selectedWork.id] ?? [];
+                const workLinks = LINEUP_LINKS[selectedWork.id] ?? [];
+                const pdfLinks = workLinks.filter((link) => link.kind === 'pdf');
+                const otherLinks = workLinks.filter((link) => link.kind !== 'pdf');
                 return (
                   <>
                     <section className="min-h-[70vh] flex flex-col justify-end px-6 md:px-24 pb-20 border-b border-black/5">
@@ -1844,6 +1892,59 @@ const App: React.FC = () => {
                               <TrendingUp className="w-4 h-4 text-black/20" />
                             </div>
                           ))}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-24 max-w-7xl mx-auto border-t border-black/5">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                        <div className="space-y-6">
+                          <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('interestingLinks')}</h3>
+                          {otherLinks.length ? (
+                            <div className="space-y-4">
+                              {otherLinks.map((link) => (
+                                <a
+                                  key={link.url}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center justify-between gap-4 p-5 bg-white border border-black/5 rounded-2xl hover:border-[#ff6700] transition-colors"
+                                >
+                                  <div className="flex items-center gap-4">
+                                    <ExternalLink className="w-4 h-4 text-[#ff6700]" />
+                                    <span className="text-xs font-bold uppercase tracking-tight text-black/70">{link.label}</span>
+                                  </div>
+                                  <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">{link.kind}</span>
+                                </a>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-sm text-black/40">{t('noLinks')}</p>
+                          )}
+                        </div>
+                        <div className="space-y-6">
+                          <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('projectPdfs')}</h3>
+                          {pdfLinks.length ? (
+                            <div className="space-y-4">
+                              {pdfLinks.map((link) => (
+                                <a
+                                  key={link.url}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center justify-between gap-4 p-5 bg-black/5 rounded-2xl hover:bg-black/10 transition-colors"
+                                >
+                                  <div className="flex items-center gap-4">
+                                    <FileText className="w-4 h-4 text-[#ff6700]" />
+                                    <span className="text-xs font-bold uppercase tracking-tight text-black/70">{link.label}</span>
+                                  </div>
+                                  <span className="text-[10px] font-mono uppercase tracking-widest text-black/30">PDF</span>
+                                </a>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-sm text-black/40">{t('noPdfs')}</p>
+                          )}
                         </div>
                       </div>
                     </section>
