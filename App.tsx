@@ -505,6 +505,203 @@ const WORKS: MultilangWork[] = [
       en: 'Working with the DitMad start-up, we developed a UX framework that empowers users to navigate their nutritional journey with precision.',
       es: 'Trabajando con la start-up DitMad, desarrollamos un marco de UX.',
       ca: 'Treballant amb la start-up DitMad, vam desenvolupar un marc d\'UX.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'DitMadkompas | Danish-First Food Scanner Concept',
+          subtitle: 'A fast scan flow that translates ingredients into a clear, trustable choice.',
+          narrative: 'DitMadkompas is a concept for a simple barcode scanning app that explains processing levels and ingredients in seconds, then suggests healthier alternatives. The work defined the product foundation, early UX, pricing logic, and a low-cost validation plan before building a database.'
+        },
+        sideCard: {
+          challenge: 'Danish shoppers struggle to interpret labels, additives, and E-numbers in real time, and existing apps do not fully localize to Danish needs. The startup had no brand identity, no product database, and no scoring model, so building "the real thing" first would be a risky bet.',
+          outcome: 'A defined scan-to-rating-to-alternatives experience, plus a Fake Door + Pinocchio pretotype to validate demand and trust before MVP.',
+          buttonLabel: 'View Concept Deck'
+        },
+        yourTask: {
+          preLine: 'Make food transparency usable in the aisle.',
+          question: 'How might we help people in Denmark make healthier choices with a simple, trustworthy scan experience?',
+          reframe: 'What should the app explain instantly, and what should it keep out to stay fast? What would make the score feel credible, not cosmetic?'
+        },
+        takeOn: {
+          questions: [
+            'What should the first scan result prioritize: additives, sugars, saturated fat, or processing level?',
+            'Would you trust a traffic-light rating without a deep breakdown every time? Why?',
+            'When do you want alternatives: only on "red" products, or always?',
+            'What would make this feel Danish-first: Ø-mærket detection, local regulation explainers, or Nordic nutrition framing?',
+            'What would convince you to pay: unlimited scans, personalized modes, or weekly insights?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Food information is too complex for real shopping moments, so clarity and trust beat depth by default.',
+          tensions: [
+            'Scientific complexity vs a 2-second decision in-store',
+            'No existing database vs expectation of instant scanning results',
+            '"Simple score" clarity vs the need to prove how the score is earned'
+          ]
+        },
+        persona: {
+          title: 'Everyday Grocery Parent',
+          oneLiner: 'Shops fast, wants to do better for the household, and does not have time to decode labels.',
+          needs: [
+            'Instant, plain-language explanations (especially additives and processing)',
+            'Confidence through a consistent visual system and repeatable logic',
+            'Better swaps that are realistic to buy, not theoretical'
+          ]
+        },
+        solution: {
+          title: 'Scan, Score, Swap',
+          paragraph: 'A Danish-first product scanning concept that simplifies nutrition into a traffic-light score, highlights positives and negatives, and offers healthier alternatives. The system is supported by a communication plan across social and short explainer formats, and a tiered freemium model that scales from basic clarity to deeper insights and personalization.',
+          definingPhrases: [
+            'Traffic-light trust layer',
+            'Alternatives as the payoff',
+            'Freemium to premium progression'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Launch the Fake Door landing page with "Try the scanner now" and track real intent.',
+            'Run the Pinocchio scan simulation using manual lookup (Open Food Facts behind the scenes) to test completion and trust.',
+            'If validated, move to an MVP with automated scanning and a first-pass Danish scoring model.'
+          ],
+          successMetrics: [
+            'Landing page CTA conversion above 20% (validation threshold).',
+            'Full fake scan completion above 25% (validation threshold).',
+            'Weekly usage intent above 15% (validation threshold).'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'DitMadkompas | Danish-First Food Scanner Concept',
+          subtitle: 'A fast scan flow that translates ingredients into a clear, trustable choice.',
+          narrative: 'DitMadkompas is a concept for a simple barcode scanning app that explains processing levels and ingredients in seconds, then suggests healthier alternatives. The work defined the product foundation, early UX, pricing logic, and a low-cost validation plan before building a database.'
+        },
+        sideCard: {
+          challenge: 'Danish shoppers struggle to interpret labels, additives, and E-numbers in real time, and existing apps do not fully localize to Danish needs. The startup had no brand identity, no product database, and no scoring model, so building "the real thing" first would be a risky bet.',
+          outcome: 'A defined scan-to-rating-to-alternatives experience, plus a Fake Door + Pinocchio pretotype to validate demand and trust before MVP.',
+          buttonLabel: 'View Concept Deck'
+        },
+        yourTask: {
+          preLine: 'Make food transparency usable in the aisle.',
+          question: 'How might we help people in Denmark make healthier choices with a simple, trustworthy scan experience?',
+          reframe: 'What should the app explain instantly, and what should it keep out to stay fast? What would make the score feel credible, not cosmetic?'
+        },
+        takeOn: {
+          questions: [
+            'What should the first scan result prioritize: additives, sugars, saturated fat, or processing level?',
+            'Would you trust a traffic-light rating without a deep breakdown every time? Why?',
+            'When do you want alternatives: only on "red" products, or always?',
+            'What would make this feel Danish-first: Ø-mærket detection, local regulation explainers, or Nordic nutrition framing?',
+            'What would convince you to pay: unlimited scans, personalized modes, or weekly insights?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Food information is too complex for real shopping moments, so clarity and trust beat depth by default.',
+          tensions: [
+            'Scientific complexity vs a 2-second decision in-store',
+            'No existing database vs expectation of instant scanning results',
+            '"Simple score" clarity vs the need to prove how the score is earned'
+          ]
+        },
+        persona: {
+          title: 'Everyday Grocery Parent',
+          oneLiner: 'Shops fast, wants to do better for the household, and does not have time to decode labels.',
+          needs: [
+            'Instant, plain-language explanations (especially additives and processing)',
+            'Confidence through a consistent visual system and repeatable logic',
+            'Better swaps that are realistic to buy, not theoretical'
+          ]
+        },
+        solution: {
+          title: 'Scan, Score, Swap',
+          paragraph: 'A Danish-first product scanning concept that simplifies nutrition into a traffic-light score, highlights positives and negatives, and offers healthier alternatives. The system is supported by a communication plan across social and short explainer formats, and a tiered freemium model that scales from basic clarity to deeper insights and personalization.',
+          definingPhrases: [
+            'Traffic-light trust layer',
+            'Alternatives as the payoff',
+            'Freemium to premium progression'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Launch the Fake Door landing page with "Try the scanner now" and track real intent.',
+            'Run the Pinocchio scan simulation using manual lookup (Open Food Facts behind the scenes) to test completion and trust.',
+            'If validated, move to an MVP with automated scanning and a first-pass Danish scoring model.'
+          ],
+          successMetrics: [
+            'Landing page CTA conversion above 20% (validation threshold).',
+            'Full fake scan completion above 25% (validation threshold).',
+            'Weekly usage intent above 15% (validation threshold).'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'DitMadkompas | Danish-First Food Scanner Concept',
+          subtitle: 'A fast scan flow that translates ingredients into a clear, trustable choice.',
+          narrative: 'DitMadkompas is a concept for a simple barcode scanning app that explains processing levels and ingredients in seconds, then suggests healthier alternatives. The work defined the product foundation, early UX, pricing logic, and a low-cost validation plan before building a database.'
+        },
+        sideCard: {
+          challenge: 'Danish shoppers struggle to interpret labels, additives, and E-numbers in real time, and existing apps do not fully localize to Danish needs. The startup had no brand identity, no product database, and no scoring model, so building "the real thing" first would be a risky bet.',
+          outcome: 'A defined scan-to-rating-to-alternatives experience, plus a Fake Door + Pinocchio pretotype to validate demand and trust before MVP.',
+          buttonLabel: 'View Concept Deck'
+        },
+        yourTask: {
+          preLine: 'Make food transparency usable in the aisle.',
+          question: 'How might we help people in Denmark make healthier choices with a simple, trustworthy scan experience?',
+          reframe: 'What should the app explain instantly, and what should it keep out to stay fast? What would make the score feel credible, not cosmetic?'
+        },
+        takeOn: {
+          questions: [
+            'What should the first scan result prioritize: additives, sugars, saturated fat, or processing level?',
+            'Would you trust a traffic-light rating without a deep breakdown every time? Why?',
+            'When do you want alternatives: only on "red" products, or always?',
+            'What would make this feel Danish-first: Ø-mærket detection, local regulation explainers, or Nordic nutrition framing?',
+            'What would convince you to pay: unlimited scans, personalized modes, or weekly insights?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Food information is too complex for real shopping moments, so clarity and trust beat depth by default.',
+          tensions: [
+            'Scientific complexity vs a 2-second decision in-store',
+            'No existing database vs expectation of instant scanning results',
+            '"Simple score" clarity vs the need to prove how the score is earned'
+          ]
+        },
+        persona: {
+          title: 'Everyday Grocery Parent',
+          oneLiner: 'Shops fast, wants to do better for the household, and does not have time to decode labels.',
+          needs: [
+            'Instant, plain-language explanations (especially additives and processing)',
+            'Confidence through a consistent visual system and repeatable logic',
+            'Better swaps that are realistic to buy, not theoretical'
+          ]
+        },
+        solution: {
+          title: 'Scan, Score, Swap',
+          paragraph: 'A Danish-first product scanning concept that simplifies nutrition into a traffic-light score, highlights positives and negatives, and offers healthier alternatives. The system is supported by a communication plan across social and short explainer formats, and a tiered freemium model that scales from basic clarity to deeper insights and personalization.',
+          definingPhrases: [
+            'Traffic-light trust layer',
+            'Alternatives as the payoff',
+            'Freemium to premium progression'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Launch the Fake Door landing page with "Try the scanner now" and track real intent.',
+            'Run the Pinocchio scan simulation using manual lookup (Open Food Facts behind the scenes) to test completion and trust.',
+            'If validated, move to an MVP with automated scanning and a first-pass Danish scoring model.'
+          ],
+          successMetrics: [
+            'Landing page CTA conversion above 20% (validation threshold).',
+            'Full fake scan completion above 25% (validation threshold).',
+            'Weekly usage intent above 15% (validation threshold).'
+          ]
+        }
+      }
     }
   },
   {
@@ -529,6 +726,73 @@ const WORKS: MultilangWork[] = [
       en: 'An integrated system for Red Cross Denmark that leverages AI to streamline membership.',
       es: 'Un sistema integrado para la Cruz Roja Danesa que aprovecha la IA.',
       ca: 'Un sistema integrat per a la Creu Roja Danesa que aprofita la IA.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'Red Cross DK 360º | AI-Powered Donation Intake',
+          subtitle: 'A faster drop-off flow that turns a bag into a verified record with visible impact.',
+          narrative: 'This concept uses AI photo recognition to identify donated items, calculate estimated CO2 impact, and connect the donation to a member account. It is designed to reduce volunteer workload while motivating repeat donations through rewards and partner incentives.'
+        },
+        sideCard: {
+          challenge: 'Donation intake is manual and time-heavy, especially when volume spikes. Donors get little feedback after drop-off, so the experience is easy to forget and hard to repeat.',
+          outcome: 'A 360º flow from bag to digital record, with AI recognition, member identification, and a confirmation checkout for volunteer supervision.',
+          buttonLabel: 'View Prototype Flow'
+        },
+        yourTask: {
+          preLine: 'Make donating feel effortless and worth repeating.',
+          question: 'How might we make Red Cross clothing donations faster, more transparent, and more motivating for both donors and volunteers?',
+          reframe: 'In other words: If one bag could become a verified record in minutes, what must be automated and what must stay human-approved? What feedback should the donor receive immediately to feel impact and trust the system?'
+        },
+        takeOn: {
+          questions: [
+            'Which moment matters most: drop-off speed, impact feedback, or rewards?',
+            'Should donors see item recognition details, or only a simple summary?',
+            'Where should volunteer verification happen to stay fast but safe?',
+            'What incentives feel aligned with Red Cross values: points, discounts, or community recognition?',
+            'Would a bike pickup option change your donation frequency, and in which situations?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Donations increase when the process is quick, the impact is visible, and the organization can handle volume without adding manual work.',
+          tensions: [
+            'Automation speed vs the need for volunteer supervision and trust',
+            'Impact storytelling vs accurate, explainable CO2 estimates',
+            'Incentives and partner value vs keeping the experience mission-aligned'
+          ]
+        },
+        persona: {
+          title: 'Repeat Donor and Member',
+          oneLiner: 'Wants donating to be quick and meaningful, and wants a record they can share.',
+          needs: [
+            'A frictionless drop-off that does not require extra steps',
+            'Immediate proof of impact, including estimated CO2 savings over time',
+            'Rewards that feel fair and simple (points, discounts, partner offers)'
+          ]
+        },
+        solution: {
+          title: 'Bag to Verified Impact Record',
+          paragraph: 'A mobile intake flow where a volunteer captures 2 to 3 photos of the donation bag, AI detects item types, and the system links the donation to a member through identification. A confirmation checkout keeps humans in the loop, while donors receive a transparent digital record that can include impact and rewards.',
+          definingPhrases: [
+            'AI photo recognition with human approval',
+            'Real-time impact feedback (estimated CO2)',
+            'Rewards loop for repeat donations'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Pilot the intake flow in one location with the four-step prototype: Member Identification, AI Object Detection, Volunteer Supervision, Confirmation Checkout.',
+            'Define the recognition taxonomy (what categories matter) and tune photo guidance so volunteers can capture consistent inputs fast.',
+            'Validate the incentive model and partner integration, plus the bike pickup option as a practical add-on service.'
+          ],
+          successMetrics: [
+            'Faster handling time per bag and fewer manual steps for volunteers (measured in pilot).',
+            'Higher repeat donation intent and member adoption of the digital record (measured via usage and follow-up prompts).',
+            'Verified impact visibility: percentage of donations with AI recognition + approved checkout, and engagement with CO2 history sharing (measured in app).'
+          ]
+        }
+      }
     }
   },
   {
@@ -1663,16 +1927,85 @@ const App: React.FC = () => {
               })()}
             </motion.div>
           ) : (
-            <motion.div key="torrent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a] overflow-x-hidden pb-40">
-              <section className="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/10">
-                <div className="absolute inset-0 opacity-40"><div className="absolute inset-0 bg-gradient-to-b from-[#ff6700]/20 to-[#0a0a0a] z-10" /><img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover grayscale" /></div>
-                <div className="relative z-20 text-center max-w-7xl px-6 w-full">
-                  <button onClick={() => navigateTo('home')} className="mb-12 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('exitEnvironment')}</button>
-                  <h1 className="text-4xl md:text-[6rem] font-heading font-bold text-white leading-none mb-4 tracking-tighter uppercase">{t('project')}</h1>
-                  <div className="w-full flex justify-center"><GradientText text="TORRENT" as="h2" className="bitcount-single-hero text-[15vw] md:text-[10vw] leading-[0.6] text-center mb-12" /></div>
+            <motion.div key="torrent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
+              <header className="relative h-[60vh] flex items-center justify-center">
+                <div className="text-center px-6">
+                  <h1 className="text-xl font-heading font-bold uppercase text-white/40 mb-4 tracking-[0.4em]">AI-AUGMENTED DESIGN SPRINT</h1>
+                  <GradientText
+                    text="TORRENT"
+                    as="h2"
+                    className="bitcount-single-hero text-[15vw] md:text-[10vw] leading-[0.9] pt-[0.14em] pb-[0.16em] overflow-visible"
+                  />
+                  <p className="mt-8 text-xl md:text-2xl font-light text-white/80 max-w-4xl mx-auto italic">AI-augmented Design Sprint for creative teams</p>
+                  <p className="mt-4 text-sm md:text-base font-mono uppercase tracking-widest text-white/40 max-w-3xl mx-auto">
+                    A governed sprint protocol where AI accelerates instrumental work, and humans keep creative judgement.
+                  </p>
+                </div>
+              </header>
+
+              <section className="py-24 max-w-7xl mx-auto px-6">
+                <div className="mb-40 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                  <div className="space-y-8">
+                    <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-[#ff6700]">THE NARRATIVE</h3>
+                    <p className="text-lg md:text-xl font-light leading-relaxed text-white/80">
+                      TORRENT is a hybrid Design Sprint framework that integrates AI at specific "injection points" to reduce mechanical workload while protecting human decision-making.
+                    </p>
+                    <p className="text-base text-white/40 leading-relaxed">
+                      This methodology was battle-tested and first applied in collaboration with <span className="text-white border-b border-white/20">Politiken.dk</span>, where we used the 5-day flow to
+                      redefine news consumption habits for younger audiences.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 gap-8">
+                    <div className="p-8 bg-white/5 border border-white/10 rounded-2xl">
+                      <h4 className="text-[10px] font-mono uppercase tracking-widest text-[#ff6700] mb-4">CHALLENGE</h4>
+                      <p className="text-sm leading-relaxed text-white/70 italic">
+                        How can small creative teams keep Sprint speed, but reduce cognitive overload and improve decision quality, without delegating judgement to AI?
+                      </p>
+                    </div>
+                    <div className="p-8 bg-white/5 border border-white/10 rounded-2xl">
+                      <h4 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-4">OUTCOME</h4>
+                      <p className="text-sm leading-relaxed text-white/70">
+                        A complete operational protocol (schedule, artifacts, injection points, governance rules). Current delivery covers the theoretical groundwork applied in real contexts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-40">
+                  <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-white/30 text-center mb-12">METHODOLOGY COMPARISON (DECISION TREE)</h3>
+                  <TorrentAnimation />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-40">
+                  {[
+                    { day: 'Day 1', label: 'Synthesis', list: ['Deep Research Grounding', 'Contextual Mapping', 'Automated Synthesis'] },
+                    { day: 'Day 2', label: 'Map', list: ['User Journey Audit', 'Critical Friction Map', 'Challenge Framing'] },
+                    { day: 'Day 3', label: 'Incubation', list: ['PROTECTED MANUAL ZONE', 'Strategic Divergence', 'Human Decision Core'] },
+                    { day: 'Day 4', label: 'Build', list: ['Augmented Drafting', 'Structural Deployment', 'Technical Layout Mapping'] },
+                    { day: 'Day 5', label: 'Test', list: ['Workflow Orchestration', 'Rapid Validation Cycles', 'Dynamic Insight Generation'] }
+                  ].map((step, i) => (
+                    <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:bg-white/10 transition-colors">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#ff6700]">{step.day}</span>
+                      <h5 className="text-xl font-bold uppercase mb-6 tracking-tight">{step.label}</h5>
+                      <ul className="space-y-3">
+                        {step.list.map((l, j) => (
+                          <li key={j} className="text-[10px] uppercase font-bold text-white/40">
+                            {l}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-8">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-[#ff6700]">TORRENT STACK</h3>
+                    <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">AI INJECTION POINTS BY SPRINT PHASE</span>
+                  </div>
+                  <ToolAquarium />
                 </div>
               </section>
-              <section className="py-24 px-6 max-w-7xl mx-auto space-y-12"><TorrentAnimation /></section>
             </motion.div>
           )}
         </AnimatePresence>
