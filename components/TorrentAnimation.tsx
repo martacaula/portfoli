@@ -115,51 +115,73 @@ const TorrentAnimation: React.FC = () => {
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
 
-                {torrentSteps.map((step, i) => (
-                  <g key={i} transform={`translate(${250 + i * 275}, 300)`}>
-                    <motion.rect
-                      x="-85"
-                      y="-35"
-                      width="170"
-                      height="70"
-                      rx="18"
-                      fill="#0c1a2a"
-                      stroke="#ff6700"
-                      strokeWidth="1.5"
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.2, delay: i * 0.05 }}
-                    />
+                {torrentSteps.map((step, i) => {
+                  const isIncubation = step === 'Incubation';
+                  const isAiHeavy = i === 0 || i === 3;
+                  const accentColor = isIncubation ? '#ffffff' : '#ff6700';
 
-                    {step === 'Incubation' && (
+                  return (
+                    <g key={i} transform={`translate(${250 + i * 275}, 300)`}>
+                      {isAiHeavy && (
+                        <motion.rect
+                          x="-95"
+                          y="-45"
+                          width="190"
+                          height="90"
+                          rx="22"
+                          fill={accentColor}
+                          fillOpacity="0.06"
+                          stroke={accentColor}
+                          strokeWidth="1"
+                          animate={{ opacity: [0.15, 0.5, 0.15] }}
+                          transition={{ duration: 1.8, repeat: Infinity }}
+                        />
+                      )}
+
                       <motion.rect
-                        x="-75"
-                        y="-25"
-                        width="150"
-                        height="50"
-                        rx="12"
-                        fill="#ff6700"
-                        fillOpacity="0.1"
-                        animate={{ opacity: [0.2, 0.6, 0.2] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
+                        x="-85"
+                        y="-35"
+                        width="170"
+                        height="70"
+                        rx="18"
+                        fill="#0c1a2a"
+                        stroke={accentColor}
+                        strokeWidth="1.5"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.2, delay: i * 0.05 }}
                       />
-                    )}
 
-                    <motion.text
-                      textAnchor="middle"
-                      y="5"
-                      className={`text-[11px] font-black uppercase tracking-[0.2em] ${step === 'Incubation' ? 'fill-[#ff6700]' : 'fill-white'}`}
-                    >
-                      {step}
-                    </motion.text>
+                      {isIncubation && (
+                        <motion.rect
+                          x="-75"
+                          y="-25"
+                          width="150"
+                          height="50"
+                          rx="12"
+                          fill={accentColor}
+                          fillOpacity="0.12"
+                          animate={{ opacity: [0.2, 0.6, 0.2] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                      )}
 
-                    {step === 'Incubation' && (
-                      <text y="22" textAnchor="middle" className="text-[7px] fill-[#ff6700] uppercase font-mono tracking-widest opacity-60">
-                        Manual Incubation
-                      </text>
-                    )}
-                  </g>
-                ))}
+                      <motion.text
+                        textAnchor="middle"
+                        y="5"
+                        className={`text-[11px] font-black uppercase tracking-[0.2em] ${isIncubation ? 'fill-white' : 'fill-white'}`}
+                      >
+                        {step}
+                      </motion.text>
+
+                      {isIncubation && (
+                        <text y="22" textAnchor="middle" className="text-[7px] fill-white uppercase font-mono tracking-widest opacity-70">
+                          AI Protected
+                        </text>
+                      )}
+                    </g>
+                  );
+                })}
 
                 <motion.circle r="6" fill="#ff6700" className="shadow-lg shadow-[#ff6700]/80">
                   <animateMotion path="M 150 300 L 1450 300" dur="2.5s" repeatCount="indefinite" />

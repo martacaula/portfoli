@@ -14,6 +14,7 @@ import ArtistCard from './components/ArtistCard';
 import AIChat from './components/AIChat';
 import TorrentAnimation from './components/TorrentAnimation';
 import ToolAquarium from './components/ToolAquarium';
+import TorrentStack from './components/TorrentStack';
 import TorrentGallery from './components/TorrentGallery';
 import { Artist as Work } from './types';
 
@@ -23,7 +24,7 @@ const TRANSLATIONS = {
   en: {
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
-    lineupSubtitle: "(projects) mossfera x quant, quant x mossfera, sirene de OOONOS, internship at kave home",
+    lineupSubtitle: "(projects) mossfera x quant, internship at kave home",
     gallery: "Gallery",
     tfg: "FINAL DEGREE PROJECT",
     iteration: "Iteration 2025",
@@ -98,7 +99,7 @@ const TRANSLATIONS = {
   es: {
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
-    lineupSubtitle: "(proyectos) mossfera x quant, quant x mossfera, sirene de OOONOS, prácticas en kave home",
+    lineupSubtitle: "(proyectos) mossfera x quant, prácticas en kave home",
     gallery: "Galería",
     tfg: "PROYECTO DE FINAL DE GRADO",
     iteration: "Iteration 2025",
@@ -173,7 +174,7 @@ const TRANSLATIONS = {
   ca: {
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
-    lineupSubtitle: "(projectes) mossfera x quant, quant x mossfera, sirene de OOONOS, pràctiques a kave home",
+    lineupSubtitle: "(projectes) mossfera x quant, pràctiques a kave home",
     gallery: "Galeria",
     tfg: "TREBALL FINAL DE GRAU",
     iteration: "Iteració 2025",
@@ -262,7 +263,7 @@ const WORKS: MultilangWork[] = [
     name: 'RE:CONNECT',
     genre: 'Digital Product Design',
     day: 'Politiken',
-    year: '2024',
+    year: 'Nov 2025',
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1600&auto=format&fit=crop',
     description: 'AI-powered daily news briefings.',
     subtitle: {
@@ -488,7 +489,7 @@ const WORKS: MultilangWork[] = [
     name: 'DitMadKompass',
     genre: 'UX Design & Strategy',
     day: 'DitMad',
-    year: '2023',
+    year: 'Dec 2023',
     image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop',
     description: 'UX for a specialized nutrition start-up.',
     challenge: {
@@ -706,10 +707,10 @@ const WORKS: MultilangWork[] = [
   },
   {
     id: '3',
-    name: 'Members App',
+    name: 'Red Cross 360º',
     genre: 'Workflow Optimization',
     day: 'Red Cross Denmark',
-    year: '2024',
+    year: 'Nov 2025',
     image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?q=80&w=1600&auto=format&fit=crop',
     description: 'AI powered verification workflow.',
     challenge: {
@@ -799,8 +800,8 @@ const WORKS: MultilangWork[] = [
     id: '4',
     name: 'Mossfera x Quant',
     genre: 'Identity & AI Strategy',
-    day: 'Mossfera',
-    year: '2025',
+    day: 'Eram (UdG)',
+    year: 'Jun 2025',
     image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1600&auto=format&fit=crop',
     description: 'Experimental digital identity merging bio-elements with quantum logic.',
     subtitle: {
@@ -825,102 +826,11 @@ const WORKS: MultilangWork[] = [
     }
   },
   {
-    id: '5',
-    name: 'Sirene de OOONOS',
-    genre: 'Product Design & UX',
-    day: 'OOONOS',
-    year: '2024',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop',
-    description: 'High-fidelity UI/UX for acoustic monitoring systems.',
-    challenge: {
-      en: 'Visualizing sound patterns for high-stakes environmental monitoring.',
-      es: 'Visualizar patrones de sonido para el monitoreo ambiental de alto riesgo.',
-      ca: 'Visualitzar patrons de so per al monitoratge ambiental d\'alt risc.'
-    },
-    outcome: {
-      en: '85% increase in user response speed during critical signal detection tests.',
-      es: 'Aumento del 85% en la velocidad de respuesta del usuario durante pruebas críticas.',
-      ca: 'Augment del 85% en la velocitat de resposta de l\'usuari durant proves crítiques.'
-    },
-    longDescription: {
-      en: 'Sirene is a specialized UX project for OOONOS, focusing on the intuitive visualization of acoustic data.',
-      es: 'Sirene es un proyecto de UX especializado para OOONOS.',
-      ca: 'Sirene és un projecte d\'UX especialitzat per a OOONOS.'
-    },
-    content: {
-      en: {
-        hero: {
-          title: 'Sirène | Empowerment-Led Marketing Campaign',
-          subtitle: 'A safety brand framework built on trust, tone, and simple action.',
-          narrative: 'Sirène is a pocket-sized safety device where one press connects you to loved ones. This work defines the campaign foundation across website and social, shifting from fear storytelling to an empowerment tone.'
-        },
-        sideCard: {
-          challenge: 'Safety marketing sits in a sensitive space where messaging can either empower or reinforce fear. The plan had to support near-term reach for vulnerable users while building a longer-term brand for confident, everyday customers.',
-          outcome: 'A campaign framework with tone principles, channel priorities (Instagram first, website for depth), and insight-led feature messaging.',
-          buttonLabel: 'View Campaign Framework'
-        },
-        yourTask: {
-          preLine: 'Trust first, urgency second.',
-          question: 'How should Sirène communicate safety without triggering fear or victim framing?',
-          reframe: 'In other words: What do we say in the first 5 seconds that feels respectful and real? What do we show to prove reliability, not just intention?'
-        },
-        takeOn: {
-          questions: [
-            'Which moment should the campaign anchor on: commuting, travel, or being alone at night?',
-            'What is the right balance between product demo and human story?',
-            'Which feature should lead: loud alarm, live location, or direct emergency call?',
-            'What partnerships would add credibility without feeling performative?',
-            'What content formats should dominate: short video, highlights, Q&A, or photography?'
-          ],
-          note: ''
-        },
-        problem: {
-          insight: 'People adopt safety tools when the message is calm, empowering, and specific about how help is activated.',
-          tensions: [
-            'Urgency vs calm, confidence-building communication',
-            'Privacy vs connectivity (location, community, alerts)',
-            'Awareness storytelling vs proof through demos and clear information'
-          ]
-        },
-        persona: {
-          title: 'Solo Commuter',
-          oneLiner: 'Often moves alone and wants a discreet backup that reduces anxiety without changing their life.',
-          needs: [
-            'One-step activation that is easy under stress',
-            'Clear reassurance about reliability (battery, offline, connection)',
-            'A support loop that involves loved ones, not just the device'
-          ]
-        },
-        solution: {
-          title: 'Tone, Content, and Channel System',
-          paragraph: 'A marketing framework that prioritizes Instagram as the daily touchpoint (highlights, relevant posts, photography) and the website as the trust layer (clear info for the target audience, data-backed claims). Messaging centers empowerment and practical demos, shaped by user triggers and requested features.',
-          definingPhrases: [
-            'Empowerment-led tone',
-            'Demo-first clarity',
-            'Channel roles with purpose'
-          ]
-        },
-        metrics: {
-          nextSteps: [
-            'Produce a core set of representative videos and photo assets for social and landing pages.',
-            'Build the website information architecture around "How it works", "Family", "Community", and "Q&A".',
-            'Pilot partner-led distribution and community touchpoints to validate reach and trust.'
-          ],
-          successMetrics: [
-            'Website intent signals (waitlist, contact, "How it works" completion rate) (target).',
-            'Social trust signals (saves, shares, highlight taps, Q&A engagement) (target).',
-            'Qualified partnership conversations initiated (target).'
-          ]
-        }
-      }
-    }
-  },
-  {
     id: '6',
     name: 'Kave Home Studio',
     genre: 'Visual Arts & Photography',
     day: 'Kave Home',
-    year: '2024',
+    year: 'Abr 2024',
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop',
     description: 'A reshoot brief to modernize a high-visual category.',
     challenge: {
@@ -1137,35 +1047,11 @@ const WORKS: MultilangWork[] = [
     }
   },
   {
-    id: '7',
-    name: 'Quant x Mossfera',
-    genre: 'AI Workflow Integration',
-    day: 'Quant Labs',
-    year: '2025',
-    image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1600&auto=format&fit=crop',
-    description: 'Integration of generative AI models into creative production pipelines.',
-    challenge: {
-      en: 'Automating the creative bottleneck without losing human authorship.',
-      es: 'Automatizar el cuello de botella creativo sin perder la autoría humana.',
-      ca: 'Automatitzar el coll de botella creatiu sense perdre l\'autoria humana.'
-    },
-    outcome: {
-      en: 'Production turnaround time reduced by 60% across the identity department.',
-      es: 'Tiempo de producción reducido en un 60% en el departamento de identidad.',
-      ca: 'Temps de producció reduït en un 60% al departament d\'identitat.'
-    },
-    longDescription: {
-      en: 'The sequel to the initial collaboration, Quant x Mossfera focused on custom GPTs and image models.',
-      es: 'Quant x Mossfera se centró en la creación de GPTs personalizados.',
-      ca: 'Quant x Mossfera es va centrar en la creació de GPTs personalitzats.'
-    }
-  },
-  {
     id: '8',
     name: 'Neety',
     genre: 'B2B Sales Automation',
     day: 'Neety',
-    year: '2025',
+    year: 'Oct 2023',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
     description: 'Campaign console redesign for faster action.',
     subtitle: {
@@ -1392,7 +1278,7 @@ const WORKS: MultilangWork[] = [
     name: 'Strenes Concert',
     genre: 'Visual Identity System',
     day: 'Strenes',
-    year: '2025',
+    year: 'Mar 2023',
     image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop',
     description: 'Visual identity system proposal for a locally rooted festival.',
     subtitle: {
@@ -1999,11 +1885,7 @@ const App: React.FC = () => {
                 </div>
 
                 <div className="space-y-8">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-[#ff6700]">TORRENT STACK</h3>
-                    <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">AI INJECTION POINTS BY SPRINT PHASE</span>
-                  </div>
-                  <ToolAquarium />
+                  <TorrentStack />
                 </div>
               </section>
             </motion.div>
