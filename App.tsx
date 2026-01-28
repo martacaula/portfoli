@@ -17,6 +17,7 @@ import ToolAquarium from './components/ToolAquarium';
 import TorrentStack from './components/TorrentStack';
 import TorrentGallery, { type FolderName } from './components/TorrentGallery';
 import { Artist as Work, type Language } from './types';
+import martaPhoto from './Assets/marta_caula.jpeg';
 
 const TRANSLATIONS = {
   en: {
@@ -327,23 +328,11 @@ interface MultilangWork extends Work {
   content?: Partial<Record<Language, Partial<WorkContent>>>;
 }
 
-const lineupAssets = (
-  import.meta as ImportMeta & {
-    glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
-  }
-).glob('./Assets/**/*.{jpg,JPG,jpeg,png}', { eager: true, import: 'default' });
+const lineupAssets = import.meta.glob<string>('./Assets/**/*.{jpg,JPG,jpeg,png}', { eager: true, import: 'default' });
 
-const lineupDocs = (
-  import.meta as ImportMeta & {
-    glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
-  }
-).glob('./Assets/**/*.{pdf,PDF}', { eager: true, import: 'default' });
+const lineupDocs = import.meta.glob<string>('./Assets/**/*.{pdf,PDF}', { eager: true, import: 'default' });
 
-const lineupVideos = (
-  import.meta as ImportMeta & {
-    glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
-  }
-).glob('./Assets/**/*.{mov,MOV,mp4,MP4}', { eager: true, import: 'default' });
+const lineupVideos = import.meta.glob<string>('./Assets/**/*.{mov,MOV,mp4,MP4}', { eager: true, import: 'default' });
 
 const findLineupAsset = (suffix: string) =>
   Object.entries(lineupAssets).find(([path]) => path.endsWith(suffix))?.[1] ?? '';
@@ -2452,7 +2441,7 @@ const App: React.FC = () => {
                       <div className="sticky top-40">
                         <div className="relative aspect-[3/4] rounded-[3rem] overflow-hidden mb-12 shadow-2xl group">
                           <img
-                            src="./Assets/marta_caula.jpeg"
+                            src={martaPhoto}
                             alt="Marta Caula Riera"
                             className="w-full h-full object-cover transition-all duration-1000 scale-105 group-hover:scale-100"
                           />
