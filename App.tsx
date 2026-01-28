@@ -204,11 +204,11 @@ interface MultilangWork extends Work {
 }
 
 const WORKS: MultilangWork[] = [
-  { 
-    id: '1', 
-    name: 'RE:CONNECT', 
-    genre: 'Digital Product Design', 
-    day: 'Politiken', 
+  {
+    id: '1',
+    name: 'RE:CONNECT',
+    genre: 'Digital Product Design',
+    day: 'Politiken',
     year: '2024',
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1600&auto=format&fit=crop',
     description: 'AI-powered daily news briefings.',
@@ -233,11 +233,11 @@ const WORKS: MultilangWork[] = [
       ca: 'Re:Connect replanteja com es consumeix Politiken en convertir el periodisme premium en resums d\'àudio breus.'
     }
   },
-  { 
-    id: '2', 
-    name: 'DitMadKompass', 
-    genre: 'UX Design & Strategy', 
-    day: 'DitMad', 
+  {
+    id: '2',
+    name: 'DitMadKompass',
+    genre: 'UX Design & Strategy',
+    day: 'DitMad',
     year: '2023',
     image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop',
     description: 'UX for a specialized nutrition start-up.',
@@ -257,11 +257,11 @@ const WORKS: MultilangWork[] = [
       ca: 'Treballant amb la start-up DitMad, vam desenvolupar un marc d\'UX.'
     }
   },
-  { 
-    id: '3', 
-    name: 'Members App', 
-    genre: 'Workflow Optimization', 
-    day: 'Red Cross Denmark', 
+  {
+    id: '3',
+    name: 'Members App',
+    genre: 'Workflow Optimization',
+    day: 'Red Cross Denmark',
     year: '2024',
     image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?q=80&w=1600&auto=format&fit=crop',
     description: 'AI powered verification workflow.',
@@ -281,11 +281,11 @@ const WORKS: MultilangWork[] = [
       ca: 'Un sistema integrat per a la Creu Roja Danesa que aprofita la IA.'
     }
   },
-  { 
-    id: '4', 
-    name: 'Mossfera x Quant', 
-    genre: 'Identity & AI Strategy', 
-    day: 'Mossfera', 
+  {
+    id: '4',
+    name: 'Mossfera x Quant',
+    genre: 'Identity & AI Strategy',
+    day: 'Mossfera',
     year: '2025',
     image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1600&auto=format&fit=crop',
     description: 'Experimental digital identity merging bio-elements with quantum logic.',
@@ -310,11 +310,11 @@ const WORKS: MultilangWork[] = [
       ca: 'Mossfera x Quant representa la convergència de la inspiració biològica i la precisió algorítmica.'
     }
   },
-  { 
-    id: '5', 
-    name: 'Sirene de OOONOS', 
-    genre: 'Product Design & UX', 
-    day: 'OOONOS', 
+  {
+    id: '5',
+    name: 'Sirene de OOONOS',
+    genre: 'Product Design & UX',
+    day: 'OOONOS',
     year: '2024',
     image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop',
     description: 'High-fidelity UI/UX for acoustic monitoring systems.',
@@ -334,11 +334,11 @@ const WORKS: MultilangWork[] = [
       ca: 'Sirene és un projecte d\'UX especialitzat per a OOONOS.'
     }
   },
-  { 
-    id: '6', 
-    name: 'Kave Home Studio', 
-    genre: 'Visual Arts & Photography', 
-    day: 'Kave Home', 
+  {
+    id: '6',
+    name: 'Kave Home Studio',
+    genre: 'Visual Arts & Photography',
+    day: 'Kave Home',
     year: '2024',
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop',
     description: 'Professional studio photography and lighting design for high-end furniture.',
@@ -358,11 +358,11 @@ const WORKS: MultilangWork[] = [
       ca: 'Durant les meves pràctiques a Kave Home, vaig gestionar la il·luminació d\'estudi.'
     }
   },
-  { 
-    id: '7', 
-    name: 'Quant x Mossfera', 
-    genre: 'AI Workflow Integration', 
-    day: 'Quant Labs', 
+  {
+    id: '7',
+    name: 'Quant x Mossfera',
+    genre: 'AI Workflow Integration',
+    day: 'Quant Labs',
     year: '2025',
     image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1600&auto=format&fit=crop',
     description: 'Integration of generative AI models into creative production pipelines.',
@@ -380,35 +380,6 @@ const WORKS: MultilangWork[] = [
       en: 'The sequel to the initial collaboration, Quant x Mossfera focused on custom GPTs and image models.',
       es: 'Quant x Mossfera se centró en la creación de GPTs personalizados.',
       ca: 'Quant x Mossfera es va centrar en la creació de GPTs personalitzats.'
-    }
-  },
-  { 
-    id: '8', 
-    name: 'TORRENT', 
-    genre: 'Design Sprint & AI Strategy', 
-    day: 'TFG_Fase1_Marta_Caula_Riera', 
-    year: '2025',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop',
-    description: 'An AI-augmented Design Sprint that protects human judgment while reducing cycle time.',
-    subtitle: {
-      en: 'An AI-augmented Design Sprint that protects human judgment while reducing cycle time.',
-      es: 'Un Design Sprint aumentado por IA que protege el juicio humano mientras reduce el tiempo de ciclo.',
-      ca: 'Un Design Sprint augmentat per IA que protegeix el judici humà mentre redueix el temps de cicle.'
-    },
-    challenge: {
-      en: 'BALANCING AI SPEED WITH HUMAN CREATIVITY IN DESIGN SPRINTS.',
-      es: 'EQUILIBRAR LA VELOCIDAD DE LA IA CON LA CREATIVIDAD HUMANA EN DESIGN SPRINTS.',
-      ca: 'EQUILIBRAR LA VELOCITAT DE LA IA AMB LA CREATIVITAT HUMANA EN DESIGN SPRINTS.'
-    },
-    outcome: {
-      en: 'A robust methodology with "no-AI" windows for ideation and mandatory traceability.',
-      es: 'Una metodología robusta con ventanas "sin IA" para ideación y trazabilidad obligatoria.',
-      ca: 'Una metodologia robusta amb finestres "sense IA" per a ideació i traçabilitat obligatòria.'
-    },
-    longDescription: {
-      en: 'TORRENT is a Design Sprint enriched with AI for small creative teams. AI is used as a collaborative cognitive tool embedded in the workflow, focused on instrumental tasks like transcription, synthesis, formatting, and rapid prototyping, while decisions remain fully human (human-in-the-loop). The method introduces explicit “no-AI” windows for ideation and incubation, plus mandatory traceability through a Decision Log and an Insight Repo, and Green AI limits to keep usage intentional and sustainable.',
-      es: 'TORRENT es un Design Sprint enriquecido con IA para pequeños equipos creativos. La IA actúa como herramienta cognitiva colaborativa en tareas instrumentales, mientras las decisiones siguen siendo plenamente dirigida por humanos. El método incluye ventanas "sin IA" para ideación pura, asegura trazabilidad mediante registros de decisión y promueve un uso sostenible de la IA.',
-      ca: 'TORRENT és un Design Sprint enriquit amb IA per a petits equips creatius. La IA actua com a eina cognitiva col·laborativa per a tasques instrumentals, mentre les decisions segueixen sent plenament dirigida per humans. El mètode inclou finestres "sense IA" per a ideació pura, assegura traçabilitat mitjançant registres de decisió i promou un ús sostenible de la IA.'
     }
   }
 ];
@@ -429,7 +400,7 @@ const App: React.FC = () => {
   useEffect(() => {
     torrentAudioRef.current = new Audio('https://ia801602.us.archive.org/3/items/james-horner-avatar-ost/08.%20Becoming%20One%20With%20Neytiri.mp3');
     torrentAudioRef.current.loop = true;
-    
+
     const handleNavigateLineup = () => navigateTo('lineup');
     window.addEventListener('navigate-lineup', handleNavigateLineup);
 
@@ -447,7 +418,7 @@ const App: React.FC = () => {
   const navigateTo = (page: typeof currentPage, sectionId?: string, workData?: MultilangWork) => {
     setMobileMenuOpen(false);
     if (workData) setSelectedWork(workData);
-    
+
     if (page === 'torrent' && torrentAudioRef.current) {
       torrentAudioRef.current.volume = 0.5;
       torrentAudioRef.current.play().catch(e => console.log("Audio playback blocked:", e));
@@ -480,7 +451,7 @@ const App: React.FC = () => {
       <CustomCursor />
       <FluidBackground />
       <AIChat />
-      
+
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-6 mix-blend-difference">
         <button onClick={() => navigateTo('home')} className="bebas-neue-regular text-2xl md:text-4xl tracking-[0.15em] text-white bg-transparent border-none z-50">
           MARTA CAULA
@@ -488,13 +459,13 @@ const App: React.FC = () => {
         <div className="hidden md:flex gap-10 text-xs font-bold tracking-widest uppercase items-center">
           <button onClick={() => navigateTo('lineup')} className={`transition-colors text-white hover:text-[#ff6700] ${currentPage === 'lineup' ? 'text-[#ff6700]' : ''}`}>{t('lineupNav')}</button>
           <button onClick={() => navigateTo('gallery')} className={`transition-colors text-white hover:text-[#ff6700] ${currentPage === 'gallery' ? 'text-[#ff6700]' : ''}`}>{t('gallery')}</button>
-          <button 
-            onClick={() => navigateTo('torrent')} 
+          <button
+            onClick={() => navigateTo('torrent')}
             className={`bitcount-single-hero text-2xl tracking-normal transition-all hover:scale-110 ${currentPage === 'torrent' ? 'text-[#ff6700]' : 'text-white'}`}
           >
             TORRENT
           </button>
-          <button 
+          <button
             onClick={toggleLang}
             className="flex items-center gap-2 px-3 py-1 border border-white/20 rounded-full hover:border-[#ff6700] transition-colors text-white"
             data-hover="true"
@@ -504,8 +475,8 @@ const App: React.FC = () => {
           </button>
         </div>
         <button className="md:hidden text-white z-50 flex items-center gap-4" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-           <span onClick={(e) => { e.stopPropagation(); navigateTo('torrent'); }} className="bitcount-single-hero text-xl text-[#ff6700]">TORRENT</span>
-           {mobileMenuOpen ? <X /> : <Menu />}
+          <span onClick={(e) => { e.stopPropagation(); navigateTo('torrent'); }} className="bitcount-single-hero text-xl text-[#ff6700]">TORRENT</span>
+          {mobileMenuOpen ? <X /> : <Menu />}
         </button>
       </nav>
 
@@ -532,13 +503,13 @@ const App: React.FC = () => {
                   </motion.div>
                   <div className="flex items-center gap-3 text-xs md:text-sm font-mono text-[#ff6700] tracking-[0.3em] uppercase mb-4 bg-black/40 px-6 py-2 rounded-full backdrop-blur-md">
                     <span>{t('iteration')}</span>
-                    <span className="w-2 h-2 bg-[#ff6700] rounded-full animate-pulse"/>
+                    <span className="w-2 h-2 bg-[#ff6700] rounded-full animate-pulse" />
                     <span>{t('designSprint')}</span>
                   </div>
                   <button onClick={() => navigateTo('torrent')} className="group/hero relative block bg-transparent border-none p-0 cursor-pointer">
                     <GradientText text="TORRENT" as="h1" className="bitcount-single-hero text-[15vw] md:text-[12vw] max-w-screen-xl leading-[0.8] text-center" />
                     <motion.div initial={{ opacity: 0, y: 10 }} whileHover={{ opacity: 1, y: 0 }} className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[#ff6700] font-mono text-xs uppercase tracking-[0.5em]">
-                       {t('viewMethod')} <ArrowRight className="w-4 h-4" />
+                      {t('viewMethod')} <ArrowRight className="w-4 h-4" />
                     </motion.div>
                   </button>
                   <div className="w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-[#3a6ea5]/50 to-transparent mt-8 mb-8" />
@@ -551,7 +522,7 @@ const App: React.FC = () => {
                   <div className="flex flex-col items-center gap-16">
                     <div className="relative z-10 space-y-6 max-w-3xl">
                       <h2 className="text-5xl md:text-8xl font-heading font-bold leading-[0.9]">
-                        {lang === 'en' ? 'Who' : lang === 'es' ? 'Quién' : 'Qui'} <br/> <GradientText text={lang === 'en' ? 'AM I' : lang === 'es' ? 'SOY' : 'SÓC'} className="text-6xl md:text-9xl" />
+                        {lang === 'en' ? 'Who' : lang === 'es' ? 'Quién' : 'Qui'} <br /> <GradientText text={lang === 'en' ? 'AM I' : lang === 'es' ? 'SOY' : 'SÓC'} className="text-6xl md:text-9xl" />
                       </h2>
                       <p className="text-2xl font-bold text-white leading-tight uppercase tracking-tight mx-auto">{t('aboutIntro')}</p>
                     </div>
@@ -571,39 +542,39 @@ const App: React.FC = () => {
 
               <section id="disciplines" className="relative z-10 py-24 md:py-32 px-6 bg-[#1a2a3a]/50">
                 <div className="max-w-7xl mx-auto">
-                   <div className="mb-20 flex flex-col items-center justify-center text-center">
-                      <h2 className="text-3xl md:text-5xl font-heading font-bold uppercase tracking-tight leading-tight max-w-2xl">
-                        {lang === 'en' ? 'Three Branches' : lang === 'es' ? 'Tres Ramas' : 'Tres Branques'} <br/> 
-                        <span className="text-[#ff6700]">{lang === 'en' ? 'I work with' : lang === 'es' ? 'con las que trabajo' : 'amb les que treballo'}</span>
-                      </h2>
-                   </div>
-                   <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-32">
-                      <div className="p-10 border border-white/5 bg-black/20 backdrop-blur-xl rounded-3xl">
-                         <div className="w-16 h-16 rounded-2xl bg-[#3a6ea5]/20 flex items-center justify-center mb-10"><Layers className="w-8 h-8 text-[#3a6ea5]" /></div>
-                         <h3 className="text-2xl font-heading font-bold mb-6 text-white uppercase">{t('designBranch')}</h3>
-                         <div className="space-y-4 text-[#c0c0c0]">
-                            {TRANSLATIONS[lang].designList.map((item, i) => (<p key={i} className="flex items-center gap-3 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-[#ff6700]" /> {item}</p>))}
-                         </div>
+                  <div className="mb-20 flex flex-col items-center justify-center text-center">
+                    <h2 className="text-3xl md:text-5xl font-heading font-bold uppercase tracking-tight leading-tight max-w-2xl">
+                      {lang === 'en' ? 'Three Branches' : lang === 'es' ? 'Tres Ramas' : 'Tres Branques'} <br />
+                      <span className="text-[#ff6700]">{lang === 'en' ? 'I work with' : lang === 'es' ? 'con las que trabajo' : 'amb les que treballo'}</span>
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-32">
+                    <div className="p-10 border border-white/5 bg-black/20 backdrop-blur-xl rounded-3xl">
+                      <div className="w-16 h-16 rounded-2xl bg-[#3a6ea5]/20 flex items-center justify-center mb-10"><Layers className="w-8 h-8 text-[#3a6ea5]" /></div>
+                      <h3 className="text-2xl font-heading font-bold mb-6 text-white uppercase">{t('designBranch')}</h3>
+                      <div className="space-y-4 text-[#c0c0c0]">
+                        {TRANSLATIONS[lang].designList.map((item, i) => (<p key={i} className="flex items-center gap-3 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-[#ff6700]" /> {item}</p>))}
                       </div>
-                      <div className="p-10 border border-white/5 bg-black/20 backdrop-blur-xl rounded-3xl">
-                         <div className="w-16 h-16 rounded-2xl bg-[#ff6700]/20 flex items-center justify-center mb-10"><Camera className="w-8 h-8 text-[#ff6700]" /></div>
-                         <h3 className="text-2xl font-heading font-bold mb-6 text-white uppercase">{t('visualBranch')}</h3>
-                         <div className="space-y-4 text-[#c0c0c0]">
-                            {TRANSLATIONS[lang].visualList.map((item, i) => (<p key={i} className="flex items-center gap-3 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-[#ff6700]" /> {item}</p>))}
-                         </div>
+                    </div>
+                    <div className="p-10 border border-white/5 bg-black/20 backdrop-blur-xl rounded-3xl">
+                      <div className="w-16 h-16 rounded-2xl bg-[#ff6700]/20 flex items-center justify-center mb-10"><Camera className="w-8 h-8 text-[#ff6700]" /></div>
+                      <h3 className="text-2xl font-heading font-bold mb-6 text-white uppercase">{t('visualBranch')}</h3>
+                      <div className="space-y-4 text-[#c0c0c0]">
+                        {TRANSLATIONS[lang].visualList.map((item, i) => (<p key={i} className="flex items-center gap-3 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-[#ff6700]" /> {item}</p>))}
                       </div>
-                      <div className="p-10 border border-white/5 bg-black/20 backdrop-blur-xl rounded-3xl">
-                         <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-10"><Cpu className="w-8 h-8 text-white" /></div>
-                         <h3 className="text-2xl font-heading font-bold mb-6 text-white uppercase">{t('digitalBranch')}</h3>
-                         <div className="space-y-4 text-[#c0c0c0]">
-                            {TRANSLATIONS[lang].digitalList.map((item, i) => (<p key={i} className="flex items-center gap-3 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-[#ff6700]" /> {item}</p>))}
-                         </div>
+                    </div>
+                    <div className="p-10 border border-white/5 bg-black/20 backdrop-blur-xl rounded-3xl">
+                      <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-10"><Cpu className="w-8 h-8 text-white" /></div>
+                      <h3 className="text-2xl font-heading font-bold mb-6 text-white uppercase">{t('digitalBranch')}</h3>
+                      <div className="space-y-4 text-[#c0c0c0]">
+                        {TRANSLATIONS[lang].digitalList.map((item, i) => (<p key={i} className="flex items-center gap-3 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-[#ff6700]" /> {item}</p>))}
                       </div>
-                   </div>
-                   <div className="space-y-12">
-                      <div className="text-center"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase tracking-tighter leading-none mb-6">{t('ecosystemTitle')}</h2></div>
-                      <ToolAquarium />
-                   </div>
+                    </div>
+                  </div>
+                  <div className="space-y-12">
+                    <div className="text-center"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase tracking-tighter leading-none mb-6">{t('ecosystemTitle')}</h2></div>
+                    <ToolAquarium />
+                  </div>
                 </div>
               </section>
             </motion.div>
@@ -616,7 +587,7 @@ const App: React.FC = () => {
                   <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#ff6700] max-w-3xl leading-loose font-bold border-l-2 border-[#ff6700] pl-6 py-2">{t('lineupSubtitle')}</p>
                 </div>
                 <div className="max-w-md text-[#c0c0c0] text-sm md:text-base leading-relaxed border-l border-white/10 pl-8 py-2">
-                   Professional feed of high-velocity digital projects, UX cases, and artistic explorations developed throughout my career.
+                  Professional feed of high-velocity digital projects, UX cases, and artistic explorations developed throughout my career.
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">
@@ -625,41 +596,41 @@ const App: React.FC = () => {
             </motion.div>
           ) : currentPage === 'gallery' ? (
             <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-               <TorrentGallery />
+              <TorrentGallery />
             </motion.div>
           ) : currentPage === 'work-detail' && selectedWork ? (
             <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a]">
               <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
-                 <div className="absolute inset-0"><div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10" /><img src={selectedWork.image} className="w-full h-full object-cover grayscale opacity-30" /></div>
-                 <div className="relative z-20 text-center max-w-6xl px-6">
-                    <button onClick={() => navigateTo('lineup')} className="mb-8 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}</button>
-                    <h1 className="text-5xl md:text-[9rem] font-heading font-bold text-white leading-[0.8] mb-6 tracking-tighter uppercase">{selectedWork.name}</h1>
-                    <p className="text-lg md:text-2xl text-[#ff6700] font-mono tracking-widest max-w-3xl mx-auto uppercase">{selectedWork.subtitle?.[lang] || selectedWork.description}</p>
-                 </div>
+                <div className="absolute inset-0"><div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10" /><img src={selectedWork.image} className="w-full h-full object-cover grayscale opacity-30" /></div>
+                <div className="relative z-20 text-center max-w-6xl px-6">
+                  <button onClick={() => navigateTo('lineup')} className="mb-8 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}</button>
+                  <h1 className="text-5xl md:text-[9rem] font-heading font-bold text-white leading-[0.8] mb-6 tracking-tighter uppercase">{selectedWork.name}</h1>
+                  <p className="text-lg md:text-2xl text-[#ff6700] font-mono tracking-widest max-w-3xl mx-auto uppercase">{selectedWork.subtitle?.[lang] || selectedWork.description}</p>
+                </div>
               </section>
               <section className="py-24 md:py-48 px-6 max-w-7xl mx-auto">
-                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-                    <div className="lg:col-span-8 space-y-32">
-                       <div className="space-y-12"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('narrative')}</h2><p className="text-xl md:text-3xl text-white/70 leading-relaxed font-light">{selectedWork.longDescription[lang]}</p></div>
-                       <div className="p-10 border border-white/10 bg-black/60 backdrop-blur-3xl rounded-[3rem] space-y-10">
-                          <div><h5 className="text-[#ff6700] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('challenge')}</h5><p className="text-white text-xl font-heading font-bold leading-tight tracking-tight uppercase">{selectedWork.challenge[lang]}</p></div>
-                          <div className="h-px bg-white/10" />
-                          <div><h5 className="text-[#3a6ea5] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('outcome')}</h5><p className="text-white/70 text-sm leading-relaxed">{selectedWork.outcome[lang]}</p></div>
-                       </div>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+                  <div className="lg:col-span-8 space-y-32">
+                    <div className="space-y-12"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('narrative')}</h2><p className="text-xl md:text-3xl text-white/70 leading-relaxed font-light">{selectedWork.longDescription[lang]}</p></div>
+                    <div className="p-10 border border-white/10 bg-black/60 backdrop-blur-3xl rounded-[3rem] space-y-10">
+                      <div><h5 className="text-[#ff6700] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('challenge')}</h5><p className="text-white text-xl font-heading font-bold leading-tight tracking-tight uppercase">{selectedWork.challenge[lang]}</p></div>
+                      <div className="h-px bg-white/10" />
+                      <div><h5 className="text-[#3a6ea5] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('outcome')}</h5><p className="text-white/70 text-sm leading-relaxed">{selectedWork.outcome[lang]}</p></div>
                     </div>
-                    <aside className="lg:col-span-4 lg:sticky lg:top-40 self-start"><div className="p-10 border border-white/5 rounded-[2.5rem]"><h5 className="text-white/20 mb-6 text-[10px] font-mono uppercase tracking-widest">{t('nextWork')}</h5><button onClick={() => { const idx = WORKS.findIndex(w => w.id === selectedWork?.id); const next = WORKS[(idx + 1) % WORKS.length]; navigateTo('work-detail', undefined, next); }} className="group flex items-center justify-between w-full text-left"><span className="text-3xl font-black uppercase group-hover:text-[#ff6700] transition-colors leading-none tracking-tighter">{WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}</span><ArrowRight className="w-8 h-8 text-[#ff6700] group-hover:translate-x-3 transition-transform" /></button></div></aside>
-                 </div>
+                  </div>
+                  <aside className="lg:col-span-4 lg:sticky lg:top-40 self-start"><div className="p-10 border border-white/5 rounded-[2.5rem]"><h5 className="text-white/20 mb-6 text-[10px] font-mono uppercase tracking-widest">{t('nextWork')}</h5><button onClick={() => { const idx = WORKS.findIndex(w => w.id === selectedWork?.id); const next = WORKS[(idx + 1) % WORKS.length]; navigateTo('work-detail', undefined, next); }} className="group flex items-center justify-between w-full text-left"><span className="text-3xl font-black uppercase group-hover:text-[#ff6700] transition-colors leading-none tracking-tighter">{WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}</span><ArrowRight className="w-8 h-8 text-[#ff6700] group-hover:translate-x-3 transition-transform" /></button></div></aside>
+                </div>
               </section>
             </motion.div>
           ) : (
             <motion.div key="torrent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a] overflow-x-hidden pb-40">
               <section className="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/10">
-                 <div className="absolute inset-0 opacity-40"><div className="absolute inset-0 bg-gradient-to-b from-[#ff6700]/20 to-[#0a0a0a] z-10" /><img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover grayscale" /></div>
-                 <div className="relative z-20 text-center max-w-7xl px-6 w-full">
-                    <button onClick={() => navigateTo('home')} className="mb-12 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('exitEnvironment')}</button>
-                    <h1 className="text-4xl md:text-[6rem] font-heading font-bold text-white leading-none mb-4 tracking-tighter uppercase">{t('project')}</h1>
-                    <div className="w-full flex justify-center"><GradientText text="TORRENT" as="h2" className="bitcount-single-hero text-[15vw] md:text-[10vw] leading-[0.6] text-center mb-12" /></div>
-                 </div>
+                <div className="absolute inset-0 opacity-40"><div className="absolute inset-0 bg-gradient-to-b from-[#ff6700]/20 to-[#0a0a0a] z-10" /><img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover grayscale" /></div>
+                <div className="relative z-20 text-center max-w-7xl px-6 w-full">
+                  <button onClick={() => navigateTo('home')} className="mb-12 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('exitEnvironment')}</button>
+                  <h1 className="text-4xl md:text-[6rem] font-heading font-bold text-white leading-none mb-4 tracking-tighter uppercase">{t('project')}</h1>
+                  <div className="w-full flex justify-center"><GradientText text="TORRENT" as="h2" className="bitcount-single-hero text-[15vw] md:text-[10vw] leading-[0.6] text-center mb-12" /></div>
+                </div>
               </section>
               <section className="py-24 px-6 max-w-7xl mx-auto space-y-12"><TorrentAnimation /></section>
             </motion.div>
@@ -671,7 +642,7 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16">
           <div className="space-y-6">
             <button onClick={() => navigateTo('home')} className="bebas-neue-regular text-3xl tracking-widest text-white bg-transparent border-none p-0 cursor-pointer">MARTA CAULA</button>
-            <p className="text-[10px] text-white/40 font-mono uppercase tracking-widest leading-relaxed">Visual Communication & Multimedia <br/> Professional Portfolio <br/> Iteration v2.5</p>
+            <p className="text-[10px] text-white/40 font-mono uppercase tracking-widest leading-relaxed">Visual Communication & Multimedia <br /> Professional Portfolio <br /> Iteration v2.5</p>
           </div>
           <div className="space-y-6">
             <h4 className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-[#ff6700]">Navigation Map</h4>
@@ -694,7 +665,7 @@ const App: React.FC = () => {
             <h4 className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-white/20">System Details</h4>
             <div className="flex flex-col gap-4">
               <button onClick={toggleLang} className="flex items-center gap-2 px-4 py-2 border border-white/10 rounded-full hover:border-[#ff6700] transition-colors w-fit"><Languages className="w-3 h-3 text-[#ff6700]" /><span className="text-[10px] font-mono uppercase tracking-widest">{lang} Mode</span></button>
-              <span className="text-[9px] font-mono text-white/20 uppercase tracking-[0.2em] leading-loose">© 2025 Marta Caula <br/> Powered by TORRENT v2.5</span>
+              <span className="text-[9px] font-mono text-white/20 uppercase tracking-[0.2em] leading-loose">© 2025 Marta Caula <br /> Powered by TORRENT v2.5</span>
             </div>
           </div>
         </div>
