@@ -2169,9 +2169,18 @@ const App: React.FC = () => {
                           <div className="backdrop-blur-xl bg-black/40 p-4 rounded-2xl border border-white/10 flex items-center gap-4">
                             <button
                               onClick={() => {
-                                const audio = document.getElementById('about-audio') as HTMLAudioElement;
-                                if (audio.paused) audio.play();
-                                else audio.pause();
+                                const voice = document.getElementById('about-audio-voice') as HTMLAudioElement | null;
+                                const bed = document.getElementById('about-audio-bed') as HTMLAudioElement | null;
+                                if (!voice || !bed) return;
+                                if (voice.paused) {
+                                  voice.volume = 1;
+                                  bed.volume = 0.2;
+                                  bed.play().catch(() => null);
+                                  voice.play().catch(() => null);
+                                } else {
+                                  voice.pause();
+                                  bed.pause();
+                                }
                               }}
                               className="w-12 h-12 flex-shrink-0 rounded-full bg-[#ff6700] hover:bg-[#ff8533] transition-all flex items-center justify-center shadow-lg"
                             >
@@ -2192,8 +2201,20 @@ const App: React.FC = () => {
                                 />
                               </div>
                             </div>
-                            <audio id="about-audio" loop>
-                              <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+                            <audio
+                              id="about-audio-voice"
+                              onEnded={() => {
+                                const bed = document.getElementById('about-audio-bed') as HTMLAudioElement | null;
+                                if (bed) {
+                                  bed.pause();
+                                  bed.currentTime = 0;
+                                }
+                              }}
+                            >
+                              <source src="./Assets/marta_caula_audio.ogg" type="audio/ogg" />
+                            </audio>
+                            <audio id="about-audio-bed" loop>
+                              <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg" />
                             </audio>
                           </div>
                         </div>
