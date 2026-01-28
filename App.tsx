@@ -2029,8 +2029,8 @@ const App: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-[#3a6ea5]">Social Signals</h4>
             <nav className="flex flex-col gap-4">
-              <a href="https://linkedin.com/in/martacaula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Linkedin className="w-3 h-3 text-[#3a6ea5]" /> LinkedIn</a>
-              <a href="https://instagram.com/martacaula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Instagram className="w-3 h-3 text-[#ff6700]" /> Instagram</a>
+              <a href="https://www.linkedin.com/in/marta-caula/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Linkedin className="w-3 h-3 text-[#3a6ea5]" /> LinkedIn</a>
+              <a href="https://www.instagram.com/marta.caula/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Instagram className="w-3 h-3 text-[#ff6700]" /> Instagram</a>
               <a href="https://github.com/martacaula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Github className="w-3 h-3 text-white" /> GitHub</a>
             </nav>
           </div>

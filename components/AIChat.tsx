@@ -1,21 +1,20 @@
 
 import React, { useState } from 'react';
-import { MessageCircle, X, Instagram, Linkedin, Github, Send, Mail, Briefcase, Sparkles } from 'lucide-react';
+import { MessageCircle, X, Instagram, Linkedin, Github, Send, Mail, Briefcase } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AIChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   
   const socialLinks = [
-    { icon: <Linkedin className="w-5 h-5" />, url: 'https://linkedin.com/in/martacaula', name: 'LinkedIn' },
-    { icon: <Instagram className="w-5 h-5" />, url: 'https://instagram.com/martacaula', name: 'Instagram' },
+    { icon: <Linkedin className="w-5 h-5" />, url: 'https://www.linkedin.com/in/marta-caula/', name: 'LinkedIn' },
+    { icon: <Instagram className="w-5 h-5" />, url: 'https://www.instagram.com/marta.caula/', name: 'Instagram' },
     { icon: <Github className="w-5 h-5" />, url: 'https://github.com/martacaula', name: 'GitHub' },
   ];
 
   const contactOptions = [
-    { label: 'Contactar via Email', icon: <Mail className="w-4 h-4" />, action: () => window.location.href = 'mailto:hola@martacaula.com' },
+    { label: 'Contactar via Email', icon: <Mail className="w-4 h-4" />, action: () => window.location.href = 'mailto:caulamarta2@gmail.com' },
     { label: 'Veure Projectes', icon: <Briefcase className="w-4 h-4" />, action: () => { setIsOpen(false); window.dispatchEvent(new CustomEvent('navigate-lineup')); } },
-    { label: 'Say Hello!', icon: <Sparkles className="w-4 h-4" />, action: () => alert('Sending signals to Marta...') },
   ];
 
   return (
