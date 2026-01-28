@@ -10,6 +10,7 @@ export interface Artist {
   name: string;
   genre: string;
   image: string;
+  detailImage?: string;
   day: string; // Utilitzat per l'empresa / client
   year?: string; // Camp per la data del projecte
   description: string;

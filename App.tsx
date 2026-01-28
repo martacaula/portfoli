@@ -332,11 +332,15 @@ const LINEUP_IMAGES = {
   strenes: findLineupAsset('Assets/strenesmedia/herostrenes.png'),
 };
 
+const LINEUP_DETAIL_IMAGES = {
+  moss: findLineupAsset('Assets/mossmedia/heromoss.jpg')
+};
+
 const LINEUP_HERO_EXCLUDES: Record<string, Set<string>> = {
   '1': new Set([LINEUP_IMAGES.reconnect]),
   '2': new Set([LINEUP_IMAGES.ditmad]),
   '3': new Set([LINEUP_IMAGES.redcross]),
-  '4': new Set([LINEUP_IMAGES.moss]),
+  '4': new Set([LINEUP_IMAGES.moss, LINEUP_DETAIL_IMAGES.moss].filter(Boolean) as string[]),
   '5': new Set([LINEUP_IMAGES.blu]),
   '6': new Set([LINEUP_IMAGES.kave]),
   '8': new Set([LINEUP_IMAGES.neety]),
@@ -911,6 +915,7 @@ const WORKS: MultilangWork[] = [
     day: 'Eram (UdG)',
     year: 'Jun 2025',
     image: LINEUP_IMAGES.moss,
+    detailImage: LINEUP_DETAIL_IMAGES.moss || LINEUP_IMAGES.moss,
     description: 'Art direction for material memory.',
     subtitle: {
       en: 'A site-specific object, brand system, and process film rooted in craft and cultural heritage.',
@@ -2172,10 +2177,6 @@ const App: React.FC = () => {
                 <div className="flex-1">
                   <button onClick={() => navigateTo('home')} className="flex items-center gap-2 text-[#ff6700] font-mono uppercase tracking-widest text-xs mb-4"><ArrowLeft className="w-4 h-4" /> Home</button>
                   <h1 className="text-6xl md:text-[10rem] font-heading font-bold uppercase leading-[0.8] tracking-tighter text-white mb-8">{t('lineupTitle')}</h1>
-                  <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#ff6700] max-w-3xl leading-loose font-bold border-l-2 border-[#ff6700] pl-6 py-2">{t('lineupSubtitle')}</p>
-                </div>
-                <div className="max-w-md text-[#c0c0c0] text-sm md:text-base leading-relaxed border-l border-white/10 pl-8 py-2">
-                  Professional feed of high-velocity digital projects, UX cases, and artistic explorations developed throughout my career.
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">
@@ -2223,7 +2224,7 @@ const App: React.FC = () => {
                         {selectedWork.id !== '1' ? (
                           <div className={`relative bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/5 ${selectedWork.id === '6' ? '' : 'aspect-video'}`}>
                             <MediaRenderer
-                              url={selectedWork.image}
+                              url={selectedWork.detailImage || selectedWork.image}
                               type={selectedWork.mediaType}
                               className={selectedWork.id === '6' ? 'w-full h-auto object-contain' : undefined}
                             />
