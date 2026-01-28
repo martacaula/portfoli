@@ -14,6 +14,7 @@ import ArtistCard from './components/ArtistCard';
 import AIChat from './components/AIChat';
 import TorrentAnimation from './components/TorrentAnimation';
 import ToolAquarium from './components/ToolAquarium';
+import TorrentStack from './components/TorrentStack';
 import TorrentGallery from './components/TorrentGallery';
 import { Artist as Work } from './types';
 
@@ -23,7 +24,7 @@ const TRANSLATIONS = {
   en: {
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
-    lineupSubtitle: "(projects) mossfera x quant, quant x mossfera, sirene de OOONOS, internship at kave home",
+    lineupSubtitle: "(projects) mossfera x quant, internship at kave home",
     gallery: "Gallery",
     tfg: "FINAL DEGREE PROJECT",
     iteration: "Iteration 2025",
@@ -76,12 +77,29 @@ const TRANSLATIONS = {
     metricsTitle: "Success Metrics",
     taskTitle: "Your Task",
     takeOnTitle: "Give us your take on",
-    note: "Note"
+    note: "Note",
+    sideCardButton: "View Case Study",
+    yourTaskPreLine: "Strategic Exploration",
+    yourTaskQuestion: "What would make this experience effortless for people?",
+    yourTaskReframe: "Turn complexity into a guided, human pace.",
+    takeOnQuestions: ["Is the value obvious in 10 seconds?", "What creates daily habit?", "Where does trust fail first?"],
+    takeOnNote: "Decisions prioritize clarity over noise.",
+    problemTensions: ["Depth vs Speed", "Signal vs Noise", "Craft vs Scale"],
+    personaName: "The Explorer",
+    personaOneLiner: "Curious, fast-moving, and allergic to friction.",
+    personaNeeds: ["Clear entry point", "Fast feedback loops", "Trustable outcomes"],
+    solutionName: "Focused Experience Loop",
+    solutionParagraph: "A concise narrative arc that moves users from curiosity to confident action with minimal steps.",
+    solutionPhrases: ["Frictionless start", "Human verified AI", "Contextual delivery"],
+    nextStepsLabel: "Next Steps",
+    successMetricsLabel: "Success Metrics",
+    nextSteps: ["Beta testing", "Tone fine-tuning", "Accessibility audit"],
+    successMetrics: ["Daily active users", "Completion rate", "Conversion to premium"]
   },
   es: {
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
-    lineupSubtitle: "(proyectos) mossfera x quant, quant x mossfera, sirene de OOONOS, prácticas en kave home",
+    lineupSubtitle: "(proyectos) mossfera x quant, prácticas en kave home",
     gallery: "Galería",
     tfg: "PROYECTO DE FINAL DE GRADO",
     iteration: "Iteration 2025",
@@ -134,12 +152,29 @@ const TRANSLATIONS = {
     metricsTitle: "Métricas de Éxito",
     taskTitle: "Tu Tarea",
     takeOnTitle: "Danos tu opinión sobre",
-    note: "Note"
+    note: "Nota",
+    sideCardButton: "Ver Caso",
+    yourTaskPreLine: "Exploración estratégica",
+    yourTaskQuestion: "¿Qué haría que esta experiencia fuese effortless para las personas?",
+    yourTaskReframe: "Convertir la complejidad en un ritmo guiado y humano.",
+    takeOnQuestions: ["¿El valor es obvio en 10 segundos?", "¿Qué genera hábito diario?", "¿Dónde falla primero la confianza?"],
+    takeOnNote: "Las decisiones priorizan la claridad sobre el ruido.",
+    problemTensions: ["Profundidad vs Velocidad", "Señal vs Ruido", "Artesanía vs Escala"],
+    personaName: "La Exploradora",
+    personaOneLiner: "Curiosa, rápida y alérgica a la fricción.",
+    personaNeeds: ["Punto de entrada claro", "Feedback rápido", "Resultados confiables"],
+    solutionName: "Bucle de experiencia enfocado",
+    solutionParagraph: "Un arco narrativo conciso que mueve a las personas de la curiosidad a la acción con pasos mínimos.",
+    solutionPhrases: ["Inicio sin fricción", "IA verificada por humanos", "Entrega contextual"],
+    nextStepsLabel: "Próximos pasos",
+    successMetricsLabel: "Métricas de éxito",
+    nextSteps: ["Beta testing", "Ajuste de tono", "Auditoría de accesibilidad"],
+    successMetrics: ["Usuarios activos diarios", "Tasa de finalización", "Conversión a premium"]
   },
   ca: {
     lineupNav: "Line Up",
     lineupTitle: "THE WAVES",
-    lineupSubtitle: "(projectes) mossfera x quant, quant x mossfera, sirene de OOONOS, pràctiques a kave home",
+    lineupSubtitle: "(projectes) mossfera x quant, pràctiques a kave home",
     gallery: "Galeria",
     tfg: "TREBALL FINAL DE GRAU",
     iteration: "Iteració 2025",
@@ -192,7 +227,24 @@ const TRANSLATIONS = {
     metricsTitle: "Mètriques d'Èxit",
     taskTitle: "La teva tasca",
     takeOnTitle: "Dona'ns la teva visió sobre",
-    note: "Nota"
+    note: "Nota",
+    sideCardButton: "Veure Cas",
+    yourTaskPreLine: "Exploració estratègica",
+    yourTaskQuestion: "Què faria que aquesta experiència fos effortless per a les persones?",
+    yourTaskReframe: "Convertir la complexitat en un ritme guiat i humà.",
+    takeOnQuestions: ["El valor és obvi en 10 segons?", "Què genera hàbit diari?", "On falla primer la confiança?"],
+    takeOnNote: "Les decisions prioritzen la claredat per sobre del soroll.",
+    problemTensions: ["Profunditat vs Velocitat", "Senyal vs Soroll", "Artesania vs Escala"],
+    personaName: "L'Exploradora",
+    personaOneLiner: "Curiosa, ràpida i al·lèrgica a la fricció.",
+    personaNeeds: ["Punt d'entrada clar", "Feedback ràpid", "Resultats fiables"],
+    solutionName: "Bucle d'experiència enfocat",
+    solutionParagraph: "Un arc narratiu concís que mou les persones de la curiositat a l'acció amb passos mínims.",
+    solutionPhrases: ["Inici sense fricció", "IA verificada per humans", "Entrega contextual"],
+    nextStepsLabel: "Següents passos",
+    successMetricsLabel: "Mètriques d'èxit",
+    nextSteps: ["Beta testing", "Ajust de to", "Auditoria d'accessibilitat"],
+    successMetrics: ["Usuaris actius diaris", "Taxa de finalització", "Conversió a premium"]
   }
 };
 
@@ -201,12 +253,8 @@ interface MultilangWork extends Work {
   subtitle?: { en: string; es: string; ca: string };
   challenge: { en: string; es: string; ca: string };
   outcome: { en: string; es: string; ca: string };
-  problem?: { en: string; es: string; ca: string };
-  persona?: { en: string; es: string; ca: string };
-  solution?: { en: string; es: string; ca: string };
-  task?: { en: string; es: string; ca: string };
-  takeOn?: { en: string; es: string; ca: string };
-  metrics?: { en: string; es: string; ca: string };
+  mediaType?: 'image' | 'video';
+  content?: Partial<Record<Language, Partial<WorkContent>>>;
 }
 
 const WORKS: MultilangWork[] = [
@@ -215,7 +263,7 @@ const WORKS: MultilangWork[] = [
     name: 'RE:CONNECT',
     genre: 'Digital Product Design',
     day: 'Politiken',
-    year: '2024',
+    year: 'Nov 2025',
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1600&auto=format&fit=crop',
     description: 'AI-powered daily news briefings.',
     subtitle: {
@@ -238,35 +286,202 @@ const WORKS: MultilangWork[] = [
       es: 'Re:Connect replantea cómo se consume Politiken al convertir el periodismo premium en resúmenes de audio breves.',
       ca: 'Re:Connect replanteja com es consumeix Politiken en convertir el periodisme premium en resums d\'àudio breus.'
     },
-    problem: {
-      en: 'Students find traditional news formats overwhelming and disconnected from their mobile-first lifestyle.',
-      es: 'Los estudiantes encuentran los formatos de noticias tradicionales abrumadores y desconectados de su estilo de vida móvil.',
-      ca: 'Els estudiants troben els formats de notícies tradicionals aclaparadors i desconnectats del seu estil de vida mòbil.'
-    },
-    persona: {
-      en: 'Lucas, 22. University student. Wants to stay informed but lacks time for long reads.',
-      es: 'Lucas, 22. Estudiante universitario. Quiere estar informado pero le falta tiempo para lecturas largas.',
-      ca: 'Lucas, 22. Estudiant universitari. Vol estar informat però li falta temps per a lectures llargues.'
-    },
-    solution: {
-      en: 'Audio-first briefings generated by AI that adapt length and tone to the user\'s schedule.',
-      es: 'Resúmenes de audio generados por IA que adaptan la duración y el tono al horario del usuario.',
-      ca: 'Resums d\'àudio generats per IA que adapten la durada i el to a l\'horari de l\'usuari.'
-    },
-    task: {
-      en: 'Design the onboarding flow for interest selection.',
-      es: 'Diseñar el flujo de incorporación para la selección de intereses.',
-      ca: 'Dissenyar el flux d\'incorporació per a la selecció d\'interessos.'
-    },
-    takeOn: {
-      en: 'Is audio the future of text journalism?',
-      es: '¿Es el audio el futuro del periodismo de texto?',
-      ca: 'És l\'àudio el futur del periodisme de text?'
-    },
-    metrics: {
-      en: 'Daily Active Users (DAU), Completion Rate, Retention.',
-      es: 'Usuarios Activos Diarios (DAU), Tasa de Finalización, Retención.',
-      ca: 'Usuaris Actius Diaris (DAU), Taxa de Finalització, Retenció.'
+    content: {
+      en: {
+        hero: {
+          title: 'Politiken Re:Connect | Voice-First Morning Brief',
+          subtitle: 'A flagship habit that proves premium value before payment.',
+          narrative: 'In a 2-day sprint, we reframed Politiken\'s youth challenge around attention, trust, and daily rhythm. The concept is a 5 to 10 minute audio brief built for wake-up and commute, with a student on-ramp to reduce friction early.'
+        },
+        sideCard: {
+          challenge: 'Print loss was not converting to digital, youth appeal felt limited, and app usage was estimated around 15 to 20% with discovery gated by subscription. Competitors won mornings with faster daily summaries, while product sprawl risked dilution.',
+          outcome: 'A converged flagship concept with a clear scope boundary, plus an intended prototype and test plan to validate habit and trust.',
+          buttonLabel: 'View Concept One-Pager'
+        },
+        yourTask: {
+          preLine: 'Design for a real morning moment.',
+          question: 'What is the smallest daily experience that makes Politiken feel worth coming back to?',
+          reframe: 'If we can win 10 minutes a day, what should the brief include and exclude? How do we prove quality before we ask for payment?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you opt in to a daily audio brief tomorrow morning?',
+            'Which topics belong in the default brief, and which should be optional?',
+            'What trust signals matter most for AI-supported summaries and voice Q&A?',
+            'Where should the student on-ramp live: app, campus partnerships, or both?',
+            'What is the one thing that would make this feel premium, not just convenient?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Younger readers commit to premium when it fits their routine and proves value with minimal friction.',
+          tensions: [
+            'Depth of journalism vs 5 to 10 minute consumption',
+            'Paywall protection vs discovery and habit formation',
+            'One flagship experience vs pressure to ship many features'
+          ]
+        },
+        persona: {
+          title: 'Time-Pressed Student Reader',
+          oneLiner: 'Mobile-first, price-sensitive, and high trust expectations, with a preference for short audio and offline access.',
+          needs: [
+            'A brief that respects limited time',
+            'Clear quality and credibility cues',
+            'A low-friction student pathway (trial, partners)'
+          ]
+        },
+        solution: {
+          title: 'AI Morning News Brief',
+          paragraph: 'A voice-first daily brief that opens from a timed notification, delivers curated summaries, and supports follow-up questions grounded in Politiken journalism. The experience stays intentionally narrow to protect quality and repeat use.',
+          definingPhrases: [
+            'Voice-first 5 to 10 minute brief',
+            'Proof of value before payment',
+            'Student on-ramp for later conversion'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Wireframe the first 30 seconds and the core player flow.',
+            'Build a clickable prototype and run short student interviews focused on timing, clarity, trust.',
+            'Define a protected scope boundary and a lightweight content ops plan for daily briefs.'
+          ],
+          successMetrics: [
+            'Listening frequency of at least 3 times per week per user (target).',
+            '30+ day retention of the brief experience (target).',
+            'Conversion pathway from student access to paid after graduation (target).'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'Politiken Re:Connect | Voice-First Morning Brief',
+          subtitle: 'A flagship habit that proves premium value before payment.',
+          narrative: 'In a 2-day sprint, we reframed Politiken\'s youth challenge around attention, trust, and daily rhythm. The concept is a 5 to 10 minute audio brief built for wake-up and commute, with a student on-ramp to reduce friction early.'
+        },
+        sideCard: {
+          challenge: 'Print loss was not converting to digital, youth appeal felt limited, and app usage was estimated around 15 to 20% with discovery gated by subscription. Competitors won mornings with faster daily summaries, while product sprawl risked dilution.',
+          outcome: 'A converged flagship concept with a clear scope boundary, plus an intended prototype and test plan to validate habit and trust.',
+          buttonLabel: 'View Concept One-Pager'
+        },
+        yourTask: {
+          preLine: 'Design for a real morning moment.',
+          question: 'What is the smallest daily experience that makes Politiken feel worth coming back to?',
+          reframe: 'If we can win 10 minutes a day, what should the brief include and exclude? How do we prove quality before we ask for payment?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you opt in to a daily audio brief tomorrow morning?',
+            'Which topics belong in the default brief, and which should be optional?',
+            'What trust signals matter most for AI-supported summaries and voice Q&A?',
+            'Where should the student on-ramp live: app, campus partnerships, or both?',
+            'What is the one thing that would make this feel premium, not just convenient?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Younger readers commit to premium when it fits their routine and proves value with minimal friction.',
+          tensions: [
+            'Depth of journalism vs 5 to 10 minute consumption',
+            'Paywall protection vs discovery and habit formation',
+            'One flagship experience vs pressure to ship many features'
+          ]
+        },
+        persona: {
+          title: 'Time-Pressed Student Reader',
+          oneLiner: 'Mobile-first, price-sensitive, and high trust expectations, with a preference for short audio and offline access.',
+          needs: [
+            'A brief that respects limited time',
+            'Clear quality and credibility cues',
+            'A low-friction student pathway (trial, partners)'
+          ]
+        },
+        solution: {
+          title: 'AI Morning News Brief',
+          paragraph: 'A voice-first daily brief that opens from a timed notification, delivers curated summaries, and supports follow-up questions grounded in Politiken journalism. The experience stays intentionally narrow to protect quality and repeat use.',
+          definingPhrases: [
+            'Voice-first 5 to 10 minute brief',
+            'Proof of value before payment',
+            'Student on-ramp for later conversion'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Wireframe the first 30 seconds and the core player flow.',
+            'Build a clickable prototype and run short student interviews focused on timing, clarity, trust.',
+            'Define a protected scope boundary and a lightweight content ops plan for daily briefs.'
+          ],
+          successMetrics: [
+            'Listening frequency of at least 3 times per week per user (target).',
+            '30+ day retention of the brief experience (target).',
+            'Conversion pathway from student access to paid after graduation (target).'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'Politiken Re:Connect | Voice-First Morning Brief',
+          subtitle: 'A flagship habit that proves premium value before payment.',
+          narrative: 'In a 2-day sprint, we reframed Politiken\'s youth challenge around attention, trust, and daily rhythm. The concept is a 5 to 10 minute audio brief built for wake-up and commute, with a student on-ramp to reduce friction early.'
+        },
+        sideCard: {
+          challenge: 'Print loss was not converting to digital, youth appeal felt limited, and app usage was estimated around 15 to 20% with discovery gated by subscription. Competitors won mornings with faster daily summaries, while product sprawl risked dilution.',
+          outcome: 'A converged flagship concept with a clear scope boundary, plus an intended prototype and test plan to validate habit and trust.',
+          buttonLabel: 'View Concept One-Pager'
+        },
+        yourTask: {
+          preLine: 'Design for a real morning moment.',
+          question: 'What is the smallest daily experience that makes Politiken feel worth coming back to?',
+          reframe: 'If we can win 10 minutes a day, what should the brief include and exclude? How do we prove quality before we ask for payment?'
+        },
+        takeOn: {
+          questions: [
+            'What would make you opt in to a daily audio brief tomorrow morning?',
+            'Which topics belong in the default brief, and which should be optional?',
+            'What trust signals matter most for AI-supported summaries and voice Q&A?',
+            'Where should the student on-ramp live: app, campus partnerships, or both?',
+            'What is the one thing that would make this feel premium, not just convenient?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Younger readers commit to premium when it fits their routine and proves value with minimal friction.',
+          tensions: [
+            'Depth of journalism vs 5 to 10 minute consumption',
+            'Paywall protection vs discovery and habit formation',
+            'One flagship experience vs pressure to ship many features'
+          ]
+        },
+        persona: {
+          title: 'Time-Pressed Student Reader',
+          oneLiner: 'Mobile-first, price-sensitive, and high trust expectations, with a preference for short audio and offline access.',
+          needs: [
+            'A brief that respects limited time',
+            'Clear quality and credibility cues',
+            'A low-friction student pathway (trial, partners)'
+          ]
+        },
+        solution: {
+          title: 'AI Morning News Brief',
+          paragraph: 'A voice-first daily brief that opens from a timed notification, delivers curated summaries, and supports follow-up questions grounded in Politiken journalism. The experience stays intentionally narrow to protect quality and repeat use.',
+          definingPhrases: [
+            'Voice-first 5 to 10 minute brief',
+            'Proof of value before payment',
+            'Student on-ramp for later conversion'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Wireframe the first 30 seconds and the core player flow.',
+            'Build a clickable prototype and run short student interviews focused on timing, clarity, trust.',
+            'Define a protected scope boundary and a lightweight content ops plan for daily briefs.'
+          ],
+          successMetrics: [
+            'Listening frequency of at least 3 times per week per user (target).',
+            '30+ day retention of the brief experience (target).',
+            'Conversion pathway from student access to paid after graduation (target).'
+          ]
+        }
+      }
     }
   },
   {
@@ -274,7 +489,7 @@ const WORKS: MultilangWork[] = [
     name: 'DitMadKompass',
     genre: 'UX Design & Strategy',
     day: 'DitMad',
-    year: '2023',
+    year: 'Dec 2023',
     image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop',
     description: 'UX for a specialized nutrition start-up.',
     challenge: {
@@ -292,20 +507,210 @@ const WORKS: MultilangWork[] = [
       es: 'Trabajando con la start-up DitMad, desarrollamos un marco de UX.',
       ca: 'Treballant amb la start-up DitMad, vam desenvolupar un marc d\'UX.'
     },
-    // Placeholders for structure
-    problem: { en: 'Placeholder Problem', es: 'Problema Placeholder', ca: 'Problema Placeholder' },
-    persona: { en: 'Placeholder Persona', es: 'Persona Placeholder', ca: 'Persona Placeholder' },
-    solution: { en: 'Placeholder Solution', es: 'Solución Placeholder', ca: 'Solució Placeholder' },
-    task: { en: 'Placeholder Task', es: 'Tarea Placeholder', ca: 'Tasca Placeholder' },
-    takeOn: { en: 'Placeholder Take', es: 'Opinión Placeholder', ca: 'Opinió Placeholder' },
-    metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
+    content: {
+      en: {
+        hero: {
+          title: 'DitMadkompas | Danish-First Food Scanner Concept',
+          subtitle: 'A fast scan flow that translates ingredients into a clear, trustable choice.',
+          narrative: 'DitMadkompas is a concept for a simple barcode scanning app that explains processing levels and ingredients in seconds, then suggests healthier alternatives. The work defined the product foundation, early UX, pricing logic, and a low-cost validation plan before building a database.'
+        },
+        sideCard: {
+          challenge: 'Danish shoppers struggle to interpret labels, additives, and E-numbers in real time, and existing apps do not fully localize to Danish needs. The startup had no brand identity, no product database, and no scoring model, so building "the real thing" first would be a risky bet.',
+          outcome: 'A defined scan-to-rating-to-alternatives experience, plus a Fake Door + Pinocchio pretotype to validate demand and trust before MVP.',
+          buttonLabel: 'View Concept Deck'
+        },
+        yourTask: {
+          preLine: 'Make food transparency usable in the aisle.',
+          question: 'How might we help people in Denmark make healthier choices with a simple, trustworthy scan experience?',
+          reframe: 'What should the app explain instantly, and what should it keep out to stay fast? What would make the score feel credible, not cosmetic?'
+        },
+        takeOn: {
+          questions: [
+            'What should the first scan result prioritize: additives, sugars, saturated fat, or processing level?',
+            'Would you trust a traffic-light rating without a deep breakdown every time? Why?',
+            'When do you want alternatives: only on "red" products, or always?',
+            'What would make this feel Danish-first: Ø-mærket detection, local regulation explainers, or Nordic nutrition framing?',
+            'What would convince you to pay: unlimited scans, personalized modes, or weekly insights?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Food information is too complex for real shopping moments, so clarity and trust beat depth by default.',
+          tensions: [
+            'Scientific complexity vs a 2-second decision in-store',
+            'No existing database vs expectation of instant scanning results',
+            '"Simple score" clarity vs the need to prove how the score is earned'
+          ]
+        },
+        persona: {
+          title: 'Everyday Grocery Parent',
+          oneLiner: 'Shops fast, wants to do better for the household, and does not have time to decode labels.',
+          needs: [
+            'Instant, plain-language explanations (especially additives and processing)',
+            'Confidence through a consistent visual system and repeatable logic',
+            'Better swaps that are realistic to buy, not theoretical'
+          ]
+        },
+        solution: {
+          title: 'Scan, Score, Swap',
+          paragraph: 'A Danish-first product scanning concept that simplifies nutrition into a traffic-light score, highlights positives and negatives, and offers healthier alternatives. The system is supported by a communication plan across social and short explainer formats, and a tiered freemium model that scales from basic clarity to deeper insights and personalization.',
+          definingPhrases: [
+            'Traffic-light trust layer',
+            'Alternatives as the payoff',
+            'Freemium to premium progression'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Launch the Fake Door landing page with "Try the scanner now" and track real intent.',
+            'Run the Pinocchio scan simulation using manual lookup (Open Food Facts behind the scenes) to test completion and trust.',
+            'If validated, move to an MVP with automated scanning and a first-pass Danish scoring model.'
+          ],
+          successMetrics: [
+            'Landing page CTA conversion above 20% (validation threshold).',
+            'Full fake scan completion above 25% (validation threshold).',
+            'Weekly usage intent above 15% (validation threshold).'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'DitMadkompas | Danish-First Food Scanner Concept',
+          subtitle: 'A fast scan flow that translates ingredients into a clear, trustable choice.',
+          narrative: 'DitMadkompas is a concept for a simple barcode scanning app that explains processing levels and ingredients in seconds, then suggests healthier alternatives. The work defined the product foundation, early UX, pricing logic, and a low-cost validation plan before building a database.'
+        },
+        sideCard: {
+          challenge: 'Danish shoppers struggle to interpret labels, additives, and E-numbers in real time, and existing apps do not fully localize to Danish needs. The startup had no brand identity, no product database, and no scoring model, so building "the real thing" first would be a risky bet.',
+          outcome: 'A defined scan-to-rating-to-alternatives experience, plus a Fake Door + Pinocchio pretotype to validate demand and trust before MVP.',
+          buttonLabel: 'View Concept Deck'
+        },
+        yourTask: {
+          preLine: 'Make food transparency usable in the aisle.',
+          question: 'How might we help people in Denmark make healthier choices with a simple, trustworthy scan experience?',
+          reframe: 'What should the app explain instantly, and what should it keep out to stay fast? What would make the score feel credible, not cosmetic?'
+        },
+        takeOn: {
+          questions: [
+            'What should the first scan result prioritize: additives, sugars, saturated fat, or processing level?',
+            'Would you trust a traffic-light rating without a deep breakdown every time? Why?',
+            'When do you want alternatives: only on "red" products, or always?',
+            'What would make this feel Danish-first: Ø-mærket detection, local regulation explainers, or Nordic nutrition framing?',
+            'What would convince you to pay: unlimited scans, personalized modes, or weekly insights?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Food information is too complex for real shopping moments, so clarity and trust beat depth by default.',
+          tensions: [
+            'Scientific complexity vs a 2-second decision in-store',
+            'No existing database vs expectation of instant scanning results',
+            '"Simple score" clarity vs the need to prove how the score is earned'
+          ]
+        },
+        persona: {
+          title: 'Everyday Grocery Parent',
+          oneLiner: 'Shops fast, wants to do better for the household, and does not have time to decode labels.',
+          needs: [
+            'Instant, plain-language explanations (especially additives and processing)',
+            'Confidence through a consistent visual system and repeatable logic',
+            'Better swaps that are realistic to buy, not theoretical'
+          ]
+        },
+        solution: {
+          title: 'Scan, Score, Swap',
+          paragraph: 'A Danish-first product scanning concept that simplifies nutrition into a traffic-light score, highlights positives and negatives, and offers healthier alternatives. The system is supported by a communication plan across social and short explainer formats, and a tiered freemium model that scales from basic clarity to deeper insights and personalization.',
+          definingPhrases: [
+            'Traffic-light trust layer',
+            'Alternatives as the payoff',
+            'Freemium to premium progression'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Launch the Fake Door landing page with "Try the scanner now" and track real intent.',
+            'Run the Pinocchio scan simulation using manual lookup (Open Food Facts behind the scenes) to test completion and trust.',
+            'If validated, move to an MVP with automated scanning and a first-pass Danish scoring model.'
+          ],
+          successMetrics: [
+            'Landing page CTA conversion above 20% (validation threshold).',
+            'Full fake scan completion above 25% (validation threshold).',
+            'Weekly usage intent above 15% (validation threshold).'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'DitMadkompas | Danish-First Food Scanner Concept',
+          subtitle: 'A fast scan flow that translates ingredients into a clear, trustable choice.',
+          narrative: 'DitMadkompas is a concept for a simple barcode scanning app that explains processing levels and ingredients in seconds, then suggests healthier alternatives. The work defined the product foundation, early UX, pricing logic, and a low-cost validation plan before building a database.'
+        },
+        sideCard: {
+          challenge: 'Danish shoppers struggle to interpret labels, additives, and E-numbers in real time, and existing apps do not fully localize to Danish needs. The startup had no brand identity, no product database, and no scoring model, so building "the real thing" first would be a risky bet.',
+          outcome: 'A defined scan-to-rating-to-alternatives experience, plus a Fake Door + Pinocchio pretotype to validate demand and trust before MVP.',
+          buttonLabel: 'View Concept Deck'
+        },
+        yourTask: {
+          preLine: 'Make food transparency usable in the aisle.',
+          question: 'How might we help people in Denmark make healthier choices with a simple, trustworthy scan experience?',
+          reframe: 'What should the app explain instantly, and what should it keep out to stay fast? What would make the score feel credible, not cosmetic?'
+        },
+        takeOn: {
+          questions: [
+            'What should the first scan result prioritize: additives, sugars, saturated fat, or processing level?',
+            'Would you trust a traffic-light rating without a deep breakdown every time? Why?',
+            'When do you want alternatives: only on "red" products, or always?',
+            'What would make this feel Danish-first: Ø-mærket detection, local regulation explainers, or Nordic nutrition framing?',
+            'What would convince you to pay: unlimited scans, personalized modes, or weekly insights?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Food information is too complex for real shopping moments, so clarity and trust beat depth by default.',
+          tensions: [
+            'Scientific complexity vs a 2-second decision in-store',
+            'No existing database vs expectation of instant scanning results',
+            '"Simple score" clarity vs the need to prove how the score is earned'
+          ]
+        },
+        persona: {
+          title: 'Everyday Grocery Parent',
+          oneLiner: 'Shops fast, wants to do better for the household, and does not have time to decode labels.',
+          needs: [
+            'Instant, plain-language explanations (especially additives and processing)',
+            'Confidence through a consistent visual system and repeatable logic',
+            'Better swaps that are realistic to buy, not theoretical'
+          ]
+        },
+        solution: {
+          title: 'Scan, Score, Swap',
+          paragraph: 'A Danish-first product scanning concept that simplifies nutrition into a traffic-light score, highlights positives and negatives, and offers healthier alternatives. The system is supported by a communication plan across social and short explainer formats, and a tiered freemium model that scales from basic clarity to deeper insights and personalization.',
+          definingPhrases: [
+            'Traffic-light trust layer',
+            'Alternatives as the payoff',
+            'Freemium to premium progression'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Launch the Fake Door landing page with "Try the scanner now" and track real intent.',
+            'Run the Pinocchio scan simulation using manual lookup (Open Food Facts behind the scenes) to test completion and trust.',
+            'If validated, move to an MVP with automated scanning and a first-pass Danish scoring model.'
+          ],
+          successMetrics: [
+            'Landing page CTA conversion above 20% (validation threshold).',
+            'Full fake scan completion above 25% (validation threshold).',
+            'Weekly usage intent above 15% (validation threshold).'
+          ]
+        }
+      }
+    }
   },
   {
     id: '3',
-    name: 'Members App',
+    name: 'Red Cross 360º',
     genre: 'Workflow Optimization',
     day: 'Red Cross Denmark',
-    year: '2024',
+    year: 'Nov 2025',
     image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?q=80&w=1600&auto=format&fit=crop',
     description: 'AI powered verification workflow.',
     challenge: {
@@ -323,20 +728,80 @@ const WORKS: MultilangWork[] = [
       es: 'Un sistema integrado para la Cruz Roja Danesa que aprovecha la IA.',
       ca: 'Un sistema integrat per a la Creu Roja Danesa que aprofita la IA.'
     },
-    // Placeholders for structure
-    problem: { en: 'Placeholder Problem', es: 'Problema Placeholder', ca: 'Problema Placeholder' },
-    persona: { en: 'Placeholder Persona', es: 'Persona Placeholder', ca: 'Persona Placeholder' },
-    solution: { en: 'Placeholder Solution', es: 'Solución Placeholder', ca: 'Solució Placeholder' },
-    task: { en: 'Placeholder Task', es: 'Tarea Placeholder', ca: 'Tasca Placeholder' },
-    takeOn: { en: 'Placeholder Take', es: 'Opinión Placeholder', ca: 'Opinió Placeholder' },
-    metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
+    content: {
+      en: {
+        hero: {
+          title: 'Red Cross DK 360º | AI-Powered Donation Intake',
+          subtitle: 'A faster drop-off flow that turns a bag into a verified record with visible impact.',
+          narrative: 'This concept uses AI photo recognition to identify donated items, calculate estimated CO2 impact, and connect the donation to a member account. It is designed to reduce volunteer workload while motivating repeat donations through rewards and partner incentives.'
+        },
+        sideCard: {
+          challenge: 'Donation intake is manual and time-heavy, especially when volume spikes. Donors get little feedback after drop-off, so the experience is easy to forget and hard to repeat.',
+          outcome: 'A 360º flow from bag to digital record, with AI recognition, member identification, and a confirmation checkout for volunteer supervision.',
+          buttonLabel: 'View Prototype Flow'
+        },
+        yourTask: {
+          preLine: 'Make donating feel effortless and worth repeating.',
+          question: 'How might we make Red Cross clothing donations faster, more transparent, and more motivating for both donors and volunteers?',
+          reframe: 'In other words: If one bag could become a verified record in minutes, what must be automated and what must stay human-approved? What feedback should the donor receive immediately to feel impact and trust the system?'
+        },
+        takeOn: {
+          questions: [
+            'Which moment matters most: drop-off speed, impact feedback, or rewards?',
+            'Should donors see item recognition details, or only a simple summary?',
+            'Where should volunteer verification happen to stay fast but safe?',
+            'What incentives feel aligned with Red Cross values: points, discounts, or community recognition?',
+            'Would a bike pickup option change your donation frequency, and in which situations?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'Donations increase when the process is quick, the impact is visible, and the organization can handle volume without adding manual work.',
+          tensions: [
+            'Automation speed vs the need for volunteer supervision and trust',
+            'Impact storytelling vs accurate, explainable CO2 estimates',
+            'Incentives and partner value vs keeping the experience mission-aligned'
+          ]
+        },
+        persona: {
+          title: 'Repeat Donor and Member',
+          oneLiner: 'Wants donating to be quick and meaningful, and wants a record they can share.',
+          needs: [
+            'A frictionless drop-off that does not require extra steps',
+            'Immediate proof of impact, including estimated CO2 savings over time',
+            'Rewards that feel fair and simple (points, discounts, partner offers)'
+          ]
+        },
+        solution: {
+          title: 'Bag to Verified Impact Record',
+          paragraph: 'A mobile intake flow where a volunteer captures 2 to 3 photos of the donation bag, AI detects item types, and the system links the donation to a member through identification. A confirmation checkout keeps humans in the loop, while donors receive a transparent digital record that can include impact and rewards.',
+          definingPhrases: [
+            'AI photo recognition with human approval',
+            'Real-time impact feedback (estimated CO2)',
+            'Rewards loop for repeat donations'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Pilot the intake flow in one location with the four-step prototype: Member Identification, AI Object Detection, Volunteer Supervision, Confirmation Checkout.',
+            'Define the recognition taxonomy (what categories matter) and tune photo guidance so volunteers can capture consistent inputs fast.',
+            'Validate the incentive model and partner integration, plus the bike pickup option as a practical add-on service.'
+          ],
+          successMetrics: [
+            'Faster handling time per bag and fewer manual steps for volunteers (measured in pilot).',
+            'Higher repeat donation intent and member adoption of the digital record (measured via usage and follow-up prompts).',
+            'Verified impact visibility: percentage of donations with AI recognition + approved checkout, and engagement with CO2 history sharing (measured in app).'
+          ]
+        }
+      }
+    }
   },
   {
     id: '4',
     name: 'Mossfera x Quant',
     genre: 'Identity & AI Strategy',
-    day: 'Mossfera',
-    year: '2025',
+    day: 'Eram (UdG)',
+    year: 'Jun 2025',
     image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1600&auto=format&fit=crop',
     description: 'Experimental digital identity merging bio-elements with quantum logic.',
     subtitle: {
@@ -368,44 +833,13 @@ const WORKS: MultilangWork[] = [
     metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
   },
   {
-    id: '5',
-    name: 'Sirene de OOONOS',
-    genre: 'Product Design & UX',
-    day: 'OOONOS',
-    year: '2024',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop',
-    description: 'High-fidelity UI/UX for acoustic monitoring systems.',
-    challenge: {
-      en: 'Visualizing sound patterns for high-stakes environmental monitoring.',
-      es: 'Visualizar patrones de sonido para el monitoreo ambiental de alto riesgo.',
-      ca: 'Visualitzar patrons de so per al monitoratge ambiental d\'alt risc.'
-    },
-    outcome: {
-      en: '85% increase in user response speed during critical signal detection tests.',
-      es: 'Aumento del 85% en la velocidad de respuesta del usuario durante pruebas críticas.',
-      ca: 'Augment del 85% en la velocitat de resposta de l\'usuari durant proves crítiques.'
-    },
-    longDescription: {
-      en: 'Sirene is a specialized UX project for OOONOS, focusing on the intuitive visualization of acoustic data.',
-      es: 'Sirene es un proyecto de UX especializado para OOONOS.',
-      ca: 'Sirene és un projecte d\'UX especialitzat per a OOONOS.'
-    },
-    // Placeholders for structure
-    problem: { en: 'Placeholder Problem', es: 'Problema Placeholder', ca: 'Problema Placeholder' },
-    persona: { en: 'Placeholder Persona', es: 'Persona Placeholder', ca: 'Persona Placeholder' },
-    solution: { en: 'Placeholder Solution', es: 'Solución Placeholder', ca: 'Solució Placeholder' },
-    task: { en: 'Placeholder Task', es: 'Tarea Placeholder', ca: 'Tasca Placeholder' },
-    takeOn: { en: 'Placeholder Take', es: 'Opinión Placeholder', ca: 'Opinió Placeholder' },
-    metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
-  },
-  {
     id: '6',
     name: 'Kave Home Studio',
     genre: 'Visual Arts & Photography',
     day: 'Kave Home',
-    year: '2024',
+    year: 'Abr 2024',
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop',
-    description: 'Professional studio photography and lighting design for high-end furniture.',
+    description: 'A reshoot brief to modernize a high-visual category.',
     challenge: {
       en: 'Capturing the tactile essence of Mediterranean design in a controlled studio environment.',
       es: 'Capturar la esencia táctil del diseño mediterráneo en un entorno de estudio.',
@@ -421,46 +855,596 @@ const WORKS: MultilangWork[] = [
       es: 'Durante mis prácticas en Kave Home, gestioné la iluminación de estudio.',
       ca: 'Durant les meves pràctiques a Kave Home, vaig gestionar la il·luminació d\'estudi.'
     },
-    // Placeholders for structure
-    problem: { en: 'Placeholder Problem', es: 'Problema Placeholder', ca: 'Problema Placeholder' },
-    persona: { en: 'Placeholder Persona', es: 'Persona Placeholder', ca: 'Persona Placeholder' },
-    solution: { en: 'Placeholder Solution', es: 'Solución Placeholder', ca: 'Solució Placeholder' },
-    task: { en: 'Placeholder Task', es: 'Tarea Placeholder', ca: 'Tasca Placeholder' },
-    takeOn: { en: 'Placeholder Take', es: 'Opinión Placeholder', ca: 'Opinió Placeholder' },
-    metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
+    content: {
+      en: {
+        hero: {
+          title: 'Kave Home | Mirrors Category Refresh',
+          subtitle: 'A reshoot brief to modernize a high-visual category and restore momentum.',
+          narrative: 'The mirrors category was tracking below plan, while key SKUs carried outdated or missing lifestyle imagery. I defined a focused reshoot scope that upgrades context, scale cues, and cross-room usage without overextending production.'
+        },
+        sideCard: {
+          challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
+          outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
+          buttonLabel: 'View Reshoot Brief'
+        },
+        yourTask: {
+          preLine: 'Make imagery earn its space.',
+          question: 'What should we reshoot first to improve discovery and confidence from listing to PDP?',
+          reframe: 'If we can only refresh a shortlist, which scenes best communicate style and true scale? What would you keep consistent across every mirror for faster comparison?'
+        },
+        takeOn: {
+          questions: [
+            'Which room contexts matter most for mirrors in your market mix?',
+            'How should we balance lifestyle ambients vs clean product-first images?',
+            'What is the one scale cue you want shoppers to feel instantly?',
+            'Should bathroom mirrors be deliberately styled in other rooms to expand intent?',
+            'What consistency rule should never change across the category (crop, angle, lighting, props)?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'The category needed fresher, clearer visual cues to win attention and trust in a fast-scrolling environment.',
+          tensions: [
+            'High-visual category, but stale or missing ambients on key products',
+            'Need to show real scale, while keeping production practical and repeatable',
+            'Bathroom-led assortment, but broader room potential that current imagery does not unlock'
+          ]
+        },
+        persona: {
+          title: 'Mobile Home Shopper',
+          oneLiner: 'Decides visually in seconds and needs scale reassurance before committing.',
+          needs: [
+            'A quick read on size and placement',
+            'Clear differentiation between similar styles and finishes',
+            'Confidence the mirror works beyond a single staged room'
+          ]
+        },
+        solution: {
+          title: 'Reshoot Scope + Category Image System',
+          paragraph: 'A production-ready brief that prioritizes best sellers and content gaps, then applies a consistent image system to improve browsing, comparison, and perceived fit. The approach also opens new room narratives for mirrors that were previously framed too narrowly.',
+          definingPhrases: [
+            'Prioritized, not blanket reshoots',
+            'Context that communicates scale',
+            'Cross-room storytelling built for listings'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Lock the shortlist and shotlist, including required outputs per SKU (listing, PDP, variants).',
+            'Define the image system rules (crop, angle, lighting, prop limits) and apply across the reshoot.',
+            'Roll out refreshed ambients in priority listings and validate learnings before expanding scope.'
+          ],
+          successMetrics: [
+            'Category listing engagement (CTR to PDP, scroll depth, time on listing).',
+            'PDP intent signals (gallery interaction, add-to-cart rate, variant selection rate).',
+            'Commercial impact on the refreshed set (sell-through, stock coverage, returns or complaints tied to "size expectation").'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'Kave Home | Mirrors Category Refresh',
+          subtitle: 'A reshoot brief to modernize a high-visual category and restore momentum.',
+          narrative: 'The mirrors category was tracking below plan, while key SKUs carried outdated or missing lifestyle imagery. I defined a focused reshoot scope that upgrades context, scale cues, and cross-room usage without overextending production.'
+        },
+        sideCard: {
+          challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
+          outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
+          buttonLabel: 'View Reshoot Brief'
+        },
+        yourTask: {
+          preLine: 'Make imagery earn its space.',
+          question: 'What should we reshoot first to improve discovery and confidence from listing to PDP?',
+          reframe: 'If we can only refresh a shortlist, which scenes best communicate style and true scale? What would you keep consistent across every mirror for faster comparison?'
+        },
+        takeOn: {
+          questions: [
+            'Which room contexts matter most for mirrors in your market mix?',
+            'How should we balance lifestyle ambients vs clean product-first images?',
+            'What is the one scale cue you want shoppers to feel instantly?',
+            'Should bathroom mirrors be deliberately styled in other rooms to expand intent?',
+            'What consistency rule should never change across the category (crop, angle, lighting, props)?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'The category needed fresher, clearer visual cues to win attention and trust in a fast-scrolling environment.',
+          tensions: [
+            'High-visual category, but stale or missing ambients on key products',
+            'Need to show real scale, while keeping production practical and repeatable',
+            'Bathroom-led assortment, but broader room potential that current imagery does not unlock'
+          ]
+        },
+        persona: {
+          title: 'Mobile Home Shopper',
+          oneLiner: 'Decides visually in seconds and needs scale reassurance before committing.',
+          needs: [
+            'A quick read on size and placement',
+            'Clear differentiation between similar styles and finishes',
+            'Confidence the mirror works beyond a single staged room'
+          ]
+        },
+        solution: {
+          title: 'Reshoot Scope + Category Image System',
+          paragraph: 'A production-ready brief that prioritizes best sellers and content gaps, then applies a consistent image system to improve browsing, comparison, and perceived fit. The approach also opens new room narratives for mirrors that were previously framed too narrowly.',
+          definingPhrases: [
+            'Prioritized, not blanket reshoots',
+            'Context that communicates scale',
+            'Cross-room storytelling built for listings'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Lock the shortlist and shotlist, including required outputs per SKU (listing, PDP, variants).',
+            'Define the image system rules (crop, angle, lighting, prop limits) and apply across the reshoot.',
+            'Roll out refreshed ambients in priority listings and validate learnings before expanding scope.'
+          ],
+          successMetrics: [
+            'Category listing engagement (CTR to PDP, scroll depth, time on listing).',
+            'PDP intent signals (gallery interaction, add-to-cart rate, variant selection rate).',
+            'Commercial impact on the refreshed set (sell-through, stock coverage, returns or complaints tied to "size expectation").'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'Kave Home | Mirrors Category Refresh',
+          subtitle: 'A reshoot brief to modernize a high-visual category and restore momentum.',
+          narrative: 'The mirrors category was tracking below plan, while key SKUs carried outdated or missing lifestyle imagery. I defined a focused reshoot scope that upgrades context, scale cues, and cross-room usage without overextending production.'
+        },
+        sideCard: {
+          challenge: 'Performance was softening while the category look and feel lagged behind the current assortment. Best sellers lacked fresh ambients, and some mirrors were visually locked to a single room use case.',
+          outcome: 'A prioritized reshoot shortlist with clear rationale, plus direction for updated ambients and listing-ready outputs.',
+          buttonLabel: 'View Reshoot Brief'
+        },
+        yourTask: {
+          preLine: 'Make imagery earn its space.',
+          question: 'What should we reshoot first to improve discovery and confidence from listing to PDP?',
+          reframe: 'If we can only refresh a shortlist, which scenes best communicate style and true scale? What would you keep consistent across every mirror for faster comparison?'
+        },
+        takeOn: {
+          questions: [
+            'Which room contexts matter most for mirrors in your market mix?',
+            'How should we balance lifestyle ambients vs clean product-first images?',
+            'What is the one scale cue you want shoppers to feel instantly?',
+            'Should bathroom mirrors be deliberately styled in other rooms to expand intent?',
+            'What consistency rule should never change across the category (crop, angle, lighting, props)?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'The category needed fresher, clearer visual cues to win attention and trust in a fast-scrolling environment.',
+          tensions: [
+            'High-visual category, but stale or missing ambients on key products',
+            'Need to show real scale, while keeping production practical and repeatable',
+            'Bathroom-led assortment, but broader room potential that current imagery does not unlock'
+          ]
+        },
+        persona: {
+          title: 'Mobile Home Shopper',
+          oneLiner: 'Decides visually in seconds and needs scale reassurance before committing.',
+          needs: [
+            'A quick read on size and placement',
+            'Clear differentiation between similar styles and finishes',
+            'Confidence the mirror works beyond a single staged room'
+          ]
+        },
+        solution: {
+          title: 'Reshoot Scope + Category Image System',
+          paragraph: 'A production-ready brief that prioritizes best sellers and content gaps, then applies a consistent image system to improve browsing, comparison, and perceived fit. The approach also opens new room narratives for mirrors that were previously framed too narrowly.',
+          definingPhrases: [
+            'Prioritized, not blanket reshoots',
+            'Context that communicates scale',
+            'Cross-room storytelling built for listings'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Lock the shortlist and shotlist, including required outputs per SKU (listing, PDP, variants).',
+            'Define the image system rules (crop, angle, lighting, prop limits) and apply across the reshoot.',
+            'Roll out refreshed ambients in priority listings and validate learnings before expanding scope.'
+          ],
+          successMetrics: [
+            'Category listing engagement (CTR to PDP, scroll depth, time on listing).',
+            'PDP intent signals (gallery interaction, add-to-cart rate, variant selection rate).',
+            'Commercial impact on the refreshed set (sell-through, stock coverage, returns or complaints tied to "size expectation").'
+          ]
+        }
+      }
+    }
   },
   {
-    id: '7',
-    name: 'Quant x Mossfera',
-    genre: 'AI Workflow Integration',
-    day: 'Quant Labs',
-    year: '2025',
-    image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1600&auto=format&fit=crop',
-    description: 'Integration of generative AI models into creative production pipelines.',
+    id: '8',
+    name: 'Neety',
+    genre: 'B2B Sales Automation',
+    day: 'Neety',
+    year: 'Oct 2023',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
+    description: 'Campaign console redesign for faster action.',
+    subtitle: {
+      en: 'A calmer campaign console with clearer hierarchy and action paths.',
+      es: 'A calmer campaign console with clearer hierarchy and action paths.',
+      ca: 'A calmer campaign console with clearer hierarchy and action paths.'
+    },
     challenge: {
-      en: 'Automating the creative bottleneck without losing human authorship.',
-      es: 'Automatizar el cuello de botella creativo sin perder la autoría humana.',
-      ca: 'Automatitzar el coll de botella creatiu sense perdre l\'autoria humana.'
+      en: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+      es: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+      ca: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.'
     },
     outcome: {
-      en: 'Production turnaround time reduced by 60% across the identity department.',
-      es: 'Tiempo de producción reducido en un 60% en el departamento de identidad.',
-      ca: 'Temps de producció reduït en un 60% al departament d\'identitat.'
+      en: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+      es: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+      ca: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.'
     },
     longDescription: {
-      en: 'The sequel to the initial collaboration, Quant x Mossfera focused on custom GPTs and image models.',
-      es: 'Quant x Mossfera se centró en la creación de GPTs personalizados.',
-      ca: 'Quant x Mossfera es va centrar en la creació de GPTs personalitzats.'
+      en: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.',
+      es: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.',
+      ca: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
     },
-    // Placeholders for structure
-    problem: { en: 'Placeholder Problem', es: 'Problema Placeholder', ca: 'Problema Placeholder' },
-    persona: { en: 'Placeholder Persona', es: 'Persona Placeholder', ca: 'Persona Placeholder' },
-    solution: { en: 'Placeholder Solution', es: 'Solución Placeholder', ca: 'Solució Placeholder' },
-    task: { en: 'Placeholder Task', es: 'Tarea Placeholder', ca: 'Tasca Placeholder' },
-    takeOn: { en: 'Placeholder Take', es: 'Opinión Placeholder', ca: 'Opinió Placeholder' },
-    metrics: { en: 'Placeholder Metrics', es: 'Métricas Placeholder', ca: 'Mètriques Placeholder' }
+    content: {
+      en: {
+        hero: {
+          title: 'Neety | B2B Sales Automation UI Redesign',
+          subtitle: 'A calmer campaign console with clearer hierarchy and action paths.',
+          narrative: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
+        },
+        sideCard: {
+          challenge: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+          outcome: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+          buttonLabel: 'View Before/After'
+        },
+        yourTask: {
+          preLine: 'Make the next action obvious.',
+          question: 'How should a campaign dashboard communicate status and unlock the right action in seconds?',
+          reframe: 'If a new user opens this screen, what do they understand first? What do they do next, without reading everything?'
+        },
+        takeOn: {
+          questions: [
+            'Which three signals must always be visible above the fold?',
+            'What task statuses cause the most confusion today, and why?',
+            'Do bulk actions belong at the top, or closer to selected items?',
+            'What should be expandable vs always-on in each task card?',
+            'Where should lightweight notifications live so they help, not interrupt?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'In automation tooling, ambiguity is the real bottleneck, not feature count.',
+          tensions: [
+            'Dense information vs scanability',
+            'Transparency of execution vs cognitive load',
+            'Brand expression vs utilitarian clarity'
+          ]
+        },
+        persona: {
+          title: 'Sales Ops Operator',
+          oneLiner: 'Runs outbound workflows daily and needs fast, reliable feedback to keep campaigns moving.',
+          needs: [
+            'Progress that is readable at a glance',
+            'Status clarity with minimal interpretation',
+            'Strong primary actions that match the workflow'
+          ]
+        },
+        solution: {
+          title: 'Campaign Console Refresh',
+          paragraph: 'A minimal, modern layout that improves progress visibility (radial progress), elevates primary actions (“Retry Selected”, “Continue Selected”), and strengthens hierarchy through clearer headers and task card structure. A small notification box keeps updates accessible without pulling focus.',
+          definingPhrases: [
+            'Clear hierarchy, less noise',
+            'Primary actions, visually prioritized',
+            'Status clarity inside task cards'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Turn the proposal into a reusable component set (cards, status tags, buttons, progress).',
+            'Validate the new hierarchy with quick usability checks on 3 key tasks (scan, select, act).',
+            'Define analytics events for key actions to monitor workflow health post-implementation.'
+          ],
+          successMetrics: [
+            'Time to identify the next action from page load (target).',
+            'Task completion rate for selected actions (target).',
+            'Reduction in status-related support questions or user confusion signals (target).'
+          ]
+        }
+      },
+      es: {
+        hero: {
+          title: 'Neety | B2B Sales Automation UI Redesign',
+          subtitle: 'A calmer campaign console with clearer hierarchy and action paths.',
+          narrative: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
+        },
+        sideCard: {
+          challenge: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+          outcome: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+          buttonLabel: 'View Before/After'
+        },
+        yourTask: {
+          preLine: 'Make the next action obvious.',
+          question: 'How should a campaign dashboard communicate status and unlock the right action in seconds?',
+          reframe: 'If a new user opens this screen, what do they understand first? What do they do next, without reading everything?'
+        },
+        takeOn: {
+          questions: [
+            'Which three signals must always be visible above the fold?',
+            'What task statuses cause the most confusion today, and why?',
+            'Do bulk actions belong at the top, or closer to selected items?',
+            'What should be expandable vs always-on in each task card?',
+            'Where should lightweight notifications live so they help, not interrupt?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'In automation tooling, ambiguity is the real bottleneck, not feature count.',
+          tensions: [
+            'Dense information vs scanability',
+            'Transparency of execution vs cognitive load',
+            'Brand expression vs utilitarian clarity'
+          ]
+        },
+        persona: {
+          title: 'Sales Ops Operator',
+          oneLiner: 'Runs outbound workflows daily and needs fast, reliable feedback to keep campaigns moving.',
+          needs: [
+            'Progress that is readable at a glance',
+            'Status clarity with minimal interpretation',
+            'Strong primary actions that match the workflow'
+          ]
+        },
+        solution: {
+          title: 'Campaign Console Refresh',
+          paragraph: 'A minimal, modern layout that improves progress visibility (radial progress), elevates primary actions (“Retry Selected”, “Continue Selected”), and strengthens hierarchy through clearer headers and task card structure. A small notification box keeps updates accessible without pulling focus.',
+          definingPhrases: [
+            'Clear hierarchy, less noise',
+            'Primary actions, visually prioritized',
+            'Status clarity inside task cards'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Turn the proposal into a reusable component set (cards, status tags, buttons, progress).',
+            'Validate the new hierarchy with quick usability checks on 3 key tasks (scan, select, act).',
+            'Define analytics events for key actions to monitor workflow health post-implementation.'
+          ],
+          successMetrics: [
+            'Time to identify the next action from page load (target).',
+            'Task completion rate for selected actions (target).',
+            'Reduction in status-related support questions or user confusion signals (target).'
+          ]
+        }
+      },
+      ca: {
+        hero: {
+          title: 'Neety | B2B Sales Automation UI Redesign',
+          subtitle: 'A calmer campaign console with clearer hierarchy and action paths.',
+          narrative: 'I proposed a redesign to reduce visual friction in Neety’s campaign execution view. The focus is faster comprehension, cleaner navigation, and UI patterns that make “what’s next” obvious.'
+        },
+        sideCard: {
+          challenge: 'The original layout made it hard to scan progress, interpret task status, and prioritize primary actions. Content density blurred hierarchy and increased decision fatigue.',
+          outcome: 'A redesigned screen concept and rationale covering progress visualization, action emphasis, hierarchy, and lightweight notifications.',
+          buttonLabel: 'View Before/After'
+        },
+        yourTask: {
+          preLine: 'Make the next action obvious.',
+          question: 'How should a campaign dashboard communicate status and unlock the right action in seconds?',
+          reframe: 'If a new user opens this screen, what do they understand first? What do they do next, without reading everything?'
+        },
+        takeOn: {
+          questions: [
+            'Which three signals must always be visible above the fold?',
+            'What task statuses cause the most confusion today, and why?',
+            'Do bulk actions belong at the top, or closer to selected items?',
+            'What should be expandable vs always-on in each task card?',
+            'Where should lightweight notifications live so they help, not interrupt?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'In automation tooling, ambiguity is the real bottleneck, not feature count.',
+          tensions: [
+            'Dense information vs scanability',
+            'Transparency of execution vs cognitive load',
+            'Brand expression vs utilitarian clarity'
+          ]
+        },
+        persona: {
+          title: 'Sales Ops Operator',
+          oneLiner: 'Runs outbound workflows daily and needs fast, reliable feedback to keep campaigns moving.',
+          needs: [
+            'Progress that is readable at a glance',
+            'Status clarity with minimal interpretation',
+            'Strong primary actions that match the workflow'
+          ]
+        },
+        solution: {
+          title: 'Campaign Console Refresh',
+          paragraph: 'A minimal, modern layout that improves progress visibility (radial progress), elevates primary actions (“Retry Selected”, “Continue Selected”), and strengthens hierarchy through clearer headers and task card structure. A small notification box keeps updates accessible without pulling focus.',
+          definingPhrases: [
+            'Clear hierarchy, less noise',
+            'Primary actions, visually prioritized',
+            'Status clarity inside task cards'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Turn the proposal into a reusable component set (cards, status tags, buttons, progress).',
+            'Validate the new hierarchy with quick usability checks on 3 key tasks (scan, select, act).',
+            'Define analytics events for key actions to monitor workflow health post-implementation.'
+          ],
+          successMetrics: [
+            'Time to identify the next action from page load (target).',
+            'Task completion rate for selected actions (target).',
+            'Reduction in status-related support questions or user confusion signals (target).'
+          ]
+        }
+      }
+    }
+  }
+  ,
+  {
+    id: '9',
+    name: 'Strenes Concert',
+    genre: 'Visual Identity System',
+    day: 'Strenes',
+    year: 'Mar 2023',
+    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop',
+    description: 'Visual identity system proposal for a locally rooted festival.',
+    subtitle: {
+      en: 'A modular, locally rooted system designed to scale across touchpoints.',
+      es: 'A modular, locally rooted system designed to scale across touchpoints.',
+      ca: 'A modular, locally rooted system designed to scale across touchpoints.'
+    },
+    challenge: {
+      en: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.',
+      es: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.',
+      ca: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.'
+    },
+    outcome: {
+      en: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.',
+      es: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.',
+      ca: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.'
+    },
+    longDescription: {
+      en: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.',
+      es: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.',
+      ca: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.'
+    },
+    content: {
+      en: {
+        hero: {
+          title: 'Strenes Concert | Visual Identity System Proposal',
+          subtitle: 'A modular, locally rooted system designed to scale across touchpoints.',
+          narrative: 'Strenes celebrates Girona\'s essence through community pride and shared connection. I developed a graphic identity and system inspired by the Basilica\'s stained glass, built for consistent use across print and digital.'
+        },
+        sideCard: {
+          challenge: 'A festival identity must be instantly recognizable, flexible across formats, and still feel specific to place. It also needs clear rules so the system survives production at scale.',
+          outcome: 'A production-ready identity toolkit including proportions, safety zones, color modes, typography, patterns, and mock-up applications.',
+          buttonLabel: 'View Brand System'
+        },
+        yourTask: {
+          preLine: 'Make the system easy to use, not just nice to look at.',
+          question: 'What visual rules keep Strenes consistent across tickets, posters, social, and signage?',
+          reframe: 'In other words: If different teams produce assets, what guardrails prevent drift? Where should the system allow variation, and where should it stay strict?'
+        },
+        takeOn: {
+          questions: [
+            'Which applications matter most for first impression: street posters, social, or venue signage?',
+            'How bold can the pattern be before it hurts legibility of lineup information?',
+            'Does the stained-glass reference read as Girona, even without the Basilica context?',
+            'What typography pairing feels right for a youthful festival while staying functional?',
+            'What accessibility checks should we apply to the palette across day and night contexts?'
+          ],
+          note: ''
+        },
+        problem: {
+          insight: 'A local festival brand wins when it balances cultural specificity with a repeatable system that scales cleanly.',
+          tensions: [
+            'Consistency vs flexibility across many formats',
+            'Heritage cues vs contemporary youth energy',
+            'Bold chroma and pattern vs accessibility and information clarity'
+          ]
+        },
+        persona: {
+          title: 'City-First Festival-Goer',
+          oneLiner: 'Discovers events on the street and on mobile, decides quickly, and wants a cohesive experience.',
+          needs: [
+            'Instant recognition at a distance',
+            'Clear hierarchy for date, venue, and lineup',
+            'A visual system that stays consistent across touchpoints'
+          ]
+        },
+        solution: {
+          title: 'Stained-Glass Modular Identity',
+          paragraph: 'A symbol and pattern language derived from a single core shape, paired with a defined chroma palette and a practical typography system. The toolkit includes proportions, safety zones, positive and negative color use, and mock-ups to guide real-world rollout.',
+          definingPhrases: [
+            'One shape, many applications',
+            'Rules that protect consistency',
+            'Local meaning, modern execution'
+          ]
+        },
+        metrics: {
+          nextSteps: [
+            'Convert the system into ready-to-use templates for social, posters, tickets, and signage.',
+            'Run accessibility and legibility checks on key layouts and color pairings.',
+            'Extend mock-ups into a full event kit with clear production specs and handoff files.'
+          ],
+          successMetrics: [
+            'Template adoption and consistency across teams (audit-based) (target).',
+            'Reduction in production errors (wrong spacing, off-brand color, typography drift) (target).',
+            'Audience recognition in lightweight intercept feedback (street and social) (target).'
+          ]
+        }
+      }
+    }
   }
 ];
+
+type WorkContent = {
+  hero: { title: string; subtitle: string; narrative: string };
+  sideCard: { challenge: string; outcome: string; buttonLabel: string };
+  yourTask: { preLine: string; question: string; reframe: string };
+  takeOn: { questions: string[]; note: string };
+  problem: { insight: string; tensions: string[] };
+  persona: { title: string; oneLiner: string; needs: string[] };
+  solution: { title: string; paragraph: string; definingPhrases: string[] };
+  metrics: { nextSteps: string[]; successMetrics: string[] };
+};
+
+const mergeWorkContent = (base: WorkContent, override?: Partial<WorkContent>): WorkContent => ({
+  hero: { ...base.hero, ...override?.hero },
+  sideCard: { ...base.sideCard, ...override?.sideCard },
+  yourTask: { ...base.yourTask, ...override?.yourTask },
+  takeOn: { ...base.takeOn, ...override?.takeOn },
+  problem: { ...base.problem, ...override?.problem },
+  persona: { ...base.persona, ...override?.persona },
+  solution: { ...base.solution, ...override?.solution },
+  metrics: { ...base.metrics, ...override?.metrics }
+});
+
+const buildWorkContent = (work: MultilangWork, lang: Language): WorkContent => {
+  const copy = TRANSLATIONS[lang];
+  const base: WorkContent = {
+    hero: {
+      title: work.name,
+      subtitle: work.subtitle?.[lang] || work.description,
+      narrative: work.longDescription[lang]
+    },
+    sideCard: {
+      challenge: work.challenge[lang],
+      outcome: work.outcome[lang],
+      buttonLabel: copy.sideCardButton
+    },
+    yourTask: {
+      preLine: copy.yourTaskPreLine,
+      question: copy.yourTaskQuestion,
+      reframe: copy.yourTaskReframe
+    },
+    takeOn: {
+      questions: copy.takeOnQuestions,
+      note: copy.takeOnNote
+    },
+    problem: {
+      insight: work.subtitle?.[lang] || work.description,
+      tensions: copy.problemTensions
+    },
+    persona: {
+      title: copy.personaName,
+      oneLiner: copy.personaOneLiner,
+      needs: copy.personaNeeds
+    },
+    solution: {
+      title: copy.solutionName,
+      paragraph: copy.solutionParagraph,
+      definingPhrases: copy.solutionPhrases
+    },
+    metrics: {
+      nextSteps: copy.nextSteps,
+      successMetrics: copy.successMetrics
+    }
+  };
+
+  const override = work.content?.[lang] || work.content?.en;
+  return mergeWorkContent(base, override);
+};
 
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -677,40 +1661,240 @@ const App: React.FC = () => {
               <TorrentGallery />
             </motion.div>
           ) : currentPage === 'work-detail' && selectedWork ? (
-            <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a]">
-              <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0"><div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10" /><img src={selectedWork.image} className="w-full h-full object-cover grayscale opacity-30" /></div>
-                <div className="relative z-20 text-center max-w-6xl px-6">
-                  <button onClick={() => navigateTo('lineup')} className="mb-8 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}</button>
-                  <h1 className="text-5xl md:text-[9rem] font-heading font-bold text-white leading-[0.8] mb-6 tracking-tighter uppercase">{selectedWork.name}</h1>
-                  <p className="text-lg md:text-2xl text-[#ff6700] font-mono tracking-widest max-w-3xl mx-auto uppercase">{selectedWork.subtitle?.[lang] || selectedWork.description}</p>
-                </div>
-              </section>
-              <section className="py-24 md:py-48 px-6 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-                  <div className="lg:col-span-8 space-y-32">
-                    <div className="space-y-12"><h2 className="text-4xl md:text-6xl font-heading font-bold uppercase">{t('narrative')}</h2><p className="text-xl md:text-3xl text-white/70 leading-relaxed font-light">{selectedWork.longDescription[lang]}</p></div>
-                    <div className="p-10 border border-white/10 bg-black/60 backdrop-blur-3xl rounded-[3rem] space-y-10">
-                      <div><h5 className="text-[#ff6700] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('challenge')}</h5><p className="text-white text-xl font-heading font-bold leading-tight tracking-tight uppercase">{selectedWork.challenge[lang]}</p></div>
-                      <div className="h-px bg-white/10" />
-                      <div><h5 className="text-[#3a6ea5] font-mono text-[10px] uppercase tracking-[0.5em] mb-4">{t('outcome')}</h5><p className="text-white/70 text-sm leading-relaxed">{selectedWork.outcome[lang]}</p></div>
-                    </div>
-                  </div>
-                  <aside className="lg:col-span-4 lg:sticky lg:top-40 self-start"><div className="p-10 border border-white/5 rounded-[2.5rem]"><h5 className="text-white/20 mb-6 text-[10px] font-mono uppercase tracking-widest">{t('nextWork')}</h5><button onClick={() => { const idx = WORKS.findIndex(w => w.id === selectedWork?.id); const next = WORKS[(idx + 1) % WORKS.length]; navigateTo('work-detail', undefined, next); }} className="group flex items-center justify-between w-full text-left"><span className="text-3xl font-black uppercase group-hover:text-[#ff6700] transition-colors leading-none tracking-tighter">{WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}</span><ArrowRight className="w-8 h-8 text-[#ff6700] group-hover:translate-x-3 transition-transform" /></button></div></aside>
-                </div>
-              </section>
+            <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#f8f8f8] text-black pb-40">
+              {(() => {
+                const content = buildWorkContent(selectedWork, lang);
+                return (
+                  <>
+                    <section className="min-h-[70vh] flex flex-col justify-end px-6 md:px-24 pb-20 border-b border-black/5">
+                      <button onClick={() => navigateTo('lineup')} className="mb-20 inline-flex items-center gap-3 text-black/30 font-mono text-[10px] uppercase tracking-widest hover:text-[#ff6700] transition-colors">
+                        <ArrowLeft className="w-4 h-4" /> {t('lineupFeed')}
+                      </button>
+                      <div className="max-w-6xl">
+                        <h1 className="text-5xl md:text-[8vw] font-heading font-bold uppercase leading-[0.9] tracking-tighter mb-8">{content.hero.title}</h1>
+                        <p className="text-xl md:text-2xl text-black/40 font-light mb-12 max-w-2xl">{content.hero.subtitle}</p>
+                        <p className="text-lg md:text-xl text-black/70 leading-relaxed max-w-3xl">{content.hero.narrative}</p>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-24 max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+                      <div className="lg:col-span-8 space-y-32">
+                        <div>
+                          <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/30 mb-8">{t('problemAnalysis')}</h3>
+                          <p className="text-2xl md:text-4xl font-bold leading-tight mb-10">{content.problem.insight}</p>
+                          <div className="space-y-4">
+                            {content.problem.tensions.map((tension, i) => (
+                              <div key={i} className="flex items-center gap-4 text-black/40">
+                                <div className="w-1.5 h-1.5 rounded-full bg-black/10" />
+                                <p className="text-sm font-medium uppercase tracking-widest">{tension}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="relative aspect-video bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/5">
+                          <MediaRenderer url={selectedWork.image} type={selectedWork.mediaType} />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+                          <div>
+                            <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/30 mb-8">{t('personaTitle')}</h3>
+                            <p className="text-xl font-bold uppercase mb-4">{content.persona.title}</p>
+                            <p className="text-black/50 leading-relaxed mb-8">{content.persona.oneLiner}</p>
+                          </div>
+                          <div className="space-y-6">
+                            {content.persona.needs.map((need, i) => (
+                              <div key={i} className="flex gap-4 p-4 border border-black/5 rounded-xl bg-white">
+                                <CheckCircle2 className="w-5 h-5 text-[#ff6700] shrink-0" />
+                                <p className="text-xs uppercase font-bold tracking-tight">{need}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="p-12 md:p-20 bg-black text-white rounded-[3rem] relative overflow-hidden">
+                          <span className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/30 block mb-6">{content.yourTask.preLine}</span>
+                          <h2 className="text-3xl md:text-5xl font-heading font-bold uppercase mb-12 leading-[1.1]">{content.yourTask.question}</h2>
+                          <div className="flex gap-4 items-center text-white/40">
+                            <span className="w-8 h-px bg-white/20" />
+                            <p className="italic font-light text-xl">{content.yourTask.reframe}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="lg:col-span-4 space-y-12">
+                        <div className="p-10 bg-white border border-black/5 rounded-[2.5rem] sticky top-32 shadow-sm">
+                          <div className="space-y-12">
+                            <div>
+                              <h5 className="text-[10px] font-mono uppercase tracking-widest text-black/20 mb-4">{t('challenge')}</h5>
+                              <p className="text-sm leading-relaxed text-black/80">{content.sideCard.challenge}</p>
+                            </div>
+                            <div className="h-px bg-black/5" />
+                            <div>
+                              <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#ff6700] mb-4">{t('outcome')}</h5>
+                              <p className="text-sm leading-relaxed text-black/80">{content.sideCard.outcome}</p>
+                            </div>
+                            <button className="w-full py-5 bg-black text-white text-[10px] font-bold uppercase tracking-[0.3em] rounded-xl hover:bg-[#ff6700] transition-colors">
+                              {content.sideCard.buttonLabel}
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="p-10 space-y-8">
+                          <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('takeOnTitle')}</h3>
+                          <div className="space-y-6">
+                            {content.takeOn.questions.map((question, i) => (
+                              <div key={i} className="flex gap-4 group cursor-help">
+                                <span className="text-[#ff6700] font-mono text-xs">0{i + 1}</span>
+                                <p className="text-xs font-bold uppercase tracking-tight text-black/60 group-hover:text-black transition-colors">{question}</p>
+                              </div>
+                            ))}
+                          </div>
+                          {content.takeOn.note.trim() ? (
+                            <div className="pt-8 border-t border-black/5">
+                              <p className="text-[10px] font-mono text-black/20 uppercase italic">{t('note')}: {content.takeOn.note}</p>
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-32 bg-white border-y border-black/5">
+                      <div className="max-w-5xl mx-auto text-center space-y-12">
+                        <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-[#ff6700]">{t('solutionTitle')}</h3>
+                        <h2 className="text-4xl md:text-7xl font-heading font-bold uppercase tracking-tighter leading-none">{content.solution.title}</h2>
+                        <p className="text-xl md:text-2xl text-black/60 leading-relaxed max-w-3xl mx-auto">{content.solution.paragraph}</p>
+                        <div className="flex flex-wrap justify-center gap-4 pt-10">
+                          {content.solution.definingPhrases.map((phrase, i) => (
+                            <span key={i} className="px-6 py-3 rounded-full border border-black/5 text-xs font-bold uppercase tracking-widest text-black/40">
+                              {phrase}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-32 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+                      <div className="space-y-12">
+                        <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('nextStepsLabel')}</h3>
+                        <div className="space-y-4">
+                          {content.metrics.nextSteps.map((step, i) => (
+                            <div key={i} className="flex items-center gap-6 p-6 bg-white border border-black/5 rounded-2xl">
+                              <ChevronRight className="w-4 h-4 text-[#ff6700]" />
+                              <p className="text-sm font-bold uppercase tracking-tight">{step}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="space-y-12">
+                        <h3 className="text-[10px] font-mono uppercase tracking-widest text-black/30">{t('successMetricsLabel')}</h3>
+                        <div className="space-y-4">
+                          {content.metrics.successMetrics.map((metric, i) => (
+                            <div key={i} className="flex items-center justify-between p-6 bg-black/5 rounded-2xl">
+                              <p className="text-sm font-bold uppercase tracking-tight text-black/60">{metric}</p>
+                              <TrendingUp className="w-4 h-4 text-black/20" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section className="px-6 md:px-24 py-40 border-t border-black/5 text-center">
+                      <h5 className="text-[10px] font-mono uppercase tracking-widest text-black/20 mb-8">{t('nextWork')}</h5>
+                      <button
+                        onClick={() => {
+                          const idx = WORKS.findIndex((w) => w.id === selectedWork?.id);
+                          const next = WORKS[(idx + 1) % WORKS.length];
+                          navigateTo('work-detail', undefined, next);
+                        }}
+                        className="group flex flex-col items-center"
+                      >
+                        <span className="text-5xl md:text-[10vw] font-heading font-bold uppercase tracking-tighter group-hover:text-[#ff6700] transition-colors">
+                          {WORKS[(WORKS.findIndex(w => w.id === selectedWork?.id) + 1) % WORKS.length].name}
+                        </span>
+                        <ArrowRight className="w-20 h-20 text-[#ff6700] group-hover:translate-x-10 transition-transform duration-500" />
+                      </button>
+                    </section>
+                  </>
+                );
+              })()}
             </motion.div>
           ) : (
-            <motion.div key="torrent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#0a0a0a] overflow-x-hidden pb-40">
-              <section className="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/10">
-                <div className="absolute inset-0 opacity-40"><div className="absolute inset-0 bg-gradient-to-b from-[#ff6700]/20 to-[#0a0a0a] z-10" /><img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover grayscale" /></div>
-                <div className="relative z-20 text-center max-w-7xl px-6 w-full">
-                  <button onClick={() => navigateTo('home')} className="mb-12 inline-flex items-center gap-3 text-white/40 font-mono text-xs uppercase tracking-[0.4em] hover:text-[#ff6700] transition-colors"><ArrowLeft className="w-4 h-4" /> {t('exitEnvironment')}</button>
-                  <h1 className="text-4xl md:text-[6rem] font-heading font-bold text-white leading-none mb-4 tracking-tighter uppercase">{t('project')}</h1>
-                  <div className="w-full flex justify-center"><GradientText text="TORRENT" as="h2" className="bitcount-single-hero text-[15vw] md:text-[10vw] leading-[0.6] text-center mb-12" /></div>
+            <motion.div key="torrent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
+              <header className="relative h-[60vh] flex items-center justify-center">
+                <div className="text-center px-6">
+                  <h1 className="text-xl font-heading font-bold uppercase text-white/40 mb-4 tracking-[0.4em]">AI-AUGMENTED DESIGN SPRINT</h1>
+                  <GradientText
+                    text="TORRENT"
+                    as="h2"
+                    className="bitcount-single-hero text-[15vw] md:text-[10vw] leading-[0.9] pt-[0.14em] pb-[0.16em] overflow-visible"
+                  />
+                  <p className="mt-8 text-xl md:text-2xl font-light text-white/80 max-w-4xl mx-auto italic">AI-augmented Design Sprint for creative teams</p>
+                  <p className="mt-4 text-sm md:text-base font-mono uppercase tracking-widest text-white/40 max-w-3xl mx-auto">
+                    A governed sprint protocol where AI accelerates instrumental work, and humans keep creative judgement.
+                  </p>
+                </div>
+              </header>
+
+              <section className="py-24 max-w-7xl mx-auto px-6">
+                <div className="mb-40 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                  <div className="space-y-8">
+                    <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-[#ff6700]">THE NARRATIVE</h3>
+                    <p className="text-lg md:text-xl font-light leading-relaxed text-white/80">
+                      TORRENT is a hybrid Design Sprint framework that integrates AI at specific "injection points" to reduce mechanical workload while protecting human decision-making.
+                    </p>
+                    <p className="text-base text-white/40 leading-relaxed">
+                      This methodology was battle-tested and first applied in collaboration with <span className="text-white border-b border-white/20">Politiken.dk</span>, where we used the 5-day flow to
+                      redefine news consumption habits for younger audiences.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 gap-8">
+                    <div className="p-8 bg-white/5 border border-white/10 rounded-2xl">
+                      <h4 className="text-[10px] font-mono uppercase tracking-widest text-[#ff6700] mb-4">CHALLENGE</h4>
+                      <p className="text-sm leading-relaxed text-white/70 italic">
+                        How can small creative teams keep Sprint speed, but reduce cognitive overload and improve decision quality, without delegating judgement to AI?
+                      </p>
+                    </div>
+                    <div className="p-8 bg-white/5 border border-white/10 rounded-2xl">
+                      <h4 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-4">OUTCOME</h4>
+                      <p className="text-sm leading-relaxed text-white/70">
+                        A complete operational protocol (schedule, artifacts, injection points, governance rules). Current delivery covers the theoretical groundwork applied in real contexts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-40">
+                  <h3 className="text-xs font-mono uppercase tracking-[0.5em] text-white/30 text-center mb-12">METHODOLOGY COMPARISON (DECISION TREE)</h3>
+                  <TorrentAnimation />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-40">
+                  {[
+                    { day: 'Day 1', label: 'Synthesis', list: ['Deep Research Grounding', 'Contextual Mapping', 'Automated Synthesis'] },
+                    { day: 'Day 2', label: 'Map', list: ['User Journey Audit', 'Critical Friction Map', 'Challenge Framing'] },
+                    { day: 'Day 3', label: 'Incubation', list: ['PROTECTED MANUAL ZONE', 'Strategic Divergence', 'Human Decision Core'] },
+                    { day: 'Day 4', label: 'Build', list: ['Augmented Drafting', 'Structural Deployment', 'Technical Layout Mapping'] },
+                    { day: 'Day 5', label: 'Test', list: ['Workflow Orchestration', 'Rapid Validation Cycles', 'Dynamic Insight Generation'] }
+                  ].map((step, i) => (
+                    <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:bg-white/10 transition-colors">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#ff6700]">{step.day}</span>
+                      <h5 className="text-xl font-bold uppercase mb-6 tracking-tight">{step.label}</h5>
+                      <ul className="space-y-3">
+                        {step.list.map((l, j) => (
+                          <li key={j} className="text-[10px] uppercase font-bold text-white/40">
+                            {l}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-8">
+                  <TorrentStack />
                 </div>
               </section>
-              <section className="py-24 px-6 max-w-7xl mx-auto space-y-12"><TorrentAnimation /></section>
             </motion.div>
           )}
         </AnimatePresence>
@@ -734,8 +1918,8 @@ const App: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-[#3a6ea5]">Social Signals</h4>
             <nav className="flex flex-col gap-4">
-              <a href="https://linkedin.com/in/martacaula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Linkedin className="w-3 h-3 text-[#3a6ea5]" /> LinkedIn</a>
-              <a href="https://instagram.com/martacaula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Instagram className="w-3 h-3 text-[#ff6700]" /> Instagram</a>
+              <a href="https://www.linkedin.com/in/marta-caula/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Linkedin className="w-3 h-3 text-[#3a6ea5]" /> LinkedIn</a>
+              <a href="https://www.instagram.com/marta.caula/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Instagram className="w-3 h-3 text-[#ff6700]" /> Instagram</a>
               <a href="https://github.com/martacaula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[10px] text-white/60 hover:text-white uppercase tracking-widest transition-colors font-bold"><Github className="w-3 h-3 text-white" /> GitHub</a>
             </nav>
           </div>
@@ -750,6 +1934,17 @@ const App: React.FC = () => {
       </footer>
     </div>
   );
+};
+
+const MediaRenderer: React.FC<{ url: string; type?: 'image' | 'video' }> = ({ url, type = 'image' }) => {
+  if (type === 'video' || url.endsWith('.mp4')) {
+    return (
+      <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+        <source src={url} type="video/mp4" />
+      </video>
+    );
+  }
+  return <img src={url} className="w-full h-full object-cover" />;
 };
 
 export default App;

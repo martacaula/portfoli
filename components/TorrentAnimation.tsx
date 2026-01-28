@@ -1,201 +1,255 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Activity, ShieldAlert, Sparkles } from 'lucide-react';
+import { User, Zap, ShieldCheck, Timer, MousePointer2 } from 'lucide-react';
 
 const TorrentAnimation: React.FC = () => {
-  const [stage, setStage] = useState<'classic' | 'scan' | 'torrent'>('classic');
-  const [viewMode, setViewMode] = useState<'flow' | 'hours'>('flow');
+  const [stage, setStage] = useState<'manual' | 'torrent'>('manual');
 
   useEffect(() => {
-    const sequence = async () => {
-      setStage('classic');
-      await new Promise(r => setTimeout(r, 10000));
-      
-      setStage('scan');
-      await new Promise(r => setTimeout(r, 2000));
-      
-      setStage('torrent');
-      await new Promise(r => setTimeout(r, 10000));
-      
-      sequence();
-    };
-    sequence();
+    const timer = setInterval(() => {
+      setStage((s) => (s === 'manual' ? 'torrent' : 'manual'));
+    }, 5000);
+    return () => clearInterval(timer);
   }, []);
 
-  const classicData = [
-    { day: "Day 1", hours: 8, tasks: ["Long-term Goal", "Sprint Questions", "Expert Interviews", "HMW Notes", "User Journey Map"] },
-    { day: "Day 2", hours: 8, tasks: ["Lightning Demos", "Crazy 8s", "Solution Sketch", "Mind Mapping"] },
-    { day: "Day 3", hours: 8, tasks: ["Heat Map Voting", "Supervote", "Decision Matrix", "Risk Mapping"] },
-    { day: "Day 4", hours: 8, tasks: ["Final Storyboard", "Prototype Scope Cut", "Clickable Prototype", "Wizard of Oz Prototype"] },
-    { day: "Day 5", hours: 8, tasks: ["Usability Testing", "Five-Act Interview", "Affinity Mapping", "Insights Synthesis"] },
-  ];
-
-  // Mirroring the classic 5-day layout but with AI-optimized labels
-  const torrentData = [
-    { day: "Day 1", hours: 4, tasks: ["Voice Capture", "Auto-Transcribe", "AI Insight Synthesis", "Topic Clustering", "Digital Mapping"] },
-    { day: "Day 2", hours: 3, tasks: ["Algorithmic Demos", "Gen-AI Sketching", "Layout Scaffolding", "Flow Optimization"] },
-    { day: "Day 3", hours: 2, tasks: ["Auto-Prioritization", "Supervote Assist", "Risk Vectoring", "Decision Logic"] },
-    { day: "Day 4", hours: 4, tasks: ["Dynamic Storyboard", "Asset Generation", "Prototype Build", "Logic Validation"] },
-    { day: "Day 5", hours: 4, tasks: ["Targeted Testing", "Automated Synthesis", "Insight Extraction", "Outcome Matrix"] },
-  ];
+  const manualLines = Array.from({ length: 4 });
+  const torrentSteps = ['Synthesis', 'Map', 'Incubation', 'Build', 'Test'];
 
   return (
-    <div className="w-full flex flex-col gap-6">
-      {/* View Mode Selector */}
-      <div className="flex justify-end items-center bg-black/40 backdrop-blur p-4 rounded-2xl border border-white/5 gap-4">
-        <div className="flex gap-2">
-          <button 
-            onClick={() => setViewMode('flow')}
-            className={`px-6 py-2 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${viewMode === 'flow' ? 'bg-[#00CED1] text-black' : 'bg-white/5 text-white/40'}`}
-          >
-            <Activity className="w-3 h-3" /> Process Flow
-          </button>
-          <button 
-            onClick={() => setViewMode('hours')}
-            className={`px-6 py-2 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${viewMode === 'hours' ? 'bg-[#ff6700] text-white' : 'bg-white/5 text-white/40'}`}
-          >
-            <Clock className="w-3 h-3" /> Time Analysis
-          </button>
+    <div className="w-full flex flex-col gap-8">
+      <div className="w-full aspect-[21/9] bg-[#0c1a2a] rounded-[3.5rem] overflow-hidden relative border border-white/10 shadow-3xl flex items-center justify-center font-sans isolate">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#ff6700_0%,_transparent_70%)] opacity-20" />
+          <div className="w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
         </div>
-      </div>
 
-      {/* Visualizer Frame */}
-      <div className="w-full aspect-video bg-white rounded-3xl overflow-hidden relative border border-slate-200 shadow-xl flex items-center justify-center font-sans">
-        <svg viewBox="0 0 1600 900" className="w-full h-full p-20">
-          <line x1="100" y1="450" x2="1500" y2="450" stroke="#F1F5F9" strokeWidth="1" />
-          
-          <AnimatePresence mode="wait">
-            {stage === 'classic' && (
-              <motion.g key="classic-group" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <motion.line x1="100" y1="450" x2="180" y2="450" stroke="#CBD5E1" strokeWidth="4" strokeLinecap="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.8 }} />
-                <text x="100" y="430" className="text-[10px] font-bold fill-slate-300 uppercase tracking-[0.2em]">Start</text>
-
-                {classicData.map((d, i) => (
-                  <g key={`classic-day-${i}`}>
-                    <motion.circle 
-                      cx={250 + i * 260} cy={450} r="5" fill="#94A3B8"
-                      initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 1.5 }}
+        <svg viewBox="0 0 1600 600" className="w-full h-full p-20 z-10 overflow-visible">
+          <AnimatePresence>
+            {stage === 'manual' ? (
+              <motion.g
+                key="manual"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {manualLines.map((_, i) => (
+                  <g key={i}>
+                    <motion.path
+                      d={`M 150 ${210 + i * 60} L 1450 ${210 + i * 60}`}
+                      stroke="#ffffff"
+                      strokeWidth="1"
+                      strokeOpacity="0.08"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
                     />
-                    <motion.text 
-                      x={250 + i * 260} y={485} textAnchor="middle" 
-                      className="text-[12px] font-bold fill-slate-400 uppercase tracking-widest"
-                    >
-                      {viewMode === 'hours' ? `${d.hours}h` : d.day}
-                    </motion.text>
-
-                    {d.tasks.map((task, j) => (
-                      <motion.g key={`task-${i}-${j}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 1.5 + j * 0.15 }}>
-                        <path d={`M ${250 + i * 260} 450 Q ${280 + i * 260} ${450 + (j - 2) * 50} ${310 + i * 260} ${450 + (j - 2) * 70}`} stroke="#E2E8F0" strokeWidth="1" fill="none" />
-                        
-                        {/* Technique Highlighter: Specifically highlights the technique box as it's "selected" */}
-                        <motion.rect 
-                          x={310 + i * 260} y={439 + (j - 2) * 70} width="160" height="22" rx="11" 
-                          fill="#fef9c3"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: [0, 1, 0] }}
-                          transition={{ delay: i * 1.5 + j * 0.1, duration: 1 }}
-                        />
-                        
-                        <rect x={310 + i * 260} y={439 + (j - 2) * 70} width="160" height="22" rx="11" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="0.5" />
-                        <text x={325 + i * 260} y={454 + (j - 2) * 70} className="text-[9px] fill-slate-500 font-medium">{task}</text>
-                      </motion.g>
+                    {[250, 550, 850, 1150, 1400].map((x, j) => (
+                      <circle key={j} cx={x} cy={210 + i * 60} r="2.5" fill="#ffffff" fillOpacity="0.2" />
                     ))}
+                    <motion.circle r="3" fill="#ffffff" fillOpacity="0.3">
+                      <animateMotion path={`M 150 ${210 + i * 60} L 1450 ${210 + i * 60}`} dur={`${6 + i * 1}s`} repeatCount="indefinite" />
+                    </motion.circle>
                   </g>
                 ))}
-                <text x="800" y="850" textAnchor="middle" className="text-[11px] font-mono tracking-[0.4em] fill-slate-400 uppercase">Classic Sprint: Manual Technique Curation</text>
+                <text x="800" y="560" textAnchor="middle" className="text-[10px] font-mono tracking-[0.8em] fill-white/20 uppercase">
+                  Manual Sprint: Distributed Effort / Linear Time
+                </text>
               </motion.g>
-            )}
+            ) : (
+              <motion.g
+                key="torrent"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+              >
+                <g transform="translate(800, 80)">
+                  <motion.circle
+                    r="45"
+                    fill="#ff6700"
+                    fillOpacity="0.05"
+                    stroke="#ff6700"
+                    strokeWidth="1"
+                    strokeDasharray="5 5"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                  />
+                  <User className="text-[#ff6700] w-7 h-7 -translate-x-3.5 -translate-y-3.5" />
+                  <motion.text y="70" textAnchor="middle" className="text-[10px] fill-[#ff6700] font-mono font-bold uppercase tracking-[0.4em]">
+                    Strategic Guidance / Human Lead
+                  </motion.text>
 
-            {stage === 'torrent' && (
-              <motion.g key="torrent-group" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                 <line x1="100" y1="450" x2="180" y2="450" stroke="#00CED1" strokeWidth="4" strokeLinecap="round" />
-                 <text x="100" y="430" className="text-[10px] font-bold fill-slate-300 uppercase tracking-[0.2em]">Start</text>
+                  {[250, 525, 800, 1075, 1350].map((x, i) => (
+                    <motion.path
+                      key={i}
+                      d={`M 0 45 L ${x - 800} 220`}
+                      stroke="#ff6700"
+                      strokeWidth="0.5"
+                      strokeOpacity="0.2"
+                      strokeDasharray="4 4"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.3, delay: i * 0.05 }}
+                    />
+                  ))}
+                </g>
 
-                 <motion.path d="M 180 450 L 1450 450" stroke="#00CED1" strokeWidth="3" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5 }} />
+                <motion.path
+                  d="M 150 300 L 1450 300"
+                  stroke="#ff6700"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.4, ease: 'circOut' }}
+                />
 
-                 {torrentData.map((d, i) => (
-                   <g key={`t-day-${i}`}>
-                      <motion.circle cx={250 + i * 260} cy={450} r="8" fill="#00CED1" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 1.2 }} />
-                      <text x={250 + i * 260} y={485} textAnchor="middle" className="text-[14px] font-black fill-[#00CED1] uppercase tracking-widest">
-                        {viewMode === 'hours' ? `${d.hours}h` : d.day}
-                      </text>
-                      
-                      {d.tasks.map((task, j) => (
-                        <motion.g key={`t-task-${i}-${j}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 1.2 + j * 0.15 }}>
-                          <path d={`M ${250 + i * 260} 450 Q ${280 + i * 260} ${450 + (j - 2) * 50} ${310 + i * 260} ${450 + (j - 2) * 70}`} stroke="#99F6E4" strokeWidth="1" fill="none" />
-                          
-                          {/* AI Technique Highlighter */}
-                          <motion.rect 
-                            x={310 + i * 260} y={439 + (j - 2) * 70} width="160" height="28" rx="6" 
-                            fill="#00CED1"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: [0, 0.4, 0] }}
-                            transition={{ delay: i * 1.2 + j * 0.1, duration: 1 }}
-                          />
+                <motion.path
+                  d="M 150 300 L 1450 300"
+                  stroke="#ff6700"
+                  strokeWidth="25"
+                  strokeOpacity="0.03"
+                  strokeLinecap="round"
+                  animate={{ strokeWidth: [25, 40, 25], opacity: [0.03, 0.1, 0.03] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
 
-                          <rect x={310 + i * 260} y={439 + (j - 2) * 70} width="160" height="28" rx="6" fill="#F0FDFA" stroke="#99F6E4" strokeWidth="1" />
-                          <text x={325 + i * 260} y={458 + (j - 2) * 70} className="text-[10px] fill-[#0F766E] font-bold uppercase tracking-tight">{task}</text>
-                        </motion.g>
-                      ))}
-                   </g>
-                 ))}
+                {torrentSteps.map((step, i) => {
+                  const isIncubation = step === 'Incubation';
+                  const isAiHeavy = i === 0 || i === 3;
+                  const accentColor = isIncubation ? '#ffffff' : '#ff6700';
 
-                 <motion.g initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 6.5 }}>
-                    <rect x="1460" y="400" width="120" height="100" rx="20" fill="#00CED1" />
-                    <text x="1520" y="445" textAnchor="middle" className="text-[14px] font-black fill-white uppercase tracking-tighter">Outcome</text>
-                    <motion.text animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} x="1520" y="475" textAnchor="middle" className="text-[20px] fill-white">★</motion.text>
-                 </motion.g>
+                  return (
+                    <g key={i} transform={`translate(${250 + i * 275}, 300)`}>
+                      {isAiHeavy && (
+                        <motion.rect
+                          x="-95"
+                          y="-45"
+                          width="190"
+                          height="90"
+                          rx="22"
+                          fill={accentColor}
+                          fillOpacity="0.06"
+                          stroke={accentColor}
+                          strokeWidth="1"
+                          animate={{ opacity: [0.15, 0.5, 0.15] }}
+                          transition={{ duration: 1.8, repeat: Infinity }}
+                        />
+                      )}
 
-                 <motion.g initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 7.5 }}>
-                    <rect x="400" y="800" width="800" height="80" rx="12" fill="white" stroke="#E2E8F0" strokeWidth="1" />
-                    <text x="800" y="835" textAnchor="middle" className="text-[32px] font-black fill-slate-900 tracking-tighter uppercase">TORRENT Engine</text>
-                    <text x="800" y="860" textAnchor="middle" className="text-[12px] font-bold fill-[#00CED1] uppercase tracking-[0.4em]">Optimized Cycle. Pure Algorithmic Velocity.</text>
-                 </motion.g>
+                      <motion.rect
+                        x="-85"
+                        y="-35"
+                        width="170"
+                        height="70"
+                        rx="18"
+                        fill="#0c1a2a"
+                        stroke={accentColor}
+                        strokeWidth="1.5"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.2, delay: i * 0.05 }}
+                      />
+
+                      {isIncubation && (
+                        <motion.rect
+                          x="-75"
+                          y="-25"
+                          width="150"
+                          height="50"
+                          rx="12"
+                          fill={accentColor}
+                          fillOpacity="0.12"
+                          animate={{ opacity: [0.2, 0.6, 0.2] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                      )}
+
+                      <motion.text
+                        textAnchor="middle"
+                        y="5"
+                        className={`text-[11px] font-black uppercase tracking-[0.2em] ${isIncubation ? 'fill-white' : 'fill-white'}`}
+                      >
+                        {step}
+                      </motion.text>
+
+                      {isIncubation && (
+                        <text y="22" textAnchor="middle" className="text-[7px] fill-white uppercase font-mono tracking-widest opacity-70">
+                          AI Protected
+                        </text>
+                      )}
+                    </g>
+                  );
+                })}
+
+                <motion.circle r="6" fill="#ff6700" className="shadow-lg shadow-[#ff6700]/80">
+                  <animateMotion path="M 150 300 L 1450 300" dur="2.5s" repeatCount="indefinite" />
+                </motion.circle>
+
+                <text x="800" y="580" textAnchor="middle" className="text-[10px] font-mono tracking-[0.8em] fill-[#ff6700] uppercase">
+                  Torrent: Accelerated Methodology / Fluid Impact
+                </text>
               </motion.g>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {stage === 'scan' && (
-              <motion.rect x="0" y="0" width="120" height="900" fill="#00CED1" className="opacity-10" initial={{ x: -120 }} animate={{ x: 1720 }} transition={{ duration: 1.8, ease: "easeInOut" }} />
             )}
           </AnimatePresence>
         </svg>
 
-        <div className="absolute top-8 right-8 flex items-center gap-3">
-          <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-xl border border-slate-100 flex items-center gap-3 shadow-sm">
-             <Sparkles className="w-3 h-3 text-[#00CED1]" />
-             <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">Digital Synthesis</span>
+        <div className="absolute top-12 left-12 flex gap-8">
+          <div
+            className={`flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500 ${
+              stage === 'manual' ? 'border-white/20 bg-white/10 shadow-lg' : 'border-white/5 opacity-20'
+            }`}
+          >
+            <User className="w-3.5 h-3.5" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Manual Sprint</span>
+          </div>
+          <div
+            className={`flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-500 ${
+              stage === 'torrent'
+                ? 'border-[#ff6700]/40 bg-[#ff6700]/15 shadow-[0_0_20px_rgba(255,103,0,0.2)]'
+                : 'border-white/5 opacity-20'
+            }`}
+          >
+            <Zap className="w-3.5 h-3.5 text-[#ff6700]" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#ff6700]">Torrent Flow</span>
           </div>
         </div>
-        
-        <div className="absolute bottom-8 right-8">
-           <div className="bg-black/80 px-4 py-4 rounded-2xl border border-white/10 max-w-[280px] shadow-2xl backdrop-blur-xl">
-              <div className="flex items-center gap-2 mb-2">
-                 <ShieldAlert className="w-4 h-4 text-[#ff6700]" />
-                 <span className="text-[10px] font-bold text-white uppercase tracking-widest">Expert Constraint</span>
-              </div>
-              <p className="text-[9px] text-white/50 leading-relaxed">
-                This model demonstrates the method's logic. Real-world execution is mediated by a <strong>professional coach</strong> for market success.
-              </p>
-           </div>
+
+        <div className="absolute bottom-12 right-12 w-80 p-6 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl">
+          <div className="flex items-center gap-3 mb-3">
+            <ShieldCheck className="w-4 h-4 text-[#ff6700]" />
+            <h5 className="text-[10px] font-bold uppercase tracking-widest text-white">Methodology Audit</h5>
+          </div>
+          <p className="text-[10px] font-mono leading-relaxed text-white/40 uppercase">
+            {stage === 'manual'
+              ? 'Disconnected workflows lead to resource fragmentation and fatigue.'
+              : 'Torrent collapses multiple cycles into a single path directed by human strategy.'}
+          </p>
         </div>
       </div>
 
-      <div className="flex justify-between items-center bg-black/40 backdrop-blur px-6 py-4 rounded-2xl border border-white/5">
-        <div className="flex gap-6">
-           <div className="flex items-center gap-3">
-              <div className={`w-3 h-3 rounded-full ${stage === 'classic' ? 'bg-slate-400 animate-pulse' : 'bg-slate-800'}`} />
-              <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Phase 01: Traditional Selection</span>
-           </div>
-           <div className="flex items-center gap-3">
-              <div className={`w-3 h-3 rounded-full ${stage === 'torrent' ? 'bg-[#00CED1] animate-pulse' : 'bg-slate-800'}`} />
-              <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Phase 02: AI-Powered TORRENT</span>
-           </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:border-[#ff6700]/30 transition-all duration-500">
+          <h6 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3 flex items-center gap-2">
+            <Timer className="w-3 h-3" /> Efficiency Gain
+          </h6>
+          <p className="text-4xl font-heading font-bold text-[#ff6700]">-60%</p>
+          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">Reduction in cycle redundancy</p>
         </div>
-        <div className="text-[10px] font-mono text-[#ff6700] uppercase tracking-widest animate-pulse">
-           System Status: Ready
+        <div className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:border-[#ff6700]/30 transition-all duration-500">
+          <h6 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3 flex items-center gap-2">
+            <MousePointer2 className="w-3 h-3" /> Human Lead
+          </h6>
+          <p className="text-4xl font-heading font-bold">Guided</p>
+          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">Decision-driven automation</p>
+        </div>
+        <div className="p-8 bg-white/5 border border-white/10 rounded-3xl group hover:border-[#ff6700]/30 transition-all duration-500">
+          <h6 className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3 flex items-center gap-2">
+            <ShieldCheck className="w-3 h-3" /> Architecture
+          </h6>
+          <p className="text-4xl font-heading font-bold">Unified</p>
+          <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">Single-path logic deployment</p>
         </div>
       </div>
     </div>

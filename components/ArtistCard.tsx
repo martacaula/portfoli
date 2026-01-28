@@ -41,11 +41,11 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist, onClick }) => {
         <div className="absolute inset-0 bg-[#ff6700]/0 group-hover:bg-gradient-to-t group-hover:from-[#ff6700]/20 group-hover:to-transparent transition-all duration-700" />
       </div>
 
-      {/* Header info - Project Number, Date and Company */}
+      {/* Header info - Date and Company */}
       <div className="absolute top-8 left-8 right-8 flex justify-between items-start z-20">
          <div className="flex flex-col gap-1">
             <span className="text-[11px] font-mono font-black text-[#ff6700] uppercase tracking-[0.4em]">
-              Project 0{artist.id} // {artist.year || '2024'}
+              {artist.year || '2024'}
             </span>
          </div>
          
