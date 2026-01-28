@@ -257,6 +257,25 @@ interface MultilangWork extends Work {
   content?: Partial<Record<Language, Partial<WorkContent>>>;
 }
 
+const lineupAssets = (
+  import.meta as ImportMeta & {
+    glob: (pattern: string, options: { eager: true; import: 'default' }) => Record<string, string>;
+  }
+).glob('./Assets/**/*.{jpg,JPG,jpeg,png}', { eager: true, import: 'default' });
+
+const findLineupAsset = (suffix: string) =>
+  Object.entries(lineupAssets).find(([path]) => path.endsWith(suffix))?.[1] ?? '';
+
+const LINEUP_IMAGES = {
+  reconnect: findLineupAsset('Assets/reconnectmedia/Captura de pantalla 2026-01-28 a las 13.23.06.png'),
+  ditmad: findLineupAsset('Assets/ditmadmedia/heroditmad.jpg'),
+  redcross: findLineupAsset('Assets/redcrossmedia/heroredcross.png'),
+  moss: findLineupAsset('Assets/mossmedia/heromoss.jpg'),
+  kave: findLineupAsset('Assets/kavehomeinternship/herokave.jpg'),
+  neety: findLineupAsset('Assets/neetymedia/heroneety.png'),
+  strenes: findLineupAsset('Assets/strenesmedia/herostrenes.png'),
+};
+
 const WORKS: MultilangWork[] = [
   {
     id: '1',
@@ -264,7 +283,7 @@ const WORKS: MultilangWork[] = [
     genre: 'Digital Product Design',
     day: 'Politiken',
     year: 'Nov 2025',
-    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1600&auto=format&fit=crop',
+    image: LINEUP_IMAGES.reconnect,
     description: 'AI-powered daily news briefings.',
     subtitle: {
       en: 'AI-powered daily news briefings that make Politiken effortless for students today and valuable tomorrow.',
@@ -490,7 +509,7 @@ const WORKS: MultilangWork[] = [
     genre: 'UX Design & Strategy',
     day: 'DitMad',
     year: 'Dec 2023',
-    image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop',
+    image: LINEUP_IMAGES.ditmad,
     description: 'UX for a specialized nutrition start-up.',
     challenge: {
       en: 'Translating complex nutritional data into a seamless, intuitive user experience.',
@@ -711,7 +730,7 @@ const WORKS: MultilangWork[] = [
     genre: 'Workflow Optimization',
     day: 'Red Cross Denmark',
     year: 'Nov 2025',
-    image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?q=80&w=1600&auto=format&fit=crop',
+    image: LINEUP_IMAGES.redcross,
     description: 'AI powered verification workflow.',
     challenge: {
       en: 'Automating the verification process for thousands of volunteers.',
@@ -802,7 +821,7 @@ const WORKS: MultilangWork[] = [
     genre: 'Identity & AI Strategy',
     day: 'Eram (UdG)',
     year: 'Jun 2025',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1600&auto=format&fit=crop',
+    image: LINEUP_IMAGES.moss,
     description: 'Experimental digital identity merging bio-elements with quantum logic.',
     subtitle: {
       en: 'A strategic exploration of digital identity where nature meets quantum computing.',
@@ -838,7 +857,7 @@ const WORKS: MultilangWork[] = [
     genre: 'Visual Arts & Photography',
     day: 'Kave Home',
     year: 'Abr 2024',
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop',
+    image: LINEUP_IMAGES.kave,
     description: 'A reshoot brief to modernize a high-visual category.',
     challenge: {
       en: 'Capturing the tactile essence of Mediterranean design in a controlled studio environment.',
@@ -1059,7 +1078,7 @@ const WORKS: MultilangWork[] = [
     genre: 'B2B Sales Automation',
     day: 'Neety',
     year: 'Oct 2023',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
+    image: LINEUP_IMAGES.neety,
     description: 'Campaign console redesign for faster action.',
     subtitle: {
       en: 'A calmer campaign console with clearer hierarchy and action paths.',
@@ -1286,7 +1305,7 @@ const WORKS: MultilangWork[] = [
     genre: 'Visual Identity System',
     day: 'Strenes',
     year: 'Mar 2023',
-    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop',
+    image: LINEUP_IMAGES.strenes,
     description: 'Visual identity system proposal for a locally rooted festival.',
     subtitle: {
       en: 'A modular, locally rooted system designed to scale across touchpoints.',
