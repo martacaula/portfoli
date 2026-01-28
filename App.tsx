@@ -266,6 +266,12 @@ const lineupAssets = (
 const findLineupAsset = (suffix: string) =>
   Object.entries(lineupAssets).find(([path]) => path.endsWith(suffix))?.[1] ?? '';
 
+const buildFolderAssets = (folderName: string) =>
+  Object.entries(lineupAssets)
+    .filter(([path]) => path.includes(`/Assets/${folderName}/`))
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+    .map(([, url]) => url);
+
 const LINEUP_IMAGES = {
   reconnect: findLineupAsset('Assets/reconnectmedia/Captura de pantalla 2026-01-28 a las 13.23.06.png'),
   ditmad: findLineupAsset('Assets/ditmadmedia/heroditmad.jpg'),
@@ -274,6 +280,16 @@ const LINEUP_IMAGES = {
   kave: findLineupAsset('Assets/kavehomeinternship/herokave.jpg'),
   neety: findLineupAsset('Assets/neetymedia/heroneety.png'),
   strenes: findLineupAsset('Assets/strenesmedia/herostrenes.png'),
+};
+
+const LINEUP_LOGS: Record<string, string[]> = {
+  '1': buildFolderAssets('reconnectmedia'),
+  '2': buildFolderAssets('ditmadmedia'),
+  '3': buildFolderAssets('redcrossmedia'),
+  '4': buildFolderAssets('mossmedia'),
+  '6': buildFolderAssets('kavehomeinternship'),
+  '8': buildFolderAssets('neetymedia'),
+  '9': buildFolderAssets('strenesmedia'),
 };
 
 const WORKS: MultilangWork[] = [
@@ -1683,6 +1699,7 @@ const App: React.FC = () => {
             <motion.div key="work-detail" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-[#f8f8f8] text-black pb-40">
               {(() => {
                 const content = buildWorkContent(selectedWork, lang);
+                const workLog = LINEUP_LOGS[selectedWork.id] ?? [];
                 return (
                   <>
                     <section className="min-h-[70vh] flex flex-col justify-end px-6 md:px-24 pb-20 border-b border-black/5">
@@ -1714,6 +1731,19 @@ const App: React.FC = () => {
                         <div className="relative aspect-video bg-white rounded-2xl overflow-hidden shadow-2xl shadow-black/5">
                           <MediaRenderer url={selectedWork.image} type={selectedWork.mediaType} />
                         </div>
+
+                        {workLog.length ? (
+                          <div>
+                            <h3 className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/30 mb-8">Project Log</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 items-start auto-rows-min">
+                              {workLog.map((asset, index) => (
+                                <div key={`${selectedWork.id}-log-${index}`} className="relative overflow-hidden bg-white/5 shadow-lg">
+                                  <MediaRenderer url={asset} className="w-full h-auto object-contain" />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ) : null}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
                           <div>
@@ -1955,15 +1985,16 @@ const App: React.FC = () => {
   );
 };
 
-const MediaRenderer: React.FC<{ url: string; type?: 'image' | 'video' }> = ({ url, type = 'image' }) => {
+const MediaRenderer: React.FC<{ url: string; type?: 'image' | 'video'; className?: string }> = ({ url, type = 'image', className }) => {
+  const mediaClassName = className ?? 'w-full h-full object-cover';
   if (type === 'video' || url.endsWith('.mp4')) {
     return (
-      <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+      <video autoPlay loop muted playsInline className={mediaClassName}>
         <source src={url} type="video/mp4" />
       </video>
     );
   }
-  return <img src={url} className="w-full h-full object-cover" />;
+  return <img src={url} className={mediaClassName} />;
 };
 
 export default App;
